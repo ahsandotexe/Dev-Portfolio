@@ -1,0 +1,221 @@
+<!doctype html>
+<!--
+  Concept 03: Blueprint ("Sheet 1")
+  Memorable element: a schematic of three real architectures (NBP account opening, the Lumida AI platform, Qlu.ai)
+  that draws itself on load; hovering a box lights its connections and names the project.
+  Tokens (dark): bg #163F73, surface #1E4C86, text #EAF2FF, muted #B7CCE8, line #8FB4E6, grid rgba(255,255,255,.10)
+  Tokens (light): bg #F3F6FB, surface #FFFFFF, text #0F2A4F, muted #4A617F, line #2457A6, grid rgba(31,78,154,.12)
+  Type: Barlow Semi Condensed (headings; DIN-like, the lettering of engineering drawings) + Barlow (body) + Martian Mono (annotations).
+  Not a template because: cobalt-on-cobalt with no accent colour; the hero is a drawing of his systems, not an
+  illustration; a drafting grid and a title block instead of cards and a glass nav.
+  Framer Motion mapping: schematic strokes = motion.path/motion.rect with pathLength 0 to 1, staggered per row;
+  labels = opacity variants after each row; hover = whileHover on each <g> toggling a "dim others" state; details = layout.
+-->
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ahsan Iftikhar, senior full-stack engineer</title>
+<meta name="description" content="Senior full-stack and AI engineer. Systems for banks, fintech and AI products, drawn as built.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=Martian+Mono:wght@400;500&display=swap">
+<script>try{var t=localStorage.getItem('m03-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<style>
+:root{--bg:243 246 251;--surface:255 255 255;--text:15 42 79;--muted:74 97 127;--line:36 87 166;--grid:31 78 154;--grid-a:.12;--btn:31 79 176;--btn-text:255 255 255;color-scheme:light;
+ --head:"Barlow Semi Condensed","Arial Narrow","Helvetica Neue",Arial,sans-serif;--body:Barlow,"Helvetica Neue",Arial,sans-serif;--mono:"Martian Mono",ui-monospace,Menlo,monospace}
+[data-theme="dark"]{--bg:22 63 115;--surface:30 76 134;--text:234 242 255;--muted:183 204 232;--line:143 180 230;--grid:255 255 255;--grid-a:.10;--btn:255 255 255;--btn-text:22 63 115;color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:80px;scroll-behavior:smooth}
+body{margin:0;color:rgb(var(--text));font:17px/1.55 var(--body);-webkit-font-smoothing:antialiased;background:rgb(var(--bg));
+ background-image:linear-gradient(rgb(var(--grid)/var(--grid-a)) 1px,transparent 1px),linear-gradient(90deg,rgb(var(--grid)/var(--grid-a)) 1px,transparent 1px),linear-gradient(rgb(var(--grid)/calc(var(--grid-a)*.45)) 1px,transparent 1px),linear-gradient(90deg,rgb(var(--grid)/calc(var(--grid-a)*.45)) 1px,transparent 1px);
+ background-size:64px 64px,64px 64px,8px 8px,8px 8px}
+img{max-width:100%;display:block}
+a{color:inherit;text-underline-offset:3px}
+h1,h2,h3{font-family:var(--head);font-weight:600;margin:0;line-height:1.02;text-wrap:balance;letter-spacing:-0.005em}
+h1{font-size:clamp(2.6rem,1.4rem + 4.2vw,5rem);max-width:16ch}
+h2{font-size:2rem}
+h3{font-size:1.35rem}
+p{margin:0}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:0}
+:focus-visible{outline:2px solid rgb(var(--text));outline-offset:3px}
+.skip{position:absolute;left:16px;top:-48px;background:rgb(var(--text));color:rgb(var(--bg));padding:8px 12px;z-index:20;text-decoration:none}.skip:focus{top:12px}
+.wrap{max-width:72rem;margin-inline:auto;padding-inline:clamp(16px,4vw,32px)}
+header.site{position:sticky;top:0;z-index:10;background:rgb(var(--bg)/.92);backdrop-filter:blur(6px);border-bottom:1px solid rgb(var(--line))}
+header.site .wrap{display:flex;align-items:center;gap:12px;min-height:64px}
+.brand{font-family:var(--head);font-weight:700;font-size:1.25rem;text-decoration:none;letter-spacing:.01em}
+nav.primary{display:flex;gap:2px;margin-left:auto}
+nav.primary a{text-decoration:none;color:rgb(var(--muted));padding:10px 12px;min-height:44px;display:inline-flex;align-items:center;font-family:var(--head);font-weight:500;font-size:17px}
+nav.primary a:hover,nav.primary a[aria-current]{color:rgb(var(--text));box-shadow:inset 0 -2px 0 rgb(var(--text))}
+.ibtn{width:44px;height:44px;border:1px solid transparent;background:transparent;color:rgb(var(--muted));display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.ibtn:hover{color:rgb(var(--text));border-color:rgb(var(--line))}
+.ibtn svg{width:20px;height:20px}
+.menubtn{display:none}.menu{display:none}
+@media (max-width:767px){nav.primary{display:none}.menubtn{display:inline-flex;margin-left:auto}header.site.open .menu{display:block;border-top:1px solid rgb(var(--line))}.menu ul{list-style:none;margin:0;padding:8px 0 12px}.menu a{display:block;padding:12px 0;text-decoration:none;font-family:var(--head);font-size:1.5rem;border-bottom:1px solid rgb(var(--line))}}
+.hero{padding-block:56px 24px;display:grid;gap:22px}
+@media (min-width:900px){.hero{padding-block:80px 32px}}
+.lead{max-width:60ch;color:rgb(var(--muted));font-size:1.1rem}
+.cta{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center}
+.btn{display:inline-flex;align-items:center;min-height:46px;padding:10px 20px;background:rgb(var(--btn));color:rgb(var(--btn-text));text-decoration:none;font-family:var(--head);font-weight:600;font-size:18px;border:0;cursor:pointer;letter-spacing:.01em}
+.btn:hover{filter:brightness(.92)}
+.ghost{font-family:var(--head);font-weight:500;font-size:18px}
+.sheet{margin-top:8px;border:1px solid rgb(var(--line));background:rgb(var(--bg)/.55);position:relative;min-width:0}
+.hero > *{min-width:0}
+.sheet-h{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px 16px;padding:10px 14px;border-bottom:1px solid rgb(var(--line));color:rgb(var(--muted))}
+.scroll{overflow-x:auto}
+.schem{display:block;min-width:760px;width:100%;height:auto}
+.schem rect.box{fill:rgb(var(--surface));stroke:rgb(var(--line));stroke-width:1.5}
+.schem path.wire{fill:none;stroke:rgb(var(--line));stroke-width:1.5}
+.schem text{font-family:var(--head);font-weight:600;font-size:15px;fill:rgb(var(--text))}
+.schem text.sub,.schem text.ann{font-family:var(--mono);font-weight:400;font-size:10.5px;fill:rgb(var(--muted))}
+.schem text.ann{font-size:11px}
+.schem .drawn{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 900ms cubic-bezier(.22,1,.36,1) forwards;animation-delay:var(--d)}
+.schem .lbl{opacity:0;animation:appear 400ms forwards;animation-delay:calc(var(--d) + 700ms)}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes appear{to{opacity:1}}
+.schem g[data-p]{transition:opacity 200ms}
+.schem.focus g[data-p]{opacity:.28}
+.schem.focus g[data-p].on{opacity:1}
+.schem g[data-p].on rect.box{stroke-width:2.5}
+.callout{padding:10px 14px;border-top:1px solid rgb(var(--line));display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;min-height:44px;color:rgb(var(--muted))}
+.callout b{font-family:var(--head);font-weight:600;color:rgb(var(--text));font-size:17px}
+section{padding-block:40px}
+@media (min-width:900px){section{padding-block:56px}}
+section h2{margin-bottom:20px;display:flex;align-items:baseline;gap:14px}
+section h2 .mono{color:rgb(var(--muted))}
+.grid{display:grid;gap:16px}
+@media (min-width:640px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1024px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.card{display:grid;gap:10px;align-content:start;padding:16px;border:1px solid rgb(var(--line));background:rgb(var(--surface));color:inherit;text-decoration:none;position:relative;min-width:0}
+.card::before{content:"";position:absolute;inset:4px;border:1px solid rgb(var(--line)/.0);transition:border-color 200ms;pointer-events:none}
+.card:hover::before{border-color:rgb(var(--line))}
+.card .mono{color:rgb(var(--muted))}
+.card h3{font-size:1.25rem}
+.card p{font-size:15.5px;color:rgb(var(--muted))}
+.card .stack{font-family:var(--mono);font-size:11.5px;color:rgb(var(--muted));line-height:1.6}
+.card:hover h3{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+.rows{border-top:1px solid rgb(var(--line))}
+.rows > div{display:grid;gap:4px 20px;padding:16px 0;border-bottom:1px solid rgb(var(--line))}
+@media (min-width:720px){.rows > div{grid-template-columns:11rem minmax(0,1fr)}}
+.rows .mono{color:rgb(var(--muted));padding-top:5px}
+.rows h3{font-size:1.3rem;margin-bottom:4px}
+.rows .m{max-width:66ch}
+.rows details{margin-top:6px;font-size:16px}.rows summary{cursor:pointer;color:rgb(var(--muted));width:fit-content}.rows ul{margin:6px 0 0;padding-left:20px;display:grid;gap:4px;max-width:66ch}
+.rows dd{margin:0;max-width:70ch}
+.contact{display:grid;gap:24px}
+@media (min-width:900px){.contact{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr)}}
+form{display:grid;gap:14px}
+.frow{display:grid;gap:14px}@media (min-width:640px){.frow{grid-template-columns:1fr 1fr}}
+.field{display:grid;gap:5px}.field label{font-family:var(--head);font-weight:500;font-size:16px}.field .hint{color:rgb(var(--muted));font-weight:400}
+.field input,.field textarea{font:inherit;color:rgb(var(--text));background:rgb(var(--surface));border:1px solid rgb(var(--line));padding:9px 12px;min-height:44px;width:100%;border-radius:0}
+.field textarea{min-height:130px;resize:vertical}
+.status{color:rgb(var(--muted));font-size:15px;min-height:1.4em}
+.links{display:grid;gap:0;align-content:start;border-top:1px solid rgb(var(--line))}
+.links div{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 0;border-bottom:1px solid rgb(var(--line))}
+.links span:first-child{color:rgb(var(--muted))}
+footer.site{padding-block:32px 40px}
+.tb{display:grid;border:1px solid rgb(var(--line));background:rgb(var(--surface));font-family:var(--mono);font-size:11.5px;color:rgb(var(--muted));max-width:40rem;margin-left:auto}
+.tb div{padding:8px 12px;border-top:1px solid rgb(var(--line))}
+.tb div:first-child{border-top:0}
+.tb b{display:block;font-family:var(--head);font-weight:600;font-size:16px;color:rgb(var(--text));letter-spacing:.01em}
+@media (min-width:640px){.tb{grid-template-columns:2fr 1fr 1fr}.tb div{border-top:0;border-left:1px solid rgb(var(--line))}.tb div:first-child{border-left:0}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-delay:0s!important;transition-duration:.001ms!important}.schem .drawn{stroke-dashoffset:0}.schem .lbl{opacity:1}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site" id="hdr">
+  <div class="wrap">
+    <a class="brand" href="#top">Ahsan Iftikhar</a>
+    <nav class="primary" aria-label="Primary"><a href="#work">Work</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#contact">Contact</a><a href="#resume">Resume</a></nav>
+    <button class="ibtn" id="theme" type="button" aria-label="Switch to light theme"><svg id="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg><svg id="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" hidden><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></button>
+    <button class="ibtn menubtn" id="menubtn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+  <div class="menu" id="menu"><div class="wrap"><ul><li><a href="#work">Work</a></li><li><a href="#experience">Experience</a></li><li><a href="#skills">Skills</a></li><li><a href="#contact">Contact</a></li><li><a href="#resume">Resume</a></li></ul></div></div>
+</header>
+<main id="main" tabindex="-1">
+<div class="wrap" id="top">
+  <section class="hero">
+    <h1>I build the software banks and investors actually use.</h1>
+    <p class="lead">Senior full-stack engineer (React, Node.js, Flask, OpenAI). Since 2022 I've shipped digital account opening for a national bank, branch systems used by 300+ offices, and LLM-driven market analysis for US investors. Karachi, Pakistan; remote for Lumida Wealth, New Jersey.</p>
+    <div class="cta"><a class="btn" href="#resume">Download resume</a><a class="ghost" href="#contact">Get in touch</a></div>
+    <div class="sheet">
+      <div class="sheet-h mono"><span>Three systems, as built</span><span>Hover or tap a box</span></div>
+      <div class="scroll"><svg class="schem" id="schem" viewBox="0 0 1000 400" role="img" aria-label="Schematic of three systems: NBP Digital Account Opening (React to Node.js API to Oracle SQL), the AI Investment Analysis Platform (React to Flask to Firestore and OpenAI), and Qlu.ai (Next.js to Node.js to PostgreSQL and Elasticsearch, with Socket.IO)."></svg></div>
+      <div class="callout" id="callout"><b>NBP Digital Account Opening</b><span>Front-end lead from inception. Live for National Bank of Pakistan customers.</span></div>
+    </div>
+  </section>
+
+  <section id="work" aria-labelledby="work-h"><h2 id="work-h">Selected work <span class="mono">8 systems</span></h2><div class="grid" id="cards"></div></section>
+
+  <section id="experience" aria-labelledby="xp-h"><h2 id="xp-h">Experience <span class="mono">2022 to now</span></h2><div class="rows" id="xp"></div></section>
+
+  <section id="skills" aria-labelledby="sk-h"><h2 id="sk-h">Skills</h2><dl class="rows" id="sk"></dl></section>
+
+  <section id="contact" aria-labelledby="ct-h"><h2 id="ct-h">Contact</h2>
+    <div class="contact">
+      <form id="form" novalidate>
+        <div class="frow"><div class="field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" required></div><div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div></div>
+        <div class="field"><label for="subject">Subject <span class="hint">(optional)</span></label><input id="subject" name="subject"></div>
+        <div class="field"><label for="message">Message</label><textarea id="message" name="message" required></textarea></div>
+        <div class="cta"><button class="btn" type="submit">Send message</button><p class="status" role="status" id="status"></p></div>
+      </form>
+      <div class="links"><div><span>Email</span><span>ahsaniftikhar2016@gmail.com</span></div><div><span>GitHub</span><a href="https://github.com/ahsandotexe">github.com/ahsandotexe</a></div><div><span>LinkedIn</span><a href="https://www.linkedin.com/in/ahsaniftikhar99/">linkedin.com/in/ahsaniftikhar99</a></div><div><span>Location</span><span>Karachi, Pakistan (UTC+5)</span></div><div><span>Education</span><span>BS Computer Science, FAST-NUCES, 2022</span></div></div>
+    </div>
+  </section>
+</div>
+</main>
+<footer class="site"><div class="wrap"><div class="tb"><div><b>Ahsan Iftikhar</b>Senior Software Engineer, full stack and AI</div><div><b>Sheet 1 of 1</b>Portfolio, home</div><div><b>Rev Oct 2026</b><a href="https://github.com/ahsandotexe">GitHub</a>, <a href="https://www.linkedin.com/in/ahsaniftikhar99/">LinkedIn</a>, <a href="#resume">Resume (PDF)</a></div></div></div></footer>
+<script>
+const e=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+// Schematic: three rows of boxes and wires. Coordinates in a 1000 x 400 drawing.
+const ROWS=[
+ {p:'nbp',y:60,title:'NBP Digital Account Opening',ann:'live for NBP customers',note:'Front-end lead from inception. Live for National Bank of Pakistan customers.',boxes:[['React','MUI 5, React Query',40],['Node.js API','services',330],['Oracle SQL','',620]],extra:[['Snyk','security scans',840]]},
+ {p:'lumida',y:180,title:'AI Investment Analysis Platform',ann:'Lumida Wealth, US equities',note:'Full-stack engineer, end-to-end modules. OpenAI LLM workflows turn market data into short, forward-looking summaries.',boxes:[['React','web app',40],['Flask','APIs',330],['Firestore','GCP',620]],extra:[['OpenAI','LLM workflows',840]]},
+ {p:'qlu',y:300,title:'Qlu.ai',ann:'candidate lists in minutes',note:'Full-stack engineer. 30% faster loads, 20% faster APIs, 40% fewer post-launch bugs.',boxes:[['Next.js','React Query',40],['Node.js','JWT, Socket.IO',330],['PostgreSQL','',620]],extra:[['Elasticsearch','search',840]]},
+];
+const W=170,H=56;
+let svg='';let k=0;
+ROWS.forEach((r,ri)=>{const d=ri*450;let g=`<g data-p="${r.p}" tabindex="0" role="button" aria-label="${e(r.title)}">`;
+ const all=[...r.boxes,...r.extra];
+ all.forEach((b,bi)=>{const x=b[2],y=r.y;g+=`<rect class="box drawn" pathLength="1" x="${x}" y="${y}" width="${W}" height="${H}" style="--d:${d+bi*120}ms"/><text class="lbl" x="${x+14}" y="${y+24}" style="--d:${d+bi*120}ms">${e(b[0])}</text>${b[1]?`<text class="lbl sub" x="${x+14}" y="${y+42}" style="--d:${d+bi*120}ms">${e(b[1])}</text>`:''}`});
+ // wires: box0->box1->box2, box1->extra (down-right elbow)
+ const y=r.y+H/2;
+ g+=`<path class="wire drawn" pathLength="1" d="M${40+W} ${y} H330" style="--d:${d+80}ms"/><path class="wire drawn" pathLength="1" d="M${330+W} ${y} H620" style="--d:${d+200}ms"/><path class="wire drawn" pathLength="1" d="M${620+W} ${y} H840" style="--d:${d+320}ms"/>`;
+ g+=`<text class="lbl ann" x="40" y="${r.y-12}" style="--d:${d}ms">${e(r.title)}, ${e(r.ann)}</text>`;
+ g+=`<text class="lbl ann" x="${40+W+8}" y="${y-6}" style="--d:${d+80}ms">https</text><text class="lbl ann" x="${330+W+8}" y="${y-6}" style="--d:${d+200}ms">sql</text><text class="lbl ann" x="${620+W+8}" y="${y-6}" style="--d:${d+320}ms">${ri===0?'ci':ri===1?'api':'index'}</text>`;
+ g+='</g>';svg+=g});
+const S=document.getElementById('schem');S.innerHTML=svg;
+const co=document.getElementById('callout');
+S.querySelectorAll('g[data-p]').forEach(g=>{const r=ROWS.find(x=>x.p===g.dataset.p);const on=()=>{S.classList.add('focus');S.querySelectorAll('g[data-p]').forEach(x=>x.classList.toggle('on',x===g));co.innerHTML=`<b>${e(r.title)}</b><span>${e(r.note)}</span>`};const off=()=>{S.classList.remove('focus');S.querySelectorAll('g[data-p]').forEach(x=>x.classList.remove('on'))};g.addEventListener('pointerenter',on);g.addEventListener('focus',on);g.addEventListener('pointerleave',off);g.addEventListener('blur',off);g.addEventListener('click',on)});
+const P=[
+ {n:'NBP Digital Account Opening',t:'Banking',role:'Front-end lead from inception',i:'Live for National Bank of Pakistan customers.',s:'React, React Query, Material UI, Node.js, Oracle SQL, Snyk',live:'https://newaccount.nbp.com.pk/landing-page'},
+ {n:'National Savings Digital Account Opening',t:'Banking',role:'Backend design and front-end lead',i:'Digital onboarding without a branch visit. Live.',s:'React, Node.js, Express, SQL',live:'https://account.nationalsavings.digital/'},
+ {n:'National Savings Suite',t:'Banking',role:'Front-end and Android lead; reporting',i:'Branch operations and Jasper reporting for 300+ branches.',s:'React, React Native, Java, Spring Boot, Oracle SQL, Redis, Jasper Reports'},
+ {n:'Bank Al-Habib Core Banking',t:'Banking',role:'Front-end engineer (Vue.js)',i:'Core banking overhaul; 15% more responsive interfaces.',s:'Vue.js, XState, JWT, Java, Quarkus, SQL'},
+ {n:'AI Investment Analysis Platform',t:'Fintech, AI',role:'Full-stack engineer, end-to-end modules',i:'LLM research summaries for US-equity investors.',s:'React, Flask, Firestore, Google Cloud, OpenAI'},
+ {n:'Qlu.ai',t:'AI/SaaS',role:'Full-stack engineer',i:'Candidate lists in minutes; 30% faster loads.',s:'Next.js, Node.js, PostgreSQL, Elasticsearch, Socket.IO'},
+ {n:'National Savings Back Office',t:'Banking',role:'UI and business logic; .NET services',i:'Request management and device-blocking security.',s:'React, .NET, SQL'},
+ {n:'National Savings Call Center Portal',t:'Banking',role:'Front-end lead',i:'KYC and lock-status lookups for agents.',s:'React, Node.js, SQL'},
+];
+document.getElementById('cards').innerHTML=P.map((p,i)=>`<a class="card" href="${p.live||'#work'}"><span class="mono">${e(p.t)}</span><h3>${e(p.n)}</h3><p>${e(p.role)}. ${e(p.i)}</p><span class="stack">${e(p.s)}</span></a>`).join('');
+const X=[
+ {w:'Dec 2024 to now',r:'Senior Software Engineer, Lumida Wealth (New Jersey, remote)',l:'25% better performance and engagement from new React modules; Flask and Firestore APIs; OpenAI LLM workflows.',m:['15% less technical debt from refactoring legacy code','Front-end architecture, UI/UX of key components, and code review']},
+ {w:'Oct to Dec 2024',r:'Full Stack Engineer, Qlu.ai (remote)',l:'30% faster loads, 20% faster API responses, 40% fewer bugs reported after launch.',m:['Next.js front end with React Query and middleware','Node.js and PostgreSQL services with JWT authentication','Real-time messaging with Socket.IO']},
+ {w:'Nov 2022 to Oct 2024',r:'Software Engineer I, Paysys Labs (Karachi)',l:'Reports and ETL for 300+ National Savings branches; 40% faster database performance.',m:['React interfaces for NBP and National Savings products (up to 25% more efficient, 30% faster page loads)','Jasper reports on complex SQL and PL/SQL procedures','JMeter stress tests; Node.js, Express, NestJS and .NET services; React Native apps']},
+ {w:'Apr to Oct 2022',r:'Software Engineer, Teresol (Karachi)',l:'15% more responsive Vue.js interfaces on Bank Al-Habib\'s core banking app.',m:['JWT authentication and authorization','XState state machines for complex UI state']},
+];
+document.getElementById('xp').innerHTML=X.map(x=>`<div><span class="mono">${e(x.w)}</span><div><h3>${e(x.r)}</h3><p class="m">${e(x.l)}</p><details><summary>${x.m.length} more points</summary><ul>${x.m.map(m=>`<li>${e(m)}</li>`).join('')}</ul></details></div></div>`).join('');
+const SK=[['Languages','TypeScript, JavaScript, Python, Java, C#, C/C++, SQL'],['Front end','React, Next.js, React Native, Vue.js, React Query, XState, Material UI, Tailwind CSS'],['Back end','Node.js, Express, NestJS, Flask, Spring Boot, Quarkus, .NET, REST, JWT, Socket.IO'],['Data','PostgreSQL, Oracle SQL, PL/SQL, Firestore, Redis, Elasticsearch, ETL jobs, Jasper Reports'],['AI','OpenAI LLMs, agentic workflows'],['Cloud and tools','Google Cloud, Docker, Git, JMeter, Snyk'],['Certificates','SQL (Intermediate) and JavaScript, HackerRank 2023; Python, HackerRank 2023; Front-End Web Development with React, Coursera 2022']];
+document.getElementById('sk').innerHTML=SK.map(s=>`<div><dt class="mono">${e(s[0])}</dt><dd>${e(s[1])}</dd></div>`).join('');
+const th=document.getElementById('theme');function setT(t){document.documentElement.setAttribute('data-theme',t);try{localStorage.setItem('m03-theme',t)}catch(x){}th.setAttribute('aria-label',t==='dark'?'Switch to light theme':'Switch to dark theme');document.getElementById('sun').hidden=t!=='dark';document.getElementById('moon').hidden=t==='dark'}
+setT(document.documentElement.getAttribute('data-theme')==='light'?'light':'dark');th.addEventListener('click',()=>setT(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'));
+const hdr=document.getElementById('hdr'),mb=document.getElementById('menubtn');function closeM(){if(!hdr.classList.contains('open'))return;hdr.classList.remove('open');mb.setAttribute('aria-expanded','false');mb.setAttribute('aria-label','Open menu');mb.focus()}
+mb.addEventListener('click',()=>{if(hdr.classList.contains('open'))closeM();else{hdr.classList.add('open');mb.setAttribute('aria-expanded','true');mb.setAttribute('aria-label','Close menu');document.querySelector('#menu a').focus()}});
+document.addEventListener('keydown',ev=>{if(ev.key==='Escape')closeM();if(ev.key==='Tab'&&hdr.classList.contains('open')){const f=[mb,...document.querySelectorAll('#menu a')];if(ev.shiftKey&&document.activeElement===f[0]){ev.preventDefault();f[f.length-1].focus()}else if(!ev.shiftKey&&document.activeElement===f[f.length-1]){ev.preventDefault();f[0].focus()}}});
+document.querySelectorAll('#menu a').forEach(a=>a.addEventListener('click',closeM));
+const spy=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){document.querySelectorAll('nav.primary a').forEach(a=>a.removeAttribute('aria-current'));const a=document.querySelector(`nav.primary a[href="#${x.target.id}"]`);if(a)a.setAttribute('aria-current','location')}}),{rootMargin:'-30% 0px -60% 0px'});
+['work','experience','skills','contact'].forEach(id=>spy.observe(document.getElementById(id)));
+document.getElementById('form').addEventListener('submit',ev=>{ev.preventDefault();const f=ev.target,miss=['name','email','message'].filter(k=>!f[k].value.trim()),st=document.getElementById('status');if(miss.length){st.textContent=`Add your ${miss.join(', ')} to send.`;f[miss[0]].focus();return}st.textContent='Mockup only. The live site posts this to Netlify Forms and confirms here.'});
+</script>
+</body>
+</html>

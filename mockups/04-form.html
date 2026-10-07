@@ -1,0 +1,216 @@
+<!doctype html>
+<!--
+  Concept 04: Account-opening form ("Application")
+  Memorable element: the comb field. His name typed letter by letter into character boxes, then a blue approval stamp.
+  The whole page is the artifact his banking products produce: a numbered form with declarations and a signature line.
+  Tokens (light): desk #E6E8EC, sheet #FFFFFF, ink #1E2126, muted #5C626B, field #7C838D, pen #1A4BB5
+  Tokens (dark): desk #15181D, sheet #22262C, ink #E8EAEE, muted #A0A7B1, field #6B7380, pen #8FB4FF
+  Type: Public Sans (labels, headings; the US government forms face) + Courier Prime (the typed-in values).
+  Not a template because: nobody else's portfolio is a form; ballpoint blue is the only colour; the stamp is the hero;
+  numbered sections are a real sequence; sentence case everywhere except the stamp face.
+  Framer Motion mapping: typing = useAnimate sequence over the comb cells (staggerChildren 60 ms) then long fields
+  (instant); stamp = spring scale/rotate with a short settle; checkboxes = whileTap; sections = layout.
+-->
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ahsan Iftikhar, senior full-stack engineer</title>
+<meta name="description" content="Senior full-stack and AI engineer. Banking, fintech and AI products in production.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap">
+<script>try{var t=localStorage.getItem('m04-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<style>
+:root{--desk:230 232 236;--sheet:255 255 255;--ink:30 33 38;--muted:92 98 107;--field:124 131 141;--pen:26 75 181;--rule:201 205 211;color-scheme:light;
+ --sans:"Public Sans","Segoe UI",Helvetica,Arial,sans-serif;--type:"Courier Prime","Courier New",Courier,monospace}
+[data-theme="dark"]{--desk:21 24 29;--sheet:34 38 44;--ink:232 234 238;--muted:160 167 177;--field:107 115 128;--pen:143 180 255;--rule:62 68 78;color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:72px;scroll-behavior:smooth}
+body{margin:0;background:rgb(var(--desk));color:rgb(var(--ink));font:16px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:rgb(var(--pen));text-underline-offset:3px}
+h1,h2,h3{margin:0;line-height:1.15;text-wrap:balance}
+h1{font-size:clamp(1.5rem,1.1rem + 1.4vw,2.1rem);font-weight:700}
+h2{font-size:1.05rem;font-weight:700;display:flex;gap:10px;align-items:baseline}
+h2 .num{font-family:var(--type);font-weight:700;min-width:1.6em}
+h3{font-size:1rem;font-weight:600}
+p{margin:0}
+:focus-visible{outline:2px solid rgb(var(--pen));outline-offset:2px}
+.skip{position:absolute;left:16px;top:-48px;background:rgb(var(--pen));color:rgb(var(--sheet));padding:8px 12px;z-index:20;text-decoration:none}.skip:focus{top:12px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+header.site{position:sticky;top:0;z-index:10;background:rgb(var(--desk));border-bottom:1px solid rgb(var(--rule))}
+header.site .wrap{max-width:54rem;margin-inline:auto;padding-inline:clamp(12px,3vw,24px);display:flex;align-items:center;gap:10px;min-height:56px}
+.brand{font-weight:700;text-decoration:none;color:rgb(var(--ink))}
+nav.primary{display:flex;gap:2px;margin-left:auto}
+nav.primary a{text-decoration:none;color:rgb(var(--muted));padding:8px 10px;min-height:44px;display:inline-flex;align-items:center;font-size:15px;font-weight:500}
+nav.primary a:hover,nav.primary a[aria-current]{color:rgb(var(--pen));text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px}
+.ibtn{width:44px;height:44px;border:0;background:transparent;color:rgb(var(--muted));display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.ibtn:hover{color:rgb(var(--ink))}
+.ibtn svg{width:20px;height:20px}
+.menubtn{display:none}.menu{display:none}
+@media (max-width:767px){nav.primary{display:none}.menubtn{display:inline-flex;margin-left:auto}header.site.open .menu{display:block;border-top:1px solid rgb(var(--rule))}.menu ul{list-style:none;margin:0;padding:8px clamp(12px,3vw,24px) 12px;max-width:54rem;margin-inline:auto}.menu a{display:block;padding:12px 0;text-decoration:none;color:rgb(var(--ink));font-size:18px;border-bottom:1px solid rgb(var(--rule))}}
+main{padding:clamp(12px,3vw,40px) 0 48px}
+.sheet{max-width:54rem;margin-inline:auto;background:rgb(var(--sheet));border:1px solid rgb(var(--rule));box-shadow:0 12px 40px -24px rgb(0 0 0/.35);padding:clamp(16px,4vw,44px);position:relative}
+@media (max-width:480px){.sheet{border-left:0;border-right:0}}
+.fhead{display:grid;gap:12px;padding-bottom:18px;border-bottom:2px solid rgb(var(--ink))}
+@media (min-width:640px){.fhead{grid-template-columns:minmax(0,1fr) auto;align-items:end}}
+.ref{font-family:var(--type);font-size:13px;color:rgb(var(--muted));text-align:right}
+.fhead p{color:rgb(var(--muted));font-size:15px;max-width:60ch}
+section.part{padding:22px 0 8px;border-bottom:1px solid rgb(var(--rule))}
+section.part:last-of-type{border-bottom:0}
+.part h2{margin-bottom:14px}
+.fields{display:grid;gap:14px 18px}
+@media (min-width:640px){.fields{grid-template-columns:repeat(2,minmax(0,1fr))}.fields .full{grid-column:1/-1}}
+.f{display:grid;gap:4px;min-width:0}
+.f label,.f .lbl{font-size:12.5px;color:rgb(var(--muted));font-weight:500}
+.box{border:1px solid rgb(var(--field));min-height:40px;padding:8px 10px;font-family:var(--type);font-size:15.5px;color:rgb(var(--pen));line-height:1.35;background:rgb(var(--sheet));overflow-wrap:anywhere}
+.box.tall{min-height:84px}
+.comb{display:flex;flex-wrap:wrap;gap:4px}
+.comb .word{display:inline-flex;gap:4px;flex-wrap:nowrap}
+.comb .word > span{width:1.75em;height:2.2em;border:1px solid rgb(var(--field));display:inline-flex;align-items:center;justify-content:center;font-family:var(--type);font-size:17px;color:rgb(var(--pen));text-transform:uppercase}
+.comb .gap{border:0;width:.9em}
+.comb .word > span.cur{box-shadow:inset 0 -3px 0 rgb(var(--pen));animation:caret 800ms steps(1) infinite}
+@keyframes caret{50%{box-shadow:none}}
+.row2{display:grid;gap:14px 18px}
+@media (min-width:640px){.row2{grid-template-columns:minmax(0,1fr) 120px}}
+.photo{border:1px solid rgb(var(--field));aspect-ratio:4/5;width:120px;display:grid;place-items:center;position:relative;overflow:hidden;background:rgb(var(--sheet))}
+.photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05)}
+.photo .lbl{position:absolute;left:0;right:0;bottom:0;background:rgb(var(--sheet)/.85);text-align:center;padding:2px;font-size:11px}
+.cta{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-top:8px}
+.btn{font:inherit;font-weight:600;display:inline-flex;align-items:center;min-height:44px;padding:9px 16px;background:rgb(var(--pen));color:rgb(var(--sheet));text-decoration:none;border:0;cursor:pointer}
+.btn:hover{filter:brightness(.92)}
+.btn.o{background:transparent;color:rgb(var(--pen));border:1px solid rgb(var(--pen))}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;vertical-align:top;padding:9px 8px;border:1px solid rgb(var(--rule))}
+th{font-weight:600;font-size:12.5px;color:rgb(var(--muted));background:rgb(var(--desk)/.5)}
+td.v{font-family:var(--type);color:rgb(var(--pen));font-size:14.5px}
+.att{display:grid;gap:0;border:1px solid rgb(var(--rule))}
+.att details{border-top:1px solid rgb(var(--rule))}
+.att details:first-child{border-top:0}
+.att summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:4px 12px;align-items:start;padding:10px 12px}
+.att summary::-webkit-details-marker{display:none}
+.att summary:hover{background:rgb(var(--desk)/.5)}
+.chk{width:18px;height:18px;border:1.5px solid rgb(var(--field));display:inline-grid;place-items:center;margin-top:3px;color:rgb(var(--pen));font-family:var(--type);font-weight:700;font-size:15px;line-height:1}
+.att .n{font-weight:600}
+.att .d{font-size:14px;color:rgb(var(--muted))}
+.att .v{font-family:var(--type);font-size:13px;color:rgb(var(--pen));white-space:nowrap;padding-top:3px}
+.att .body{padding:4px 12px 14px 46px;display:grid;gap:8px;font-size:15px}
+.att .body dl{margin:0;display:grid;gap:4px 12px}
+@media (min-width:640px){.att .body dl{grid-template-columns:7rem minmax(0,1fr)}}
+.att dt{color:rgb(var(--muted));font-size:13px}.att dd{margin:0;font-family:var(--type);color:rgb(var(--pen));font-size:14px;max-width:70ch}
+.skills{display:grid;gap:10px 18px}
+@media (min-width:640px){.skills{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.skills .g{display:grid;gap:6px}
+.skills .items{display:flex;flex-wrap:wrap;gap:6px 14px}
+.skills .items span{display:inline-flex;align-items:center;gap:6px;font-size:14.5px;white-space:nowrap}
+.skills .chk{width:15px;height:15px;font-size:12px;margin:0}
+.sig{display:grid;gap:18px;margin-top:10px}
+@media (min-width:640px){.sig{grid-template-columns:minmax(0,1fr) 230px;align-items:end}}
+.sigline{border-bottom:1px solid rgb(var(--ink));padding:14px 6px 4px;font-family:var(--type);font-style:italic;color:rgb(var(--pen));font-size:20px}
+.sig .lbl{font-size:12.5px;color:rgb(var(--muted))}
+.stamp{justify-self:end;transform:rotate(-8deg) scale(.6);opacity:0;animation:stamp 500ms cubic-bezier(.34,1.56,.64,1) forwards;animation-delay:var(--sd,2.4s);border:3px double rgb(var(--pen));color:rgb(var(--pen));padding:8px 14px;text-align:center;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:18px;line-height:1.1;mix-blend-mode:multiply;width:max-content}
+[data-theme="dark"] .stamp{mix-blend-mode:screen}
+.stamp small{display:block;font-size:11px;letter-spacing:.04em;font-weight:500;text-transform:none;font-family:var(--type)}
+@keyframes stamp{to{transform:rotate(-8deg) scale(1);opacity:.92}}
+.contact{display:grid;gap:14px}
+.contact .fields input,.contact .fields textarea{font:inherit;font-family:var(--type);font-size:15px;color:rgb(var(--pen));background:rgb(var(--sheet));border:1px solid rgb(var(--field));padding:8px 10px;min-height:44px;width:100%;border-radius:0}
+.contact textarea{min-height:110px;resize:vertical}
+.status{color:rgb(var(--muted));font-size:14px;min-height:1.4em}
+footer.site{max-width:54rem;margin:24px auto 0;padding-inline:clamp(12px,3vw,24px);font-size:14px;color:rgb(var(--muted));display:flex;flex-wrap:wrap;gap:8px 20px}
+footer.site .copy{margin-left:auto}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-delay:0s!important;transition-duration:.001ms!important}.stamp{opacity:.92;transform:rotate(-8deg)}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site" id="hdr">
+  <div class="wrap">
+    <a class="brand" href="#top">Ahsan Iftikhar</a>
+    <nav class="primary" aria-label="Primary"><a href="#work">Work</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#contact">Contact</a><a href="#resume">Resume</a></nav>
+    <button class="ibtn" id="theme" type="button" aria-label="Switch to dark theme"><svg id="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true" hidden><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg><svg id="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></button>
+    <button class="ibtn menubtn" id="menubtn" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+  <div class="menu" id="menu"><ul><li><a href="#work">Work</a></li><li><a href="#experience">Experience</a></li><li><a href="#skills">Skills</a></li><li><a href="#contact">Contact</a></li><li><a href="#resume">Resume</a></li></ul></div>
+</header>
+<main id="main" tabindex="-1">
+<div class="sheet" id="top">
+  <div class="fhead">
+    <div><h1>Application for senior engineering roles</h1><p>Complete in block letters. Attach proof of work. Fields marked in blue were filled in by the applicant.</p></div>
+    <div class="ref">Form SE-2026<br>Rev. Oct 2026<br>Page 1 of 1</div>
+  </div>
+
+  <section class="part" aria-labelledby="s1"><h2 id="s1"><span class="num">1.</span>Applicant</h2>
+    <div class="row2">
+      <div class="fields">
+        <div class="f full"><span class="lbl" id="name-l">Full name</span><div class="comb" id="comb" aria-labelledby="name-l" role="img" aria-label="Ahsan Iftikhar"></div></div>
+        <div class="f"><span class="lbl">Current position</span><div class="box" data-type="Senior Software Engineer"></div></div>
+        <div class="f"><span class="lbl">Employer</span><div class="box" data-type="Lumida Wealth, New Jersey (remote)"></div></div>
+        <div class="f"><span class="lbl">Location</span><div class="box" data-type="Karachi, Pakistan (UTC+5)"></div></div>
+        <div class="f"><span class="lbl">Availability</span><div class="box" data-type="Open to remote roles"></div></div>
+        <div class="f full"><span class="lbl">Statement</span><div class="box tall" data-type="I build the software banks and investors actually use. Senior full-stack engineer (React, Node.js, Flask, OpenAI). Since 2022 I have shipped digital account opening for a national bank, branch systems used by 300+ offices, and LLM-driven market analysis for US investors."></div></div>
+      </div>
+      <div class="f"><span class="lbl">Photograph</span><div class="photo"><img src="data:image/jpeg;base64,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" alt="Ahsan Iftikhar" width="240" height="300"></div></div>
+    </div>
+    <div class="cta"><a class="btn" href="#resume">Download resume</a></div>
+  </section>
+
+  <section class="part" id="work" aria-labelledby="s2"><h2 id="s2"><span class="num">2.</span>Proof of work (attachments)</h2><div class="att" id="att"></div></section>
+
+  <section class="part" id="experience" aria-labelledby="s3"><h2 id="s3"><span class="num">3.</span>Employment history</h2>
+    <table><thead><tr><th scope="col">Period</th><th scope="col">Employer</th><th scope="col">Position and summary</th></tr></thead><tbody id="emp"></tbody></table>
+    <p style="font-size:13px;color:rgb(var(--muted));margin-top:8px">Education: BS Computer Science, FAST-NUCES, Karachi, 2018 to 2022. Certificates: SQL (Intermediate) and JavaScript, HackerRank 2023; Python, HackerRank 2023; Front-End Web Development with React, Coursera 2022.</p>
+  </section>
+
+  <section class="part" id="skills" aria-labelledby="s4"><h2 id="s4"><span class="num">4.</span>Declared skills</h2><div class="skills" id="sk"></div></section>
+
+  <section class="part" id="contact" aria-labelledby="s5"><h2 id="s5"><span class="num">5.</span>Correspondence</h2>
+    <p style="font-size:14px;color:rgb(var(--muted));margin-bottom:12px">For the visitor. Write to the applicant at ahsaniftikhar2016@gmail.com, or use the fields below. Also on <a href="https://github.com/ahsandotexe">GitHub</a> and <a href="https://www.linkedin.com/in/ahsaniftikhar99/">LinkedIn</a>.</p>
+    <form class="contact" id="form" novalidate>
+      <div class="fields"><div class="f"><label for="name">Your name</label><input id="name" name="name" autocomplete="name" required></div><div class="f"><label for="email">Your email</label><input id="email" name="email" type="email" autocomplete="email" required></div><div class="f full"><label for="subject">Subject (optional)</label><input id="subject" name="subject"></div><div class="f full"><label for="message">Message</label><textarea id="message" name="message" required></textarea></div></div>
+      <div class="cta"><button class="btn" type="submit">Send message</button><p class="status" role="status" id="status"></p></div>
+    </form>
+    <div class="sig">
+      <div><div class="sigline">Ahsan Iftikhar</div><span class="lbl">Signature of applicant</span></div>
+      <div class="stamp" aria-hidden="true">Approved<small>for production, since 2022</small></div>
+    </div>
+  </section>
+</div>
+</main>
+<footer class="site"><span>Ahsan Iftikhar</span><a href="https://github.com/ahsandotexe">GitHub</a><a href="https://www.linkedin.com/in/ahsaniftikhar99/">LinkedIn</a><a href="#resume">Resume (PDF)</a><span class="copy">© 2026</span></footer>
+<script>
+const e=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const R=matchMedia('(prefers-reduced-motion: reduce)').matches;
+// One orchestrated moment: comb field types, then the long fields fill, then the stamp lands
+const NAME='AHSAN IFTIKHAR';const comb=document.getElementById('comb');comb.innerHTML=NAME.split(' ').map(w=>`<span class="word">${[...w].map(()=>'<span aria-hidden="true"></span>').join('')}</span>`).join('<span class="gap" aria-hidden="true"></span>');
+const cells=[...comb.querySelectorAll('.word > span')];
+const boxes=[...document.querySelectorAll('.box[data-type]')];
+if(R){cells.forEach((c,i)=>c.textContent=NAME.replace(/ /g,'')[i]);boxes.forEach(b=>b.textContent=b.dataset.type);document.querySelector('.stamp').style.setProperty('--sd','0s')}
+else{const L=NAME.replace(/ /g,'');cells.forEach((c,i)=>setTimeout(()=>{c.textContent=L[i];c.classList.add('cur');if(i)cells[i-1].classList.remove('cur');if(i===L.length-1)setTimeout(()=>c.classList.remove('cur'),400)},300+i*65));
+ boxes.forEach((b,i)=>setTimeout(()=>b.textContent=b.dataset.type,1300+i*120));document.querySelector('.stamp').style.setProperty('--sd','2.3s')}
+const P=[
+ {n:'NBP Digital Account Opening',d:'Banking. Front-end lead from inception.',v:'Verified, live',problem:'Opening an NBP account meant a branch visit.',built:'React front end with MUI 5 and React Query caching; Node.js services; Snyk-driven security fixes; cross-device compatibility.',impact:'Live for National Bank of Pakistan customers.',stack:'React, React Query, Material UI, Node.js, Oracle SQL, Snyk',live:'newaccount.nbp.com.pk'},
+ {n:'National Savings Digital Account Opening',d:'Banking. Backend design and front-end lead.',v:'Verified, live',problem:'Onboard National Savings customers without a branch visit, securely.',built:'Node.js and Express backend; React front end; features delivered with cross-functional teams.',impact:'Live for National Savings customers.',stack:'React, Node.js, Express, SQL',live:'account.nationalsavings.digital'},
+ {n:'National Savings Suite',d:'Banking. Front-end and Android lead; reporting.',v:'Internal',problem:'300+ branches needed one system for information, transactions, products and savings tracking.',built:'React front end; React Native Android app; Jasper reports on complex SQL and PL/SQL; Spring Boot, Oracle SQL and Redis backend (team).',impact:'In use across 300+ branches nationwide.',stack:'React, React Native, Java, Spring Boot, Oracle SQL, Redis, Jasper Reports'},
+ {n:'Bank Al-Habib Core Banking',d:'Banking. Front-end engineer (Vue.js).',v:'Internal',problem:'An ageing core banking app spanning accounts, transactions, loans, CRM, teller and cash management, KYC and financial analysis.',built:'Vue.js front end with JWT security and XState state machines; Quarkus and SQL backend (team).',impact:'15% more responsive interfaces.',stack:'Vue.js, XState, JWT, Java, Quarkus, SQL'},
+ {n:'AI Investment Analysis Platform',d:'Fintech, AI. Full-stack engineer, end-to-end modules.',v:'Internal',problem:'US-equity investors get news, sentiment and portfolio data in separate places.',built:'React and Flask on Firestore and Google Cloud; real-time news, AI sentiment and portfolio analytics; OpenAI LLM workflows producing research summaries.',impact:'Complex market data arrives as short, forward-looking summaries.',stack:'React, Flask, Firestore, Google Cloud, OpenAI'},
+ {n:'Qlu.ai',d:'AI/SaaS. Full-stack engineer.',v:'Delivered',problem:'Recruiters build prospect lists by hand.',built:'Next.js front end; Node.js, PostgreSQL and Elasticsearch services with JWT; Socket.IO messaging; NLP that reads hiring requirements into candidate lists.',impact:'Candidate lists in minutes; 30% faster loads, 20% faster APIs, 40% fewer post-launch bugs.',stack:'Next.js, Node.js, PostgreSQL, Elasticsearch, Socket.IO'},
+ {n:'National Savings Back Office',d:'Banking. UI and business logic; .NET services.',v:'Internal',problem:'Staff needed to process onboarding requests with strong account controls.',built:'React UI and business logic; .NET and SQL services; device-blocking security.',impact:'Request management and account controls for the onboarding programme.',stack:'React, .NET, SQL'},
+ {n:'National Savings Call Center Portal',d:'Banking. Front-end lead.',v:'Internal',problem:'Agents needed KYC details and lock status without the mobile app.',built:'React portal over Node.js services.',impact:'Agents resolve KYC and lock queries from one screen.',stack:'React, Node.js, SQL'},
+];
+document.getElementById('att').innerHTML=P.map(p=>`<details><summary><span class="chk" aria-hidden="true">x</span><span><span class="n">${e(p.n)}</span><br><span class="d">${e(p.d)}</span></span><span class="v">${e(p.v)}</span></summary><div class="body"><dl><dt>Problem</dt><dd>${e(p.problem)}</dd><dt>What I built</dt><dd>${e(p.built)}</dd><dt>Impact</dt><dd>${e(p.impact)}</dd><dt>Stack</dt><dd>${e(p.stack)}</dd>${p.live?`<dt>Address</dt><dd><a href="https://${p.live}">${e(p.live)}</a></dd>`:''}</dl></div></details>`).join('');
+const X=[['Dec 2024 to now','Lumida Wealth, New Jersey (remote)','Senior Software Engineer. 25% better performance and engagement from new React modules; Flask and Firestore APIs; OpenAI LLM workflows; 15% less technical debt; front-end architecture and code review.'],['Oct to Dec 2024','Qlu.ai (remote)','Full Stack Engineer. 30% faster loads, 20% faster API responses, 40% fewer bugs after launch; Next.js, Node.js, PostgreSQL, JWT, Socket.IO.'],['Nov 2022 to Oct 2024','Paysys Labs, Karachi','Software Engineer I. Reports and ETL for 300+ National Savings branches; 40% faster database performance; React interfaces for NBP and National Savings; JMeter stress tests; Node.js, NestJS, .NET, React Native.'],['Apr to Oct 2022','Teresol, Karachi','Software Engineer. 15% more responsive Vue.js interfaces on Bank Al-Habib\'s core banking app; JWT; XState state machines.']];
+document.getElementById('emp').innerHTML=X.map(x=>`<tr><td class="v">${e(x[0])}</td><td class="v">${e(x[1])}</td><td>${e(x[2])}</td></tr>`).join('');
+const SK=[['Languages',['TypeScript','JavaScript','Python','Java','C#','C/C++','SQL']],['Front end',['React','Next.js','React Native','Vue.js','React Query','XState','Material UI','Tailwind CSS']],['Back end',['Node.js','Express','NestJS','Flask','Spring Boot','Quarkus','.NET','REST','JWT','Socket.IO']],['Data',['PostgreSQL','Oracle SQL','PL/SQL','Firestore','Redis','Elasticsearch','ETL jobs','Jasper Reports']],['AI',['OpenAI LLMs','Agentic workflows']],['Cloud and tools',['Google Cloud','Docker','Git','JMeter','Snyk']]];
+document.getElementById('sk').innerHTML=SK.map(g=>`<div class="g"><span class="lbl">${e(g[0])}</span><div class="items">${g[1].map(s=>`<span><span class="chk" aria-hidden="true">x</span>${e(s)}</span>`).join('')}</div></div>`).join('');
+const th=document.getElementById('theme');function setT(t){document.documentElement.setAttribute('data-theme',t);try{localStorage.setItem('m04-theme',t)}catch(x){}th.setAttribute('aria-label',t==='dark'?'Switch to light theme':'Switch to dark theme');document.getElementById('sun').hidden=t!=='dark';document.getElementById('moon').hidden=t==='dark'}
+setT(document.documentElement.getAttribute('data-theme')==='dark'?'dark':'light');th.addEventListener('click',()=>setT(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'));
+const hdr=document.getElementById('hdr'),mb=document.getElementById('menubtn');function closeM(){if(!hdr.classList.contains('open'))return;hdr.classList.remove('open');mb.setAttribute('aria-expanded','false');mb.setAttribute('aria-label','Open menu');mb.focus()}
+mb.addEventListener('click',()=>{if(hdr.classList.contains('open'))closeM();else{hdr.classList.add('open');mb.setAttribute('aria-expanded','true');mb.setAttribute('aria-label','Close menu');document.querySelector('#menu a').focus()}});
+document.addEventListener('keydown',ev=>{if(ev.key==='Escape')closeM();if(ev.key==='Tab'&&hdr.classList.contains('open')){const f=[mb,...document.querySelectorAll('#menu a')];if(ev.shiftKey&&document.activeElement===f[0]){ev.preventDefault();f[f.length-1].focus()}else if(!ev.shiftKey&&document.activeElement===f[f.length-1]){ev.preventDefault();f[0].focus()}}});
+document.querySelectorAll('#menu a').forEach(a=>a.addEventListener('click',closeM));
+const spy=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){document.querySelectorAll('nav.primary a').forEach(a=>a.removeAttribute('aria-current'));const a=document.querySelector(`nav.primary a[href="#${x.target.id}"]`);if(a)a.setAttribute('aria-current','location')}}),{rootMargin:'-30% 0px -60% 0px'});
+['work','experience','skills','contact'].forEach(id=>spy.observe(document.getElementById(id)));
+document.getElementById('form').addEventListener('submit',ev=>{ev.preventDefault();const f=ev.target,miss=['name','email','message'].filter(k=>!f[k].value.trim()),st=document.getElementById('status');if(miss.length){st.textContent=`Add your ${miss.join(', ')} to send.`;f[miss[0]].focus();return}st.textContent='Mockup only. The live site posts this to Netlify Forms and confirms here.'});
+</script>
+</body>
+</html>

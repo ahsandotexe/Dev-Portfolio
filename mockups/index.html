@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio direction mockups</title>
+<style>
+:root{--bg:#f6f6f7;--fg:#161718;--muted:#5d6168;--rule:#d9dbe0;--card:#ffffff;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#141517;--fg:#ececee;--muted:#9ea3ab;--rule:#2b2e33;--card:#1d1f23;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:32px clamp(16px,4vw,48px) 64px}
+h1{font-size:1.6rem;margin:0 0 6px}
+.sub{color:var(--muted);max-width:70ch;margin:0 0 28px}
+.grid{display:grid;gap:20px}
+@media (min-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1200px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.c{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:20px;display:grid;gap:12px;align-content:start}
+.c h2{font-size:1.15rem;margin:0}
+.c h2 small{color:var(--muted);font-weight:400;margin-left:8px}
+.c p{margin:0;color:var(--muted);font-size:15px}
+.sw{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
+.sw span{display:grid;gap:3px;font-size:10px;color:var(--muted);text-align:center;word-break:break-all}
+.sw i{display:block;height:26px;border-radius:5px;border:1px solid var(--rule)}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+a.b{display:inline-flex;align-items:center;min-height:40px;padding:8px 14px;border-radius:7px;background:var(--fg);color:var(--bg);text-decoration:none;font-weight:600;font-size:15px}
+a.o{background:transparent;color:var(--fg);border:1px solid var(--fg)}
+.meta{font-size:13px;color:var(--muted)}
+.docs{margin-top:28px;font-size:15px;color:var(--muted)}
+.docs a{color:inherit}
+</style>
+</head>
+<body>
+<h1>Portfolio direction mockups</h1>
+<p class="sub">Five directions for the same job: in 30 seconds a recruiter knows who Ahsan is, sees proof, and finds the resume or contact. Each is a working home page with the brief's real content, a dark and light theme (toggle in the header), responsive layout and reduced-motion support. Open at 1440 and 375.</p>
+<div class="grid">
+  <div class="c">
+    <h2>01 Status page <small>quiet</small></h2>
+    <p>The home page is an ops status board: eight real systems, each marked live and public, live and internal, or delivered, with the case study opening in place. Rows check in one after another on load; a timestamp ticks. Atkinson Hyperlegible and IBM Plex Mono; no brand colour, only semantic green and amber on neutral grey.</p>
+    <div class="sw"><span><i style="background:#17191C"></i>17191C</span><span><i style="background:#1F2226"></i>1F2226</span><span><i style="background:#E9EBEE"></i>E9EBEE</span><span><i style="background:#9AA1AB"></i>9AA1AB</span><span><i style="background:#3DBB7E"></i>3DBB7E</span><span><i style="background:#E0A33A"></i>E0A33A</span></div>
+    <div class="sw"><span><i style="background:#F4F5F7"></i>F4F5F7</span><span><i style="background:#FFFFFF"></i>FFFFFF</span><span><i style="background:#17191C"></i>17191C</span><span><i style="background:#5A6370"></i>5A6370</span><span><i style="background:#15754B"></i>15754B</span><span><i style="background:#8A5A05"></i>8A5A05</span></div>
+    <div class="row"><a class="b" href="01-status.html">Open mockup</a></div>
+    <span class="meta">Dark by default. Memorable element: the production board.</span>
+  </div>
+  <div class="c">
+    <h2>02 Magazine profile <small>restrained</small></h2>
+    <p>A feature article about him. Fraunces display with a drop cap, Newsreader text, a double-rule masthead, and marginalia: role, stack, impact and dates sit in the margin beside each item so the main column reads as prose and the proof reads at a glance. Headline words settle into place on load. Cool paper and burgundy; dark mode is aubergine and rose.</p>
+    <div class="sw"><span><i style="background:#F5F6F8"></i>F5F6F8</span><span><i style="background:#FFFFFF"></i>FFFFFF</span><span><i style="background:#1C1D21"></i>1C1D21</span><span><i style="background:#5E616A"></i>5E616A</span><span><i style="background:#D9DBE0"></i>D9DBE0</span><span><i style="background:#7D1E2E"></i>7D1E2E</span></div>
+    <div class="sw"><span><i style="background:#1E1B20"></i>1E1B20</span><span><i style="background:#272329"></i>272329</span><span><i style="background:#ECE8E1"></i>ECE8E1</span><span><i style="background:#A69F98"></i>A69F98</span><span><i style="background:#37323A"></i>37323A</span><span><i style="background:#E3A3AC"></i>E3A3AC</span></div>
+    <div class="row"><a class="b" href="02-profile.html">Open mockup</a></div>
+    <span class="meta">Light by default. Memorable element: marginalia.</span>
+  </div>
+  <div class="c">
+    <h2>03 Blueprint <small>middle</small></h2>
+    <p>A drafting sheet. Three of his real architectures (NBP account opening, the Lumida platform, Qlu.ai) are drawn as a schematic that draws itself on load; hovering a box lights its connections and names the project. Barlow Semi Condensed, the DIN-like lettering of engineering drawings, with Martian Mono annotations and a title block in the footer. Cobalt on cobalt, no accent colour.</p>
+    <div class="sw"><span><i style="background:#163F73"></i>163F73</span><span><i style="background:#1E4C86"></i>1E4C86</span><span><i style="background:#EAF2FF"></i>EAF2FF</span><span><i style="background:#B7CCE8"></i>B7CCE8</span><span><i style="background:#8FB4E6"></i>8FB4E6</span><span><i style="background:#FFFFFF"></i>FFFFFF</span></div>
+    <div class="sw"><span><i style="background:#F3F6FB"></i>F3F6FB</span><span><i style="background:#FFFFFF"></i>FFFFFF</span><span><i style="background:#0F2A4F"></i>0F2A4F</span><span><i style="background:#4A617F"></i>4A617F</span><span><i style="background:#2457A6"></i>2457A6</span><span><i style="background:#1F4FB0"></i>1F4FB0</span></div>
+    <div class="row"><a class="b" href="03-blueprint.html">Open mockup</a></div>
+    <span class="meta">Dark by default. Memorable element: the self-drawing schematic.</span>
+  </div>
+  <div class="c">
+    <h2>04 Account-opening form <small>real risk</small></h2>
+    <p>The page is a filled-in bank form, the artifact his products produce. His name types into comb boxes, the fields fill in ballpoint blue, and an approval stamp lands. Numbered sections: applicant, proof of work as attachments, employment history as a table, declared skills as a checkbox grid, correspondence with a signature line. Public Sans labels, Courier Prime values.</p>
+    <div class="sw"><span><i style="background:#E6E8EC"></i>E6E8EC</span><span><i style="background:#FFFFFF"></i>FFFFFF</span><span><i style="background:#1E2126"></i>1E2126</span><span><i style="background:#5C626B"></i>5C626B</span><span><i style="background:#7C838D"></i>7C838D</span><span><i style="background:#1A4BB5"></i>1A4BB5</span></div>
+    <div class="sw"><span><i style="background:#15181D"></i>15181D</span><span><i style="background:#22262C"></i>22262C</span><span><i style="background:#E8EAEE"></i>E8EAEE</span><span><i style="background:#A0A7B1"></i>A0A7B1</span><span><i style="background:#6B7380"></i>6B7380</span><span><i style="background:#8FB4FF"></i>8FB4FF</span></div>
+    <div class="row"><a class="b" href="04-form.html">Open mockup</a></div>
+    <span class="meta">Light by default. Memorable element: the comb field and the stamp.</span>
+  </div>
+  <div class="c">
+    <h2>05 Swiss poster <small>middle to high</small></h2>
+    <p>An eight-column poster grid. The headline in expanded Archivo across six cells, the proof figures (300+, 8) as the largest objects on the page, one crimson cell for the resume. Cells wipe in from their own edges on load; tiles invert to black on hover. One typeface at two widths; white, black and crimson; light first.</p>
+    <div class="sw"><span><i style="background:#FFFFFF"></i>FFFFFF</span><span><i style="background:#000000"></i>000000</span><span><i style="background:#6B6B6B"></i>6B6B6B</span><span><i style="background:#DADADA"></i>DADADA</span><span><i style="background:#D7263D"></i>D7263D</span><span><i style="background:#FF6B78"></i>FF6B78</span></div>
+    <div class="sw"><span><i style="background:#000000"></i>000000</span><span><i style="background:#FFFFFF"></i>FFFFFF</span><span><i style="background:#9A9A9A"></i>9A9A9A</span><span><i style="background:#333333"></i>333333</span><span><i style="background:#D7263D"></i>D7263D</span><span><i style="background:#FF6B78"></i>FF6B78</span></div>
+    <div class="row"><a class="b" href="05-poster.html">Open mockup</a></div>
+    <span class="meta">Light by default. Memorable element: the poster hero.</span>
+  </div>
+</div>
+<p class="docs">Swatches show the dark row and the light row for each concept (background, surface, text, muted, rule or line, accent). The research, concept list and design plans are in <a href="EXPLORATION.md">EXPLORATION.md</a>; the comparison and recommendation are in <a href="REVIEW.md">REVIEW.md</a>.</p>
+</body>
+</html>
