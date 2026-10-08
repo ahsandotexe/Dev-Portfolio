@@ -1,18 +1,46 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Ahsan Iftikhar - Senior Software Engineer specializing in React, Node.js, Flask, and AI integration. Building scalable, AI-driven software solutions." />
-    <meta property="og:title" content="Ahsan Iftikhar - Senior Software Engineer" />
-    <meta property="og:description" content="Building scalable, AI-driven software solutions" />
+    <script>
+      (function () {
+        var t = 'light';
+        try {
+          var s = localStorage.getItem('theme');
+          if (s === 'dark' || s === 'light') t = s;
+        } catch (e) {}
+        document.documentElement.setAttribute('data-theme', t);
+      })();
+    </script>
+    <title>Ahsan Iftikhar — Senior Software Engineer</title>
+    <meta name="description" content="Ahsan Iftikhar, senior software engineer in Karachi. Five years of fintech and AI systems: a trade-order service behind live Schwab execution, a React Native app with 1,000+ users, three national banking products." />
+    <meta name="theme-color" content="#F9F9F9" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="canonical" href="https://portfoliobyahsan.netlify.app/" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Ahsan Iftikhar" />
+    <meta property="og:title" content="Ahsan Iftikhar — Senior Software Engineer" />
+    <meta property="og:description" content="Software engineer of systems that hold. Fintech and AI: trade-order automation, a React Native app with 1,000+ users, national banking products." />
+    <meta property="og:url" content="https://portfoliobyahsan.netlify.app/" />
+    <meta property="og:image" content="https://portfoliobyahsan.netlify.app/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
-    <title>Ahsan Iftikhar - Senior Software Engineer</title>
+    <meta name="twitter:title" content="Ahsan Iftikhar — Senior Software Engineer" />
+    <meta name="twitter:description" content="Software engineer of systems that hold. Fintech and AI: trade-order automation, a React Native app with 1,000+ users, national banking products." />
+    <meta name="twitter:image" content="https://portfoliobyahsan.netlify.app/og.jpg" />
   </head>
   <body>
     <div id="root"></div>
+    <!-- Static copy of the contact form so Netlify registers it at build time. The live form is rendered by React. -->
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <textarea name="message"></textarea>
+    </form>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

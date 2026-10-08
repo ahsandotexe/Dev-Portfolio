@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#F9F9F9;color:#0A162D;font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#0A162D;text-decoration:none}a:hover{color:#DC4453}
+button{font-family:inherit}
+@keyframes lineUp{from{transform:translateY(110%)}to{transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes slideIn{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</helmet>
+<div style="min-height:100vh;background:#F9F9F9;display:flex;justify-content:center">
+<div style="width:100%;max-width:{{ frameMax }};min-height:100vh;position:relative;background:#F9F9F9;color:#0A162D;overflow:hidden">
+
+<!-- nav -->
+<header style="position:fixed;top:0;left:0;right:0;z-index:40;mix-blend-mode:difference;color:#fff;pointer-events:none">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;padding:{{ navPad }}">
+    <button onClick="{{ goHome }}" style="pointer-events:auto;background:none;border:0;color:inherit;cursor:pointer;padding:0;text-align:left;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:500;letter-spacing:0.02em;line-height:1.3">Ahsan Iftikhar<br><span style="font-family:'Inter',sans-serif;font-size:11px;opacity:.7;font-weight:400">Software Engineer, Karachi</span></button>
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+      <nav style="pointer-events:auto;display:flex;gap:28px">
+        <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+          <button onClick="{{ n.go }}" style="background:none;border:0;color:inherit;cursor:pointer;padding:0;display:flex;flex-direction:column;align-items:flex-start;gap:4px;font-size:13px;font-weight:500;opacity:{{ n.opacity }};transition:opacity 200ms" style-hover="opacity:1">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px">{{ n.idx }}</span>{{ n.label }}
+            <span style="width:100%;height:1px;background:currentColor;transform-origin:left;transform:{{ n.lineScale }};transition:transform 400ms cubic-bezier(.22,1,.36,1)"></span>
+          </button>
+        </sc-for>
+        <button onClick="{{ openContact }}" style="background:none;border:0;color:inherit;cursor:pointer;padding:0;display:flex;flex-direction:column;align-items:flex-start;gap:4px;font-size:13px;font-weight:500;opacity:.6" style-hover="opacity:1"><span style="font-family:'JetBrains Mono',monospace;font-size:10px">06</span>Contact<span style="width:100%;height:1px"></span></button>
+      </nav>
+    </sc-if>
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ toggleMenu }}" style="pointer-events:auto;background:none;border:0;color:inherit;cursor:pointer;height:44px;padding:0;font-size:13px;font-weight:500;letter-spacing:0.04em">{{ menuLabel }}</button>
+    </sc-if>
+  </div>
+</header>
+<!-- page ordinal -->
+<sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+  <div style="position:fixed;right:40px;top:50%;transform:translateY(-50%);z-index:30;display:flex;flex-direction:column;align-items:center;gap:12px;mix-blend-mode:difference;color:#fff;pointer-events:none">
+    <span key="{{ page }}" style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:500;letter-spacing:-0.04em;line-height:1;display:inline-block;overflow:hidden"><span style="display:inline-block;animation:lineUp 600ms cubic-bezier(.22,1,.36,1)">{{ pageIndex }}</span></span>
+    <div style="width:1px;height:140px;background:rgba(255,255,255,0.3)"><div style="width:100%;height:100%;background:#fff;transform-origin:top;transform:{{ progressScale }};transition:transform 100ms linear"></div></div>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:10px;opacity:.7;writing-mode:vertical-rl">{{ pageLabel }} / 05</span>
+  </div>
+</sc-if>
+
+<!-- mobile menu -->
+<sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;z-index:35;background:#0A162D;color:#F9F9F9;padding:96px 24px 32px;display:flex;flex-direction:column;animation:fade 250ms">
+    <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+      <button onClick="{{ n.go }}" style="background:none;border:0;color:inherit;padding:6px 0;cursor:pointer;text-align:left;display:flex;align-items:baseline;gap:16px;overflow:hidden">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;opacity:.6">{{ n.idx }}</span>
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:52px;font-weight:500;letter-spacing:-0.04em;line-height:1.05;display:inline-block;animation:lineUp 600ms cubic-bezier(.22,1,.36,1) both;animation-delay:{{ n.delay }};color:{{ n.mobileColor }}">{{ n.label }}</span>
+      </button>
+    </sc-for>
+    <button onClick="{{ openContact }}" style="margin-top:auto;background:none;border:0;border-top:1px solid rgba(249,249,249,0.2);color:inherit;padding:20px 0 0;cursor:pointer;text-align:left;font-size:16px;display:flex;justify-content:space-between">Get in touch <span>→</span></button>
+  </div>
+</sc-if>
+
+<main key="{{ page }}" style="animation:fade 500ms both">
+
+<!-- ================= HOME ================= -->
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+  <section data-screen-label="Home hero" style="position:relative;min-height:100vh;padding:{{ heroPad }};display:grid;grid-template-rows:1fr auto;overflow:hidden">
+    <canvas ref="{{ canvasRef }}" style="position:absolute;inset:0;width:100%;height:100%;display:block;opacity:.9"></canvas>
+    <div style="position:relative;align-self:end;display:grid;gap:0;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:{{ heroSize }};line-height:0.92;letter-spacing:-0.05em;text-transform:uppercase">
+      <sc-for list="{{ heroLines }}" as="l" hint-placeholder-count="4">
+        <div style="overflow:hidden;padding-left:{{ l.indent }}"><div style="animation:lineUp 900ms cubic-bezier(.22,1,.36,1) both;animation-delay:{{ l.delay }};color:{{ l.color }}">{{ l.text }}</div></div>
+      </sc-for>
+    </div>
+    <div style="position:relative;display:grid;grid-template-columns:{{ heroMetaCols }};gap:24px;align-items:end;padding-top:40px;animation:fade 800ms 900ms both">
+      <p style="margin:0;max-width:380px;font-size:15px;line-height:1.55;color:rgba(10,22,45,0.75)">Ahsan Iftikhar — senior software engineer. Five years of fintech and AI systems: a trade-order service behind live Schwab execution, a React Native app with 1,000+ users, three national banking products.</p>
+      <div style="display:flex;gap:28px;font-size:13px;font-weight:500;flex-wrap:wrap">
+        <button onClick="{{ goProjects }}" style="background:none;border:0;padding:0;cursor:pointer;color:#0A162D;font-size:13px;font-weight:500;display:flex;gap:8px;align-items:center;border-bottom:1px solid #0A162D;padding-bottom:4px" style-hover="color:#DC4453;border-color:#DC4453">Selected work <span>→</span></button>
+        <button onClick="{{ goResume }}" style="background:none;border:0;padding:0;cursor:pointer;color:#0A162D;font-size:13px;font-weight:500;border-bottom:1px solid transparent;padding-bottom:4px" style-hover="border-color:#0A162D">Resume</button>
+      </div>
+      <div style="display:flex;gap:16px;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(10,22,45,0.6);justify-content:{{ socialJustify }}"><a href="https://github.com/ahsandotexe">GitHub</a><a href="https://linkedin.com/in/ahsaniftikhar99">LinkedIn</a><a href="mailto:ahsaniftikhar2016@gmail.com">Email</a></div>
+    </div>
+  </section>
+
+  <!-- selected projects, editorial list -->
+  <section data-screen-label="Home work" style="padding:{{ secPad }};border-top:1px solid rgba(10,22,45,0.12)">
+    <div style="display:grid;grid-template-columns:{{ twoCol }};gap:40px;margin-bottom:48px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(10,22,45,0.6)">Selected work<br>2022 — 2026</span>
+      <h2 style="margin:0;font-family:'Space Grotesk',sans-serif;font-size:{{ h2Size }};font-weight:500;letter-spacing:-0.04em;line-height:1;text-wrap:balance">Three products that run money, teams, or markets.</h2>
+    </div>
+    <div style="display:grid">
+      <sc-for list="{{ featured }}" as="p" hint-placeholder-count="3">
+        <button onClick="{{ p.open }}" style="position:relative;display:grid;grid-template-columns:{{ listCols }};gap:24px;align-items:center;padding:32px 0;border:0;border-top:1px solid rgba(10,22,45,0.12);background:none;text-align:left;cursor:pointer;color:#0A162D;transition:color 200ms" style-hover="color:#DC4453">
+          <span style="display:grid;gap:12px;align-items:center;grid-template-columns:auto {{ thumbW }}"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(10,22,45,0.6)">{{ p.num }}</span><img src="{{ p.img }}" alt="" style="width:{{ thumbW }};aspect-ratio:4/5;object-fit:cover;display:{{ thumbDisplay }};background:#0A162D"></span>
+          <span style="font-family:'Space Grotesk',sans-serif;font-size:{{ listTitle }};font-weight:500;letter-spacing:-0.04em;line-height:1">{{ p.name }}</span>
+          <span style="font-size:14px;color:rgba(10,22,45,0.65)">{{ p.kicker }}</span>
+          <span style="font-size:13px;text-align:right">{{ p.metric }} <span style="color:rgba(10,22,45,0.55)">{{ p.metricLabel }}</span></span>
+        </button>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- experience preview -->
+  <section style="padding:{{ secPad }};background:#0A162D;color:#F9F9F9">
+    <div style="display:grid;grid-template-columns:{{ twoCol }};gap:40px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;opacity:.6">Currently</span>
+      <div style="display:grid;gap:24px">
+        <h2 style="margin:0;font-family:'Space Grotesk',sans-serif;font-size:{{ h2Size }};font-weight:500;letter-spacing:-0.04em;line-height:1">Senior Software Engineer at Lumida Wealth, owning web, mobile and the AI layer.</h2>
+        <div style="display:flex;gap:32px;flex-wrap:wrap;font-size:14px;opacity:.75"><span>Previously Paysys Labs, Teresol, Medicon</span><button onClick="{{ goExperience }}" style="background:none;border:0;color:inherit;padding:0;cursor:pointer;font-size:14px;border-bottom:1px solid currentColor" style-hover="color:#DC4453">Full history →</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:{{ secPad }};display:grid;grid-template-columns:{{ twoCol }};gap:40px;align-items:end">
+    <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(10,22,45,0.6)">Contact</span>
+    <div style="display:grid;gap:20px">
+      <button onClick="{{ openContact }}" style="background:none;border:0;padding:0;text-align:left;cursor:pointer;font-family:'Space Grotesk',sans-serif;font-size:{{ ctaSize }};font-weight:500;letter-spacing:-0.05em;line-height:0.95;color:#0A162D;transition:color 200ms" style-hover="color:#DC4453">Let's talk →</button>
+      <span style="font-size:14px;color:rgba(10,22,45,0.65)">ahsaniftikhar2016@gmail.com · Open to senior and lead roles.</span>
+    </div>
+  </section>
+</sc-if>
+
+<!-- ================= ABOUT ================= -->
+<sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="About" style="padding:{{ pagePad }};display:grid;gap:72px">
+    <div style="display:grid;grid-template-columns:{{ aboutCols }};gap:48px;align-items:stretch">
+      <div style="display:grid;grid-template-rows:1fr auto;gap:40px;min-width:0">
+        <h1 style="margin:0;font-family:'Space Grotesk',sans-serif;font-size:{{ h1Size }};font-weight:500;letter-spacing:-0.05em;line-height:0.95;text-wrap:balance">Profile:<br>an engineer who<br><em style="font-style:normal;color:#DC4453">draws the line.</em></h1>
+        <div style="display:grid;gap:20px;max-width:640px;border-top:1px solid rgba(10,22,45,0.15);padding-top:24px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(10,22,45,0.6)">Introduction</span>
+          <p style="margin:0;font-family:'Space Grotesk',sans-serif;font-size:{{ leadSize }};line-height:1.25;letter-spacing:-0.02em">Between deterministic, auditable computation and where a language model actually adds value — the trade-order service behind live Schwab execution has no model in it anywhere.</p>
+          <p style="margin:0;font-size:16px;line-height:1.6;color:rgba(10,22,45,0.75)">At a 25-person US wealth-management startup I own the React web platform and the React Native app (1,000+ active users), plus the backend services, LLM pipelines and GCP infrastructure behind them. Before that: three national banking products shipped from inception.</p>
+        </div>
+      </div>
+      <div style="min-height:{{ portraitMin }};background:#E5E7EB;display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(10,22,45,0.5);text-align:center;line-height:1.8">PORTRAIT<br>B/W · FILLS COLUMN HEIGHT</div>
+    </div>
+    <div style="display:grid;grid-template-columns:{{ twoCol }};gap:40px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(10,22,45,0.6)">Philosophy</span>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:40px 48px">
+        <sc-for list="{{ philosophy }}" as="ph" hint-placeholder-count="4">
+          <div style="display:grid;gap:10px;border-top:1px solid #0A162D;padding-top:16px">
+            <span style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:500;letter-spacing:-0.02em">{{ ph.title }}</span>
+            <span style="font-size:14px;line-height:1.6;color:rgba(10,22,45,0.7)">{{ ph.body }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:{{ twoCol }};gap:40px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(10,22,45,0.6)">Skills &amp; technologies</span>
+      <div style="display:grid;gap:0">
+        <sc-for list="{{ skillRows }}" as="sr" hint-placeholder-count="6">
+          <div style="display:grid;grid-template-columns:{{ skillCols }};gap:16px;padding:18px 0;border-top:1px solid rgba(10,22,45,0.12);align-items:baseline">
+            <span style="font-size:13px;font-weight:500">{{ sr.cat }}</span>
+            <span style="font-family:'Space Grotesk',sans-serif;font-size:{{ skillSize }};letter-spacing:-0.02em;line-height:1.3;color:rgba(10,22,45,0.85)">{{ sr.line }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:{{ twoCol }};gap:40px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(10,22,45,0.6)">Off the clock</span>
+      <p style="margin:0;max-width:640px;font-size:16px;line-height:1.6;color:rgba(10,22,45,0.75)">Enjoys building real-time data surfaces, mobile apps that stay at 60 fps on cheap phones, and AI pipelines with auditable rules around them. Mentors through release ownership; prefers removing a step over documenting it. Karachi-based, US-timezone fluent.</p>
+    </div>
+  </section>
+</sc-if>
+
+<!-- ================= EXPERIENCE ================= -->
+<sc-if value="{{ isExperience }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Experience" style="padding:{{ pagePad }};display:grid;gap:56px">
+    <div style="display:grid;grid-template-columns:{{ twoCol }};gap:40px">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(10,22,45,0.6)">Experience<br>2021 — present</span>
+      <h1 style="margin:0;font-family:'Space Grotesk',sans-serif;font-size:{{ h1Size }};font-weight:500;letter-spacing:-0.05em;line-height:0.95">Four companies,<br>in order of weight.</h1>
+    </div>
+    <div style="display:grid">
+      <sc-for list="{{ roleRows }}" as="r" hint-placeholder-count="4">
+        <div style="border-top:1px solid rgba(10,22,45,0.15)">
+          <button onClick="{{ r.select }}" onMouseEnter="{{ r.hover }}" style="width:100%;display:grid;grid-template-columns:{{ expCols }};gap:24px;align-items:baseline;padding:28px 0;background:none;border:0;text-align:left;cursor:pointer;color:{{ r.color }};transition:color 250ms,padding-left 400ms cubic-bezier(.22,1,.36,1);padding-left:{{ r.shift }}">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(10,22,45,0.6)">{{ r.dates }}</span>
+            <span style="font-family:'Space Grotesk',sans-serif;font-size:{{ expTitle }};font-weight:500;letter-spacing:-0.045em;line-height:0.95">{{ r.company }}</span>
+            <span style="font-size:14px;color:rgba(10,22,45,0.7)">{{ r.position }}</span>
+          </button>
+          <sc-if value="{{ r.isOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid;grid-template-columns:{{ twoCol }};gap:40px;padding:0 0 40px;animation:rise 400ms cubic-bezier(.22,1,.36,1) both">
+              <span style="font-size:13px;color:rgba(10,22,45,0.6)">{{ r.location }}</span>
+              <div style="display:grid;gap:32px;max-width:860px">
+                <p style="margin:0;font-family:'Space Grotesk',sans-serif;font-size:{{ leadSize }};line-height:1.25;letter-spacing:-0.02em">{{ r.description }}</p>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px">
+                  <div style="display:grid;gap:10px;align-content:start"><span style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em">Responsibilities</span><sc-for list="{{ r.responsibilities }}" as="x" hint-placeholder-count="3"><span style="font-size:14px;line-height:1.5;color:rgba(10,22,45,0.8)">{{ x }}</span></sc-for></div>
+                  <div style="display:grid;gap:10px;align-content:start"><span style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em">Achievements</span><sc-for list="{{ r.achievements }}" as="x" hint-placeholder-count="3"><span style="font-size:14px;line-height:1.5;color:rgba(10,22,45,0.8)">{{ x }}</span></sc-for></div>
+                  <div style="display:grid;gap:10px;align-content:start"><span style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em">Technologies</span><span style="font-size:14px;line-height:1.6;color:rgba(10,22,45,0.8)">{{ r.techLine }}</span></div>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+</sc-if>
+
+<!-- ================= PROJECTS (magazine spreads) ================= -->
+<sc-if value="{{ isProjects }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Projects" style="min-height:100vh;padding:{{ pagePad }};display:grid;grid-template-rows:auto 1fr auto;gap:32px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(10,22,45,0.6)">Projects — <span style="color:#0A162D">{{ spreadIndex }}</span> / {{ spreadTotal }}</span>
+      <div style="display:flex;gap:6px"><sc-for list="{{ dots }}" as="dt" hint-placeholder-count="6"><button onClick="{{ dt.go }}" style="width:28px;height:2px;border:0;background:{{ dt.bg }};cursor:pointer;padding:0;transition:background 200ms"></button></sc-for></div>
+    </div>
+    <article key="{{ spread.id }}" style="display:grid;grid-template-columns:{{ spreadCols }};gap:{{ spreadGap }};align-items:end;animation:slideIn 600ms cubic-bezier(.22,1,.36,1) both">
+      <div style="display:grid;gap:28px;order:{{ spreadTextOrder }}">
+        <div style="display:grid;gap:12px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#DC4453">{{ spread.num }} — {{ spread.kicker }}</span>
+          <h1 style="margin:0;font-family:'Space Grotesk',sans-serif;font-size:{{ spreadTitle }};font-weight:500;letter-spacing:-0.05em;line-height:0.92;text-wrap:balance">{{ spread.name }}</h1>
+        </div>
+        <p style="margin:0;font-size:16px;line-height:1.55;color:rgba(10,22,45,0.8);max-width:480px">{{ spread.description }}</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;border-top:1px solid rgba(10,22,45,0.15);padding-top:20px">
+          <div style="display:grid;gap:6px"><span style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:rgba(10,22,45,0.55)">Problem</span><span style="font-size:13px;line-height:1.55">{{ spread.problem }}</span></div>
+          <div style="display:grid;gap:6px"><span style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:rgba(10,22,45,0.55)">Solution</span><span style="font-size:13px;line-height:1.55">{{ spread.solution }}</span></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:20px;font-size:13px">
+          <div style="display:grid;gap:4px"><span style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:rgba(10,22,45,0.55)">Role</span>{{ spread.role }}</div>
+          <div style="display:grid;gap:4px"><span style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:rgba(10,22,45,0.55)">Impact</span>{{ spread.impact }}</div>
+          <div style="display:grid;gap:4px"><span style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:rgba(10,22,45,0.55)">Stack</span>{{ spread.techLine }}</div>
+        </div>
+        <div style="display:flex;gap:24px;font-size:13px;font-weight:500"><span style="border-bottom:1px solid currentColor;color:{{ spread.liveColor }}">Live site ↗</span><span style="border-bottom:1px solid currentColor;color:{{ spread.repoColor }}">GitHub ↗</span><button onClick="{{ openContact }}" style="background:none;border:0;padding:0;font:inherit;cursor:pointer;color:#0A162D;border-bottom:1px solid currentColor" style-hover="color:#DC4453">Full case study →</button></div>
+      </div>
+      <div style="aspect-ratio:{{ spreadRatio }};background:#0A162D;position:relative;overflow:hidden;transition:transform 600ms cubic-bezier(.22,1,.36,1)" style-hover="transform:scale(1.01)">
+        <img key="{{ spread.id }}" src="{{ spread.img }}" alt="{{ spread.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;animation:fade 700ms both">
+        <div style="position:absolute;left:0;right:0;bottom:0;height:46%;background:linear-gradient(180deg,rgba(10,22,45,0) 0%,rgba(10,22,45,0.92) 100%)"></div>
+        <span style="position:absolute;left:20px;bottom:20px;font-family:'Space Grotesk',sans-serif;font-size:56px;font-weight:500;letter-spacing:-0.04em;color:#F9F9F9;line-height:1">{{ spread.metric }}</span>
+        <span style="position:absolute;right:20px;bottom:24px;font-size:12px;color:rgba(249,249,249,0.85)">{{ spread.metricLabel }}</span>
+      </div>
+    </article>
+    <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(10,22,45,0.15);padding-top:20px;gap:16px">
+      <button onClick="{{ prevSpread }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:14px;font-weight:500;color:#0A162D;display:flex;gap:10px;align-items:center;height:44px" style-hover="color:#DC4453">← <span style="color:rgba(10,22,45,0.6)">{{ prevName }}</span></button>
+      <button onClick="{{ nextSpread }}" style="background:none;border:0;padding:0;cursor:pointer;font-size:14px;font-weight:500;color:#0A162D;display:flex;gap:10px;align-items:center;height:44px" style-hover="color:#DC4453"><span style="color:rgba(10,22,45,0.6)">{{ nextName }}</span> →</button>
+    </div>
+  </section>
+</sc-if>
+
+<!-- ================= RESUME (colophon) ================= -->
+<sc-if value="{{ isResume }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Resume" style="padding:{{ pagePad }};display:grid;gap:64px">
+    <div style="display:grid;grid-template-columns:{{ twoCol }};gap:40px;align-items:end">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(10,22,45,0.6)">Resume<br>Updated Oct 2026</span>
+      <div style="display:grid;gap:24px">
+        <h1 style="margin:0;font-family:'Space Grotesk',sans-serif;font-size:{{ h1Size }};font-weight:500;letter-spacing:-0.05em;line-height:0.95">Everything above,<br>on two pages.</h1>
+        <div style="display:flex;gap:28px;flex-wrap:wrap;align-items:center">
+          <a href="#" style="height:52px;padding:0 24px;background:#0A162D;color:#F9F9F9;display:flex;align-items:center;gap:12px;font-size:14px;font-weight:500;transition:background 200ms" style-hover="background:#DC4453;color:#fff">Download PDF ↓</a>
+          <span style="font-size:13px;color:rgba(10,22,45,0.6)">PDF · 2 pages · 180 KB</span>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:{{ resumeCols }};gap:48px;align-items:start">
+      <div style="display:grid;gap:40px">
+        <div style="display:grid;gap:16px;border-top:1px solid #0A162D;padding-top:16px"><span style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em">Experience summary</span>
+          <sc-for list="{{ roleRows }}" as="r" hint-placeholder-count="4"><div style="display:grid;grid-template-columns:120px 1fr;gap:16px;font-size:14px;line-height:1.5"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(10,22,45,0.6)">{{ r.short }}</span><span><span style="font-weight:500">{{ r.company }}</span><br><span style="color:rgba(10,22,45,0.65)">{{ r.position }}</span></span></div></sc-for>
+        </div>
+        <div style="display:grid;gap:12px;border-top:1px solid #0A162D;padding-top:16px"><span style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em">Education</span><span style="font-size:14px;line-height:1.5"><span style="font-weight:500">BS Computer Science</span><br><span style="color:rgba(10,22,45,0.65)">FAST – NUCES, Karachi · 2018 – 2022</span></span></div>
+        <div style="display:grid;gap:12px;border-top:1px solid #0A162D;padding-top:16px"><span style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em">Core skills</span><span style="font-family:'Space Grotesk',sans-serif;font-size:{{ skillSize }};letter-spacing:-0.02em;line-height:1.35">{{ coreSkillsLine }}</span></div>
+        <div style="display:grid;gap:12px;border-top:1px solid #0A162D;padding-top:16px"><span style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em">Technologies</span><span style="font-size:14px;line-height:1.7;color:rgba(10,22,45,0.8)">{{ techLine }}</span></div>
+      </div>
+      <div style="background:#fff;border:1px solid rgba(10,22,45,0.12);aspect-ratio:8.5/11;padding:36px;display:grid;gap:14px;align-content:start;font-size:10px;line-height:1.5;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,0.06)">
+        <span style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:500;letter-spacing:-0.03em">Ahsan Iftikhar</span>
+        <span style="color:rgba(10,22,45,0.65)">Senior Software Engineer · Full-Stack · React · React Native · AI</span>
+        <div style="height:1px;background:#0A162D"></div>
+        <span><strong>Summary</strong><br>Senior engineer with 5 years shipping production fintech and AI systems. Draws a deliberate line between deterministic, auditable computation and where LLM judgment actually adds value.</span>
+        <span><strong>Experience</strong></span>
+        <sc-for list="{{ roleRows }}" as="r" hint-placeholder-count="4"><span style="display:flex;justify-content:space-between;gap:8px"><span>{{ r.position }}, {{ r.company }}</span><span style="color:rgba(10,22,45,0.6);white-space:nowrap">{{ r.dates }}</span></span></sc-for>
+        <div style="height:100px;background:repeating-linear-gradient(0deg,rgba(10,22,45,0.1) 0 1px,transparent 1px 8px)"></div>
+      </div>
+    </div>
+  </section>
+</sc-if>
+
+</main>
+
+<footer style="padding:{{ footPad }};border-top:1px solid rgba(10,22,45,0.12);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;color:rgba(10,22,45,0.6)">
+  <span>© 2026 Ahsan Iftikhar</span><span>Set in Space Grotesk &amp; Inter · Built with React, Framer Motion, R3F</span>
+</footer>
+
+<!-- contact sheet -->
+<sc-if value="{{ contactOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeContact }}" style="position:fixed;inset:0;z-index:50;background:rgba(10,22,45,0.35);display:grid;justify-items:end;animation:fade 200ms">
+    <div onClick="{{ stop }}" style="width:100%;max-width:{{ sheetW }};height:100%;background:#F9F9F9;padding:{{ sheetPad }};display:grid;grid-template-rows:auto 1fr auto;gap:32px;animation:slideIn 500ms cubic-bezier(.22,1,.36,1);overflow:auto">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(10,22,45,0.6)">06 — Contact</span><button onClick="{{ closeContact }}" style="background:none;border:0;font-size:14px;cursor:pointer;height:44px;padding:0">Close ×</button></div>
+      <div style="display:grid;gap:28px;align-content:start">
+        <h2 style="margin:0;font-family:'Space Grotesk',sans-serif;font-size:44px;font-weight:500;letter-spacing:-0.05em;line-height:0.95">Write to me.</h2>
+        <label style="display:grid;gap:8px;font-size:12px;color:rgba(10,22,45,0.6)">Name<input style="height:48px;border:0;border-bottom:1px solid #0A162D;background:none;font-size:18px;font-family:'Space Grotesk',sans-serif;outline:none;padding:0" style-focus="border-color:#DC4453"></label>
+        <label style="display:grid;gap:8px;font-size:12px;color:rgba(10,22,45,0.6)">Email<input style="height:48px;border:0;border-bottom:1px solid #0A162D;background:none;font-size:18px;font-family:'Space Grotesk',sans-serif;outline:none;padding:0" style-focus="border-color:#DC4453"></label>
+        <label style="display:grid;gap:8px;font-size:12px;color:rgba(10,22,45,0.6)">Message<textarea rows="4" style="border:0;border-bottom:1px solid #0A162D;background:none;font-size:18px;font-family:'Space Grotesk',sans-serif;outline:none;padding:8px 0;resize:none" style-focus="border-color:#DC4453"></textarea></label>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><a href="mailto:ahsaniftikhar2016@gmail.com" style="font-size:13px;border-bottom:1px solid currentColor">ahsaniftikhar2016@gmail.com</a><button onClick="{{ closeContact }}" style="height:52px;padding:0 24px;background:#0A162D;color:#F9F9F9;border:0;font-size:14px;font-weight:500;cursor:pointer" style-hover="background:#DC4453">Send →</button></div>
+    </div>
+  </div>
+</sc-if>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;viewport&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;desktop&quot;,&quot;mobile&quot;],&quot;default&quot;:&quot;desktop&quot;,&quot;tsType&quot;:&quot;'desktop'|'mobile'&quot;,&quot;section&quot;:&quot;Preview&quot;},&quot;reducedMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
+class Component extends DCLogic {
+  state = { page: 'home', menuOpen: false, contactOpen: false, role: 0, spread: 0, progress: 0, width: 1280, data: null };
+  canvasRef = React.createRef();
+  async componentDidMount() {
+    const data = await import('./portfolio-data.js'); this.setState({ data });
+    this.onResize = () => { this.setState({ width: window.innerWidth }); clearTimeout(this.rt); this.rt = setTimeout(() => this.startCanvas(), 120); };
+    this.onScroll = () => { const h = document.documentElement; this.setState({ progress: h.scrollHeight > h.clientHeight ? h.scrollTop / (h.scrollHeight - h.clientHeight) : 0 }); };
+    window.addEventListener('resize', this.onResize); window.addEventListener('scroll', this.onScroll, { passive: true }); this.onResize();
+    this.startCanvas();
+  }
+  componentWillUnmount() { cancelAnimationFrame(this.raf); window.removeEventListener('resize', this.onResize); window.removeEventListener('scroll', this.onScroll); }
+  startCanvas() {
+    cancelAnimationFrame(this.raf);
+    const c = this.canvasRef.current; if (!c || !c.getBoundingClientRect().width) return;
+    const ctx = c.getContext('2d'), dpr = devicePixelRatio;
+    const reduced = (this.props.reducedMotion ?? false) || matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const r = c.getBoundingClientRect(); const W = c.width = r.width * dpr, H = c.height = r.height * dpr;
+    let mouse = { x: W * .7, y: H * .35 }, cur = { ...mouse }, t = 0;
+    c.parentElement.onmousemove = e => { const b = c.getBoundingClientRect(); mouse = { x: (e.clientX - b.left) * dpr, y: (e.clientY - b.top) * dpr }; };
+    const step = (this.isMobile() ? 34 : 44) * dpr, R = 260 * dpr;
+    const draw = () => {
+      cur.x += (mouse.x - cur.x) * .08; cur.y += (mouse.y - cur.y) * .08; t += .01;
+      ctx.clearRect(0, 0, W, H); ctx.fillStyle = 'rgba(10,22,45,0.55)';
+      for (let x = step; x < W; x += step) for (let y = step; y < H; y += step) {
+        const dx = x - cur.x, dy = y - cur.y, d = Math.hypot(dx, dy);
+        const f = Math.max(0, 1 - d / R), push = f * f * 36 * dpr;
+        const ox = d ? dx / d * push : 0, oy = d ? dy / d * push : 0;
+        const wob = reduced ? 0 : Math.sin(t + x * .002 + y * .003) * 1.5 * dpr;
+        const s = (1 + f * 2.2) * dpr;
+        ctx.beginPath(); ctx.arc(x + ox + wob, y + oy, s, 0, Math.PI * 2); ctx.fill();
+      }
+      if (!reduced) this.raf = requestAnimationFrame(draw);
+    };
+    draw();
+  }
+  isMobile() { return (this.props.viewport ?? 'desktop') === 'mobile' || this.state.width < 820; }
+  go(page) { return () => { this.setState({ page, menuOpen: false }, () => { window.scrollTo({ top: 0 }); if (page === 'home') this.startCanvas(); }); }; }
+  renderVals() {
+    const s = this.state, d = s.data, m = this.isMobile(), forced = (this.props.viewport ?? 'desktop') === 'mobile';
+    const pages = ['home', 'about', 'experience', 'projects', 'resume'], labels = { home: 'Home', about: 'About', experience: 'Experience', projects: 'Projects', resume: 'Resume' };
+    const nav = pages.map((p, i) => ({ label: labels[p], idx: '0' + (i + 1), go: this.go(p), opacity: s.page === p ? 1 : .6, lineScale: s.page === p ? 'scaleX(1)' : 'scaleX(0)', delay: (i * 60) + 'ms', mobileColor: s.page === p ? '#DC4453' : '#F9F9F9' }));
+    const roles = d ? d.roles : [], projects = d ? d.projects : [];
+    const n = projects.length || 1, si = ((s.spread % n) + n) % n;
+    const spread = projects[si] || { tech: [] };
+    const mapP = p => ({ ...p, img: `assets/projects/${p.id}.png`, techLine: p.tech.join(', '), liveColor: p.live ? '#0A162D' : 'rgba(10,22,45,0.3)', repoColor: p.repo ? '#0A162D' : 'rgba(10,22,45,0.3)', open: () => this.setState({ page: 'projects', spread: projects.indexOf(p) }, () => window.scrollTo({ top: 0 })) });
+    const heroWords = ['Software', 'engineer', 'of systems', 'that hold.'];
+    return {
+      canvasRef: this.canvasRef, frameMax: forced ? '390px' : '1680px', isDesktop: !m, isMobile: m,
+      menuOpen: s.menuOpen, menuLabel: s.menuOpen ? 'Close' : 'Menu', toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),
+      page: s.page, pageIndex: '0' + (pages.indexOf(s.page) + 1), pageLabel: labels[s.page], nav, progressScale: `scaleY(${s.progress})`,
+      isHome: s.page === 'home', isAbout: s.page === 'about', isExperience: s.page === 'experience', isProjects: s.page === 'projects', isResume: s.page === 'resume',
+      goHome: this.go('home'), goProjects: this.go('projects'), goResume: this.go('resume'), goExperience: this.go('experience'),
+      openContact: () => this.setState({ contactOpen: true, menuOpen: false }), closeContact: () => this.setState({ contactOpen: false }), contactOpen: s.contactOpen, stop: e => e.stopPropagation(),
+      navPad: m ? '20px 24px' : '32px 40px', heroPad: m ? '110px 24px 40px' : '140px 40px 48px', pagePad: m ? '110px 24px 64px' : '160px 40px 96px', secPad: m ? '64px 24px' : '112px 40px', footPad: m ? '24px' : '24px 40px',
+      heroSize: m ? '15vw' : 'clamp(80px,11.5vw,190px)', heroMetaCols: m ? '1fr' : '1fr auto auto', socialJustify: m ? 'flex-start' : 'flex-end',
+      heroLines: heroWords.map((w, i) => ({ text: w, delay: (200 + i * 110) + 'ms', indent: m ? '0' : (i === 1 ? '14vw' : i === 3 ? '7vw' : '0'), color: i === 3 ? '#DC4453' : '#0A162D' })),
+      h1Size: m ? '44px' : 'clamp(56px,7vw,112px)', h2Size: m ? '34px' : 'clamp(36px,4.2vw,64px)', leadSize: m ? '22px' : 'clamp(22px,2.2vw,32px)', ctaSize: m ? '56px' : 'clamp(64px,9vw,150px)', skillSize: m ? '18px' : '22px',
+      twoCol: m ? '1fr' : '220px 1fr', aboutCols: m ? '1fr' : '1.3fr 1fr', portraitMin: m ? '420px' : '560px', skillCols: m ? '1fr' : '180px 1fr', listCols: m ? '96px 1fr' : '150px 1.6fr 1fr 220px', thumbW: m ? '56px' : '72px', thumbDisplay: 'block', listTitle: m ? '28px' : 'clamp(28px,3.4vw,52px)',
+      expCols: m ? '1fr' : '160px 1fr 260px', expTitle: m ? '40px' : 'clamp(44px,6vw,96px)', resumeCols: m ? '1fr' : '1fr 400px',
+      spreadCols: m ? '1fr' : '1fr 1.1fr', spreadGap: m ? '32px' : '64px', spreadTextOrder: m ? '2' : '1', spreadRatio: m ? '4/3' : '4/5', spreadTitle: m ? '44px' : 'clamp(48px,5.6vw,88px)',
+      featured: projects.slice(0, 3).map(mapP),
+      spread: mapP(spread), spreadIndex: '0' + (si + 1), spreadTotal: '0' + n,
+      dots: projects.map((p, i) => ({ go: () => this.setState({ spread: i }), bg: i === si ? '#0A162D' : 'rgba(10,22,45,0.2)' })),
+      prevSpread: () => this.setState({ spread: si - 1 }), nextSpread: () => this.setState({ spread: si + 1 }),
+      prevName: (projects[(si - 1 + n) % n] || {}).name, nextName: (projects[(si + 1) % n] || {}).name,
+      roleRows: roles.map((r, i) => ({ ...r, techLine: r.tech.join(', '), isOpen: s.role === i, select: () => this.setState({ role: s.role === i ? -1 : i }), hover: () => {}, color: s.role === i ? '#DC4453' : '#0A162D', shift: s.role === i && !m ? '16px' : '0' })),
+      philosophy: d ? d.philosophy : [],
+      skillRows: d ? Object.entries(d.skills).map(([cat, items]) => ({ cat, line: items.join(' · ') })) : [],
+      coreSkillsLine: 'React · React Native · TypeScript · Python · Flask · Node.js · LLM pipelines · GCP',
+      techLine: d ? Object.values(d.skills).flat().join(', ') : '',
+    };
+  }
+}
+</script>
+</body>
+</html>

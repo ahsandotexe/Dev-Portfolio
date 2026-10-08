@@ -1,56 +1,31 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  darkMode: 'class',
+  content: ['./index.html', './src/**/*.{js,jsx}'],
+  darkMode: ['selector', '[data-theme="dark"]'],
   theme: {
+    // 820px is the design's desktop/mobile switch; the rest are the QA widths.
+    screens: { sm: '640px', md: '820px', lg: '1024px', xl: '1440px' },
     extend: {
       colors: {
-        primary: '#00D9FF',
-        secondary: '#10B981',
-        dark: {
-          100: '#0F172A',
-          200: '#1E293B',
-          300: '#334155',
-          400: '#475569',
-        },
-        light: {
-          100: '#FFFFFF',
-          200: '#F8F9FA',
-          300: '#E9ECEF',
-          400: '#DEE2E6',
-        },
-      },
-      animation: {
-        'fade-in': 'fadeIn 0.6s ease-in-out',
-        'slide-up': 'slideUp 0.6s ease-out',
-        'float': 'float 6s ease-in-out infinite',
-      },
-      keyframes: {
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        slideUp: {
-          '0%': { transform: 'translateY(20px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
-        },
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-20px)' },
-        },
+        paper: 'rgb(var(--paper) / <alpha-value>)',
+        ink: 'rgb(var(--ink) / <alpha-value>)',
+        accent: 'rgb(var(--accent) / <alpha-value>)',
+        plate: 'rgb(var(--plate) / <alpha-value>)',
+        doc: 'rgb(var(--doc) / <alpha-value>)',
+        'doc-ink': 'rgb(var(--doc-ink) / <alpha-value>)',
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        heading: ['Space Grotesk', 'sans-serif'],
+        display: ['"Space Grotesk Variable"', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+        sans: ['"Inter Variable"', 'system-ui', '"Segoe UI"', 'Roboto', 'sans-serif'],
+        mono: ['"JetBrains Mono Variable"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
-      backdropBlur: {
-        xs: '2px',
+      transitionTimingFunction: {
+        out: 'cubic-bezier(.22, 1, .36, 1)',
+      },
+      maxWidth: {
+        frame: '1680px',
       },
     },
   },
   plugins: [],
 }
-

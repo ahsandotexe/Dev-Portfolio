@@ -1,34 +1,55 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/space-grotesk';
+@import '@fontsource-variable/jetbrains-mono';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  /* Tokens as RGB triplets so Tailwind can apply alpha: rgb(var(--ink) / 0.65). See design-system/ahsan-portfolio/MASTER.md */
+  :root {
+    --paper: 249 249 249;
+    --ink: 10 22 45;
+    --accent: 204 58 72;
+    --plate: 229 231 235;
+    --doc: 255 255 255;
+    --doc-ink: 10 22 45;
+    color-scheme: light;
+  }
+  [data-theme='dark'] {
+    --paper: 10 22 45;
+    --ink: 249 249 249;
+    --accent: 232 96 109;
+    --plate: 22 35 61;
+    color-scheme: dark;
+  }
+
   html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    @apply bg-dark-100 text-gray-100 font-sans;
-    font-family: 'Inter', sans-serif;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-
-  /* Performance optimizations */
-  * {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-paper text-ink font-sans;
+  }
+  ::selection {
+    @apply bg-accent text-paper;
+  }
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 3px;
+  }
+  button,
+  input,
+  textarea {
+    font: inherit;
+    color: inherit;
   }
 
-  /* GPU acceleration for animations */
-  .glass,
-  .glass-light {
-    will-change: transform, opacity;
-    transform: translateZ(0);
-  }
-
-  /* Reduce motion for users who prefer it */
   @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
     *,
     *::before,
     *::after {
@@ -37,149 +58,14 @@
       transition-duration: 0.01ms !important;
     }
   }
-
-  html.light body,
-  .light body {
-    @apply bg-light-200 text-gray-800;
-  }
-
-  html.light,
-  .light {
-    @apply bg-light-200;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Space Grotesk', sans-serif;
-  }
-
-  /* Ripple effect */
-  @keyframes ripple {
-    to {
-      transform: scale(4);
-      opacity: 0;
-    }
-  }
 }
 
 @layer utilities {
-  .glass {
-    @apply bg-dark-200/80 backdrop-blur-xl border border-white/10;
-    border-radius: 1rem;
-    transition: all 0.3s ease;
+  .text-balance {
+    text-wrap: balance;
   }
-
-  html.light .glass {
-    @apply bg-white/90 backdrop-blur-xl border border-gray-300/60 shadow-lg;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  }
-
-  .glass-light {
-    @apply bg-dark-200/40 backdrop-blur-md border border-white/5;
-    border-radius: 0.75rem;
-    transition: all 0.3s ease;
-  }
-
-  html.light .glass-light,
-  .light .glass-light {
-    @apply bg-white/60 backdrop-blur-md border border-gray-300/40 shadow-md;
-  }
-
-  /* Text color utilities for light mode */
-  .text-adaptive-white {
-    @apply text-white;
-  }
-
-  html.light .text-adaptive-white,
-  .light .text-adaptive-white {
-    @apply text-gray-900;
-  }
-
-  .text-adaptive-gray-light {
-    @apply text-gray-300;
-  }
-
-  html.light .text-adaptive-gray-light,
-  .light .text-adaptive-gray-light {
-    @apply text-gray-700;
-  }
-
-  .text-adaptive-gray {
-    @apply text-gray-400;
-  }
-
-  html.light .text-adaptive-gray,
-  .light .text-adaptive-gray {
-    @apply text-gray-600;
-  }
-
-  /* Navbar background for light mode */
-  html.light nav,
-  .light nav {
-    @apply border-gray-300/60;
-  }
-
-  html.light nav.glass,
-  .light nav.glass {
-    @apply bg-white/95;
-  }
-
-  html.light nav:not(.glass),
-  .light nav:not(.glass) {
-    @apply bg-white/90;
-  }
-
-  /* Progress bar background for light mode */
-  html.light .bg-dark-300,
-  .light .bg-dark-300 {
-    background-color: rgb(229 231 235);
-  }
-
-  /* Footer border for light mode */
-  html.light footer,
-  .light footer {
-    @apply border-gray-300/60;
-  }
-
-  /* Timeline border for light mode */
-  html.light .border-dark-100,
-  .light .border-dark-100 {
-    border-color: rgb(248 250 252);
-  }
-
-  /* Placeholder text for light mode */
-  html.light input::placeholder,
-  html.light textarea::placeholder,
-  .light input::placeholder,
-  .light textarea::placeholder {
-    @apply text-gray-500;
-  }
-
-  .ripple {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .ripple::after {
-    content: '';
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(0);
-    animation: ripple 0.6s ease-out;
-    top: 50%;
-    left: 50%;
-    margin-left: -50px;
-    margin-top: -50px;
-  }
-
-  .ripple-effect {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.6);
-    transform: scale(0);
-    animation: ripple 0.6s ease-out;
-    pointer-events: none;
+  /* Header and rail sit in difference blend so they read over the inverted band. */
+  .blend-difference {
+    mix-blend-mode: difference;
   }
 }

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>html,body{margin:0;background:#E5E7EB;font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}a{color:#0A162D}a:hover{color:#DC4453}</style>
+</helmet>
+<div style="display:flex;flex-wrap:wrap;gap:40px;padding:40px;justify-content:center">
+
+<!-- 01 Trade Sheet -->
+<section id="img-trade-sheet" style="width:960px;height:1200px;background:#0A162D;position:relative;overflow:hidden;display:grid;place-items:center;font-family:'Inter',sans-serif">
+  <div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 59px,rgba(255,255,255,0.05) 59px 60px),repeating-linear-gradient(90deg,transparent 0 59px,rgba(255,255,255,0.05) 59px 60px)"></div>
+  <div style="position:relative;width:820px;background:#F9F9F9;border-radius:10px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,0.5)">
+    <div style="height:44px;background:#fff;border-bottom:1px solid rgba(10,22,45,0.1);display:flex;align-items:center;padding:0 16px;gap:8px"><span style="width:10px;height:10px;border-radius:50%;background:#E5E7EB"></span><span style="width:10px;height:10px;border-radius:50%;background:#E5E7EB"></span><span style="width:10px;height:10px;border-radius:50%;background:#E5E7EB"></span><span style="margin-left:16px;height:26px;flex:1;max-width:360px;border-radius:6px;background:#F3F4F6;display:flex;align-items:center;padding:0 10px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#777">tradesheet.internal / rebalance / 2026-10-07</span></div>
+    <div style="display:grid;grid-template-columns:260px 1fr">
+      <div style="background:#0A162D;color:#fff;padding:24px 20px;display:grid;gap:18px;align-content:start;min-height:720px">
+        <div style="font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;letter-spacing:0.08em">TRADE SHEET</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:rgba(255,255,255,0.5)">ANALYST ALLOCATION</div>
+        <div style="display:grid;gap:10px;font-size:13px">
+          <div style="display:flex;justify-content:space-between"><span>NVDA</span><span style="font-family:'JetBrains Mono',monospace">12.0%</span></div>
+          <div style="display:flex;justify-content:space-between"><span>MSFT</span><span style="font-family:'JetBrains Mono',monospace">9.5%</span></div>
+          <div style="display:flex;justify-content:space-between"><span>LLY</span><span style="font-family:'JetBrains Mono',monospace">7.0%</span></div>
+          <div style="display:flex;justify-content:space-between"><span>XLE</span><span style="font-family:'JetBrains Mono',monospace;color:#DC4453">−4.0%</span></div>
+          <div style="display:flex;justify-content:space-between"><span>TLT</span><span style="font-family:'JetBrains Mono',monospace">5.5%</span></div>
+          <div style="display:flex;justify-content:space-between"><span>CASH</span><span style="font-family:'JetBrains Mono',monospace">6.0%</span></div>
+        </div>
+        <div style="height:1px;background:rgba(255,255,255,0.12)"></div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:rgba(255,255,255,0.5)">ACCOUNTS</div>
+        <div style="display:grid;gap:8px;font-size:13px"><span>Schwab · 14 accounts</span><span style="color:rgba(255,255,255,0.6)">$18.4M AUM in scope</span></div>
+        <div style="margin-top:auto;padding:14px;border:1px solid #28A79B;border-radius:8px;display:grid;gap:4px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#28A79B">GENERATED IN</span><span style="font-family:'Space Grotesk',sans-serif;font-size:36px;font-weight:700;line-height:1">4.8s</span><span style="font-size:11px;color:rgba(255,255,255,0.6)">was ~2 h by hand</span></div>
+      </div>
+      <div style="padding:24px;display:grid;gap:16px;align-content:start">
+        <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:18px;font-weight:700;color:#0A162D">Orders · 61</span><div style="display:flex;gap:8px"><span style="padding:6px 10px;border-radius:6px;background:#D6FFFB;color:#004D5E;font-size:11px;font-weight:600">58 validated</span><span style="padding:6px 10px;border-radius:6px;background:#FFDCDF;color:#8B1B23;font-size:11px;font-weight:600">3 blocked</span></div></div>
+        <div style="display:grid;grid-template-columns:70px 1fr 70px 80px 90px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.08em;color:#777;padding:0 8px">
+          <span>TYPE</span><span>ACCOUNT · TICKER</span><span>QTY</span><span>LIVE</span><span>CHECK</span>
+        </div>
+        <div style="display:grid;gap:4px">
+          <sc-for list="{{ orders }}" as="o" hint-placeholder-count="10">
+            <div style="display:grid;grid-template-columns:70px 1fr 70px 80px 90px;align-items:center;padding:10px 8px;background:#fff;border:1px solid rgba(10,22,45,0.08);border-radius:6px;font-size:12px;color:#0A162D">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;color:{{ o.tc }}">{{ o.type }}</span>
+              <span><span style="color:#777">{{ o.acct }}</span> · <strong>{{ o.tk }}</strong></span>
+              <span style="font-family:'JetBrains Mono',monospace">{{ o.qty }}</span>
+              <span style="font-family:'JetBrains Mono',monospace">{{ o.px }}</span>
+              <span style="font-size:11px;font-weight:600;color:{{ o.cc }}">{{ o.chk }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="padding:12px 14px;border-radius:8px;background:#FFDCDF;color:#8B1B23;font-size:12px;line-height:1.5"><strong>Blocked:</strong> ACC-0417 · XLE — firm restriction (energy, account-level). Order never reaches brokerage.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 Sales Intelligence -->
+<section id="img-sales-intel" style="width:960px;height:1200px;background:#F4F5FA;position:relative;overflow:hidden;display:grid;place-items:center">
+  <div style="position:absolute;inset:0;background:radial-gradient(600px 500px at 80% 10%,rgba(124,58,237,0.18),transparent 70%)"></div>
+  <div style="position:relative;width:840px;display:grid;gap:20px">
+    <div style="background:#fff;border:1px solid rgba(10,22,45,0.1);border-radius:12px;padding:24px 28px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;box-shadow:0 20px 60px rgba(10,22,45,0.12)">
+      <div style="display:grid;gap:6px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:#7C3AED">DEAL SCORE · TIER 1</span><span style="font-size:22px;font-weight:700;color:#0A162D">Meridian Family Office — $2.4M discretionary</span><span style="font-size:13px;color:#516880">Stage: Proposal sent · 11 days in stage · Owner: K. Patel</span></div>
+      <div style="width:110px;height:110px;border-radius:50%;background:conic-gradient(#7C3AED 0 86%,#E5E7EB 86% 100%);display:grid;place-items:center"><div style="width:84px;height:84px;border-radius:50%;background:#fff;display:grid;place-items:center;font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:700;color:#0A162D">86</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+      <div style="background:#fff;border:1px solid rgba(10,22,45,0.1);border-radius:12px;padding:22px;display:grid;gap:14px;align-content:start">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:#516880">AGENT 1 · LLM EXTRACTION</span>
+        <div style="display:grid;gap:8px;font-size:13px;color:#0A162D">
+          <div style="display:flex;justify-content:space-between"><span>Intent</span><span style="padding:2px 8px;border-radius:4px;background:#D6FFFB;color:#004D5E;font-size:11px;font-weight:600">Strong</span></div>
+          <div style="display:flex;justify-content:space-between"><span>Urgency</span><span style="padding:2px 8px;border-radius:4px;background:#FFF4CC;color:#7A5B00;font-size:11px;font-weight:600">Q4 deadline</span></div>
+          <div style="display:flex;justify-content:space-between"><span>Blocker</span><span style="padding:2px 8px;border-radius:4px;background:#FFDCDF;color:#8B1B23;font-size:11px;font-weight:600">Custodian approval</span></div>
+        </div>
+        <div style="font-size:11px;color:#777;line-height:1.5;border-top:1px solid rgba(10,22,45,0.08);padding-top:10px">Strict JSON schema · 3 retries · confidence 0.91</div>
+      </div>
+      <div style="background:#0A162D;color:#fff;border-radius:12px;padding:22px;display:grid;gap:14px;align-content:start">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:#28A79B">AGENT 2 · DETERMINISTIC</span>
+        <div style="display:grid;gap:8px;font-size:13px">
+          <div style="display:flex;justify-content:space-between"><span>Rule score</span><span style="font-family:'JetBrains Mono',monospace">72 / 100</span></div>
+          <div style="display:flex;justify-content:space-between"><span>Signal weight</span><span style="font-family:'JetBrains Mono',monospace">+14</span></div>
+          <div style="display:flex;justify-content:space-between"><span>Hard override</span><span style="font-family:'JetBrains Mono',monospace;color:#28A79B">none</span></div>
+        </div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.6);line-height:1.5;border-top:1px solid rgba(255,255,255,0.12);padding-top:10px">Model never has final say. Verdict reproducible from inputs.</div>
+      </div>
+    </div>
+    <div style="background:#fff;border:1px solid rgba(10,22,45,0.1);border-radius:12px;padding:22px;display:grid;gap:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:15px;font-weight:700;color:#0A162D">Priority stack · 5 tiers</span><span style="font-size:12px;color:#516880">~$50M pipeline · 2 pipelines · 16 stages</span></div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;align-items:end;height:120px">
+        <div style="background:#7C3AED;height:100%;border-radius:6px 6px 0 0;display:grid;align-content:end;padding:8px;color:#fff;font-family:'JetBrains Mono',monospace;font-size:11px">T1 · 9</div>
+        <div style="background:#2256B3;height:78%;border-radius:6px 6px 0 0;display:grid;align-content:end;padding:8px;color:#fff;font-family:'JetBrains Mono',monospace;font-size:11px">T2 · 21</div>
+        <div style="background:#0CA5E9;height:60%;border-radius:6px 6px 0 0;display:grid;align-content:end;padding:8px;color:#fff;font-family:'JetBrains Mono',monospace;font-size:11px">T3 · 44</div>
+        <div style="background:#9CA3AF;height:42%;border-radius:6px 6px 0 0;display:grid;align-content:end;padding:8px;color:#fff;font-family:'JetBrains Mono',monospace;font-size:11px">T4 · 63</div>
+        <div style="background:#E5E7EB;height:28%;border-radius:6px 6px 0 0;display:grid;align-content:end;padding:8px;color:#0A162D;font-family:'JetBrains Mono',monospace;font-size:11px">T5 · 118</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+      <div style="background:#fff;border:1px solid rgba(10,22,45,0.1);border-radius:10px;padding:16px;display:grid;gap:4px"><span style="font-size:11px;color:#516880">Call coaching (Gong)</span><span style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:#0A162D">84<span style="font-size:14px;color:#777">/100</span></span></div>
+      <div style="background:#fff;border:1px solid rgba(10,22,45,0.1);border-radius:10px;padding:16px;display:grid;gap:4px"><span style="font-size:11px;color:#516880">Lost-deal reviews</span><span style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:#0A162D">37</span></div>
+      <div style="background:#fff;border:1px solid rgba(10,22,45,0.1);border-radius:10px;padding:16px;display:grid;gap:4px"><span style="font-size:11px;color:#516880">LLM-free modules</span><span style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700;color:#28A79B">3<span style="font-size:14px;color:#777">/7</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 Lumida Invest (phone) -->
+<section id="img-lumida-invest" style="width:960px;height:1200px;background:#0A162D;position:relative;overflow:hidden;display:grid;place-items:center">
+  <div style="position:absolute;inset:0;background:radial-gradient(500px 500px at 30% 20%,rgba(40,167,155,0.25),transparent 70%)"></div>
+  <div style="position:relative;display:flex;gap:40px;align-items:center">
+    <div style="width:375px;height:812px;border-radius:48px;background:#000;padding:12px;box-shadow:0 60px 120px rgba(0,0,0,0.6)">
+      <div style="width:100%;height:100%;border-radius:38px;background:#F4F5FA;overflow:hidden;position:relative;color:#0A162D;font-family:'Inter',sans-serif">
+        <div style="height:48px;display:flex;justify-content:space-between;align-items:end;padding:0 24px 6px;font-size:13px;font-weight:600"><span>9:41</span><span style="width:120px;height:28px;border-radius:14px;background:#000;position:absolute;top:8px;left:50%;transform:translateX(-50%)"></span><span style="font-family:'JetBrains Mono',monospace;font-size:11px">●●●</span></div>
+        <div style="padding:8px 20px 0;display:grid;gap:14px">
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;letter-spacing:0.18em">LUMIDA</span><span style="width:30px;height:30px;border-radius:50%;background:#0A162D;color:#fff;display:grid;place-items:center;font-size:11px;font-weight:700">AI</span></div>
+          <div style="background:#0A162D;color:#fff;border-radius:16px;padding:18px;display:grid;gap:6px">
+            <span style="font-size:11px;color:rgba(255,255,255,0.6)">Portfolio · 3 brokerages linked</span>
+            <span style="font-family:'Space Grotesk',sans-serif;font-size:36px;font-weight:500;letter-spacing:-0.01em;font-variant-numeric:tabular-nums">$184,320.55</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#28A79B">▲ +$2,146.10 (1.18%) today</span>
+            <svg viewBox="0 0 300 60" style="width:100%;height:52px;margin-top:6px"><polyline fill="none" stroke="#28A79B" stroke-width="2" points="0,45 25,40 50,42 75,30 100,33 125,22 150,26 175,18 200,24 225,14 250,16 275,8 300,10"></polyline></svg>
+            <div style="display:flex;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.6)"><span style="color:#fff;border-bottom:1px solid #28A79B">1D</span><span>1W</span><span>1M</span><span>YTD</span><span>1Y</span></div>
+          </div>
+          <div style="display:flex;gap:8px"><span style="padding:8px 12px;border-radius:100px;background:#0A162D;color:#fff;font-size:11px;font-weight:600">Holdings</span><span style="padding:8px 12px;border-radius:100px;background:rgba(10,22,45,0.08);font-size:11px;font-weight:600">Themes</span><span style="padding:8px 12px;border-radius:100px;background:rgba(10,22,45,0.08);font-size:11px;font-weight:600">Tax-loss</span></div>
+          <div style="display:grid;gap:8px">
+            <sc-for list="{{ holdings }}" as="h" hint-placeholder-count="4">
+              <div style="display:grid;grid-template-columns:40px 1fr auto;gap:10px;align-items:center;background:#fff;border:1px solid rgba(10,22,45,0.08);border-radius:12px;padding:10px 12px">
+                <span style="width:36px;height:36px;border-radius:8px;background:{{ h.bg }};color:#fff;display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700">{{ h.tk }}</span>
+                <span style="display:grid;gap:2px"><span style="font-size:13px;font-weight:600">{{ h.name }}</span><span style="font-size:11px;color:rgba(10,22,45,0.6)">{{ h.qty }}</span></span>
+                <span style="display:grid;gap:2px;text-align:right"><span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600">{{ h.val }}</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:{{ h.c }}">{{ h.chg }}</span></span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="background:#fff;border:1px solid rgba(10,22,45,0.08);border-radius:12px;padding:12px;display:grid;gap:6px"><span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.14em;color:#7C3AED">SMART MONEY · LIVE</span><span style="font-size:12px;line-height:1.4"><strong>Berkshire</strong> added 2.1M NVDA · <strong>Sen. Tuberville</strong> bought LLY</span></div>
+        </div>
+        <div style="position:absolute;left:0;right:0;bottom:0;height:78px;background:#fff;border-top:1px solid rgba(10,22,45,0.08);display:grid;grid-template-columns:repeat(5,1fr);align-items:start;padding-top:10px;font-size:9px;font-weight:600;text-align:center;color:rgba(10,22,45,0.5)">
+          <span style="display:grid;gap:4px;justify-items:center"><span style="width:20px;height:20px;border-radius:5px;background:rgba(10,22,45,0.15)"></span>Feed</span>
+          <span style="display:grid;gap:4px;justify-items:center;color:#0A162D"><span style="width:20px;height:20px;border-radius:5px;background:#0A162D"></span>Portfolio</span>
+          <span style="display:grid;gap:4px;justify-items:center"><span style="width:28px;height:28px;border-radius:50%;background:#28A79B;margin-top:-6px"></span>Explore</span>
+          <span style="display:grid;gap:4px;justify-items:center"><span style="width:20px;height:20px;border-radius:5px;background:rgba(10,22,45,0.15)"></span>News</span>
+          <span style="display:grid;gap:4px;justify-items:center"><span style="width:20px;height:20px;border-radius:5px;background:rgba(10,22,45,0.15)"></span>Strategies</span>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;gap:28px;color:#fff;width:300px">
+      <div style="display:grid;gap:6px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#28A79B">IOS · ANDROID</span><span style="font-family:'Space Grotesk',sans-serif;font-size:44px;font-weight:700;line-height:1">1,000+</span><span style="font-size:13px;color:rgba(255,255,255,0.6)">active users in beta</span></div>
+      <div style="display:grid;gap:6px"><span style="font-family:'Space Grotesk',sans-serif;font-size:44px;font-weight:700;line-height:1">60 fps</span><span style="font-size:13px;color:rgba(255,255,255,0.6)">live prices on mid-tier Android, via Worklets</span></div>
+      <div style="display:grid;gap:6px"><span style="font-family:'Space Grotesk',sans-serif;font-size:44px;font-weight:700;line-height:1">6</span><span style="font-size:13px;color:rgba(255,255,255,0.6)">notification types, deep-link gateway, SnapTrade linking</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 Second Opinion -->
+<section id="img-second-opinion" style="width:960px;height:1200px;background:#F9F9F9;position:relative;overflow:hidden;display:grid;place-items:center">
+  <div style="position:absolute;inset:0;background:radial-gradient(700px 500px at 20% 90%,rgba(34,86,179,0.14),transparent 70%)"></div>
+  <div style="position:relative;width:860px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 30px 80px rgba(10,22,45,0.18);border:1px solid rgba(10,22,45,0.08)">
+    <div style="height:44px;border-bottom:1px solid rgba(10,22,45,0.08);display:flex;align-items:center;padding:0 16px;gap:8px"><span style="width:10px;height:10px;border-radius:50%;background:#E5E7EB"></span><span style="width:10px;height:10px;border-radius:50%;background:#E5E7EB"></span><span style="width:10px;height:10px;border-radius:50%;background:#E5E7EB"></span><span style="margin-left:16px;height:26px;width:340px;border-radius:6px;background:#F3F4F6;display:flex;align-items:center;padding:0 10px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#777">secondopinion.lumida.com/review</span></div>
+    <div style="display:grid;grid-template-columns:1fr 300px;min-height:820px">
+      <div style="padding:36px;display:grid;gap:28px;align-content:start;border-right:1px solid rgba(10,22,45,0.08)">
+        <div style="display:grid;gap:8px"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#2256B3">STEP 3 OF 5 · HOLDINGS</span><span style="font-size:26px;font-weight:700;color:#0A162D;letter-spacing:-0.02em">Tell us what you hold</span><span style="font-size:14px;color:#516880">Findings update as you type. Nothing is scored in the browser.</span></div>
+        <div style="display:grid;gap:12px">
+          <label style="display:grid;gap:6px;font-size:12px;color:#516880">Advisor fee (annual)<div style="height:46px;border:1px solid rgba(10,22,45,0.15);border-radius:8px;display:flex;align-items:center;padding:0 14px;font-size:15px;color:#0A162D">1.25 %</div></label>
+          <label style="display:grid;gap:6px;font-size:12px;color:#516880">Portfolio value<div style="height:46px;border:1px solid #2256B3;border-radius:8px;display:flex;align-items:center;padding:0 14px;font-size:15px;color:#0A162D;box-shadow:0 0 0 3px #E8EEF9">$1,250,000<span style="width:1px;height:18px;background:#0A162D;margin-left:2px"></span></div></label>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <label style="display:grid;gap:6px;font-size:12px;color:#516880">Equity %<div style="height:46px;border:1px solid rgba(10,22,45,0.15);border-radius:8px;display:flex;align-items:center;padding:0 14px;font-size:15px;color:#0A162D">78</div></label>
+            <label style="display:grid;gap:6px;font-size:12px;color:#516880">Cash drag %<div style="height:46px;border:1px solid rgba(10,22,45,0.15);border-radius:8px;display:flex;align-items:center;padding:0 14px;font-size:15px;color:#0A162D">11</div></label>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px"><span style="height:46px;padding:0 20px;border-radius:8px;background:#0A162D;color:#fff;display:flex;align-items:center;font-size:14px;font-weight:600">Continue →</span><span style="height:46px;padding:0 20px;border-radius:8px;border:1px solid rgba(10,22,45,0.15);display:flex;align-items:center;font-size:14px;color:#0A162D">Back</span></div>
+        <div style="font-size:11px;color:#777;line-height:1.6;border-top:1px solid rgba(10,22,45,0.08);padding-top:16px">Channel: <strong>public</strong> · engine v2.3 · evaluation contract shared with advisor tool · zero client-side rules</div>
+      </div>
+      <div style="padding:28px 22px;background:#F9F9F9;display:grid;gap:14px;align-content:start">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#516880">LIVE FINDINGS · 4</span>
+        <div style="background:#fff;border:1px solid rgba(10,22,45,0.1);border-radius:10px;padding:16px;display:grid;gap:4px"><span style="font-size:11px;color:#516880">Portfolio health</span><span style="font-family:'Space Grotesk',sans-serif;font-size:40px;font-weight:700;color:#0A162D;line-height:1">62<span style="font-size:16px;color:#777">/100</span></span></div>
+        <div style="background:#fff;border-left:3px solid #DC4453;border-radius:8px;padding:12px 14px;display:grid;gap:4px"><span style="font-size:12px;font-weight:600;color:#0A162D">Fee drag: $15,600 / yr</span><span style="font-size:11px;color:#516880">1.25% is above the 0.8% median for this size.</span></div>
+        <div style="background:#fff;border-left:3px solid #E0A800;border-radius:8px;padding:12px 14px;display:grid;gap:4px"><span style="font-size:12px;font-weight:600;color:#0A162D">11% cash uninvested</span><span style="font-size:11px;color:#516880">Roughly $137k earning below T-bill yield.</span></div>
+        <div style="background:#fff;border-left:3px solid #28A79B;border-radius:8px;padding:12px 14px;display:grid;gap:4px"><span style="font-size:12px;font-weight:600;color:#0A162D">Equity mix in range</span><span style="font-size:11px;color:#516880">78% fits a growth profile at your horizon.</span></div>
+        <div style="background:#0A162D;color:#fff;border-radius:10px;padding:16px;display:grid;gap:8px;margin-top:8px"><span style="font-size:13px;font-weight:600">Full report · $49</span><span style="font-size:11px;color:rgba(255,255,255,0.65)">Stripe · feature-flagged paywall</span><span style="height:36px;border-radius:6px;background:#28A79B;color:#0A162D;display:grid;place-items:center;font-size:12px;font-weight:700">Unlock</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 ResumeGrade -->
+<section id="img-resumegrade" style="width:960px;height:1200px;background:#F4F1FE;position:relative;overflow:hidden;display:grid;place-items:center">
+  <div style="position:absolute;inset:0;background:radial-gradient(600px 500px at 85% 15%,rgba(124,58,237,0.22),transparent 70%)"></div>
+  <div style="position:relative;width:860px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 30px 80px rgba(60,30,120,0.2)">
+    <div style="height:44px;border-bottom:1px solid rgba(10,22,45,0.08);display:flex;align-items:center;padding:0 16px;gap:8px"><span style="width:10px;height:10px;border-radius:50%;background:#E5E7EB"></span><span style="width:10px;height:10px;border-radius:50%;background:#E5E7EB"></span><span style="width:10px;height:10px;border-radius:50%;background:#E5E7EB"></span><span style="margin-left:16px;height:26px;width:300px;border-radius:6px;background:#F3F4F6;display:flex;align-items:center;padding:0 10px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#777">resumegrading.com</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 32px;border-bottom:1px solid rgba(10,22,45,0.06)"><span style="font-size:16px;font-weight:800;color:#0A162D">ResumeGrading</span><div style="display:flex;gap:20px;font-size:13px;color:#516880"><span>ATS Checker</span><span>Resume Score</span><span>Guide</span><span style="padding:8px 14px;border-radius:8px;background:#7C3AED;color:#fff;font-weight:600">Analyze resume</span></div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;padding:32px">
+      <div style="display:grid;gap:18px;align-content:start">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#7C3AED">INSTANT AI RESUME REVIEW</span>
+        <span style="font-size:34px;font-weight:800;color:#0A162D;letter-spacing:-0.03em;line-height:1.05">Free AI Resume Checker &amp; ATS Optimizer</span>
+        <span style="font-size:14px;color:#516880;line-height:1.55">Score, missing ATS keywords, bullet rewrites, and interview odds — in under 60 seconds. Private, redacted before analysis. No signup.</span>
+        <div style="border:2px dashed #7C3AED;border-radius:14px;padding:28px;display:grid;gap:6px;justify-items:center;text-align:center;background:#F4F1FE"><span style="width:40px;height:40px;border-radius:10px;background:#7C3AED"></span><span style="font-size:14px;font-weight:600;color:#0A162D">Drop your resume here</span><span style="font-size:12px;color:#516880">PDF or DOCX, up to 5 MB</span></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;font-size:11px;color:#516880"><span style="padding:5px 10px;border-radius:100px;background:#F3F4F6">Overall score</span><span style="padding:5px 10px;border-radius:100px;background:#F3F4F6">ATS keywords</span><span style="padding:5px 10px;border-radius:100px;background:#F3F4F6">Bullet rewrites</span><span style="padding:5px 10px;border-radius:100px;background:#F3F4F6">Interview odds</span></div>
+      </div>
+      <div style="display:grid;gap:14px;align-content:start">
+        <div style="border:1px solid rgba(10,22,45,0.1);border-radius:14px;padding:20px;display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center">
+          <div style="width:96px;height:96px;border-radius:50%;background:conic-gradient(#7C3AED 0 78%,#EDE9FE 78% 100%);display:grid;place-items:center"><div style="width:72px;height:72px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:28px;font-weight:800;color:#0A162D">78</div></div>
+          <div style="display:grid;gap:4px"><span style="font-size:15px;font-weight:700;color:#0A162D">Strong — senior-level read</span><span style="font-size:12px;color:#516880">ATS 84 · Content 71 · Structure 80</span><span style="font-size:11px;color:#28A79B;font-weight:600">Interview odds: FAANG 22% · Startup 61%</span></div>
+        </div>
+        <div style="border:1px solid rgba(10,22,45,0.1);border-radius:14px;padding:18px;display:grid;gap:10px"><span style="font-size:12px;font-weight:700;color:#0A162D">Missing ATS keywords</span><div style="display:flex;gap:6px;flex-wrap:wrap"><span style="padding:5px 10px;border-radius:6px;background:#FFDCDF;color:#8B1B23;font-size:11px;font-weight:600">Kubernetes</span><span style="padding:5px 10px;border-radius:6px;background:#FFDCDF;color:#8B1B23;font-size:11px;font-weight:600">GraphQL</span><span style="padding:5px 10px;border-radius:6px;background:#FFDCDF;color:#8B1B23;font-size:11px;font-weight:600">A/B testing</span><span style="padding:5px 10px;border-radius:6px;background:#D6FFFB;color:#004D5E;font-size:11px;font-weight:600">React ✓</span><span style="padding:5px 10px;border-radius:6px;background:#D6FFFB;color:#004D5E;font-size:11px;font-weight:600">CI/CD ✓</span></div></div>
+        <div style="border:1px solid rgba(10,22,45,0.1);border-radius:14px;padding:18px;display:grid;gap:8px"><span style="font-size:12px;font-weight:700;color:#0A162D">Bullet rewrite · XYZ format</span><span style="font-size:12px;color:#777;text-decoration:line-through">Worked on improving app performance.</span><span style="font-size:12px;color:#0A162D;line-height:1.5">Cut time-to-interactive <strong>33%</strong> (1.8 s → 1.2 s) by virtualising long tables and memoising chart renders.</span></div>
+        <div style="font-size:11px;color:#516880;display:flex;gap:12px"><span>Groq → Cerebras → OpenRouter</span><span>·</span><span>spaCy PII redaction</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 NBP -->
+<section id="img-nbp" style="width:960px;height:1200px;background:#0B3D2E;position:relative;overflow:hidden;display:grid;place-items:center">
+  <div style="position:absolute;inset:0;background:radial-gradient(700px 500px at 80% 90%,rgba(196,160,64,0.25),transparent 70%)"></div>
+  <div style="position:relative;width:860px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,0.4)">
+    <div style="height:44px;border-bottom:1px solid rgba(10,22,45,0.08);display:flex;align-items:center;padding:0 16px;gap:8px"><span style="width:10px;height:10px;border-radius:50%;background:#E5E7EB"></span><span style="width:10px;height:10px;border-radius:50%;background:#E5E7EB"></span><span style="width:10px;height:10px;border-radius:50%;background:#E5E7EB"></span><span style="margin-left:16px;height:26px;width:340px;border-radius:6px;background:#F3F4F6;display:flex;align-items:center;padding:0 10px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#777">newaccount.nbp.com.pk</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 32px;border-bottom:1px solid rgba(10,22,45,0.06)"><div style="display:flex;align-items:center;gap:10px"><span style="width:34px;height:34px;border-radius:50%;background:#0B3D2E;border:3px solid #C4A040"></span><span style="font-size:14px;font-weight:700;color:#0B3D2E;letter-spacing:0.04em">NATIONAL BANK OF PAKISTAN</span></div><span style="font-size:12px;color:#516880">Digital Account Opening · اردو</span></div>
+    <div style="padding:28px 32px 36px;display:grid;gap:28px">
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px">
+        <div style="display:grid;gap:8px"><span style="height:4px;border-radius:2px;background:#0B3D2E"></span><span style="font-size:11px;color:#0B3D2E;font-weight:600">Account type</span></div>
+        <div style="display:grid;gap:8px"><span style="height:4px;border-radius:2px;background:#0B3D2E"></span><span style="font-size:11px;color:#0B3D2E;font-weight:600">CNIC</span></div>
+        <div style="display:grid;gap:8px"><span style="height:4px;border-radius:2px;background:#C4A040"></span><span style="font-size:11px;color:#0B3D2E;font-weight:700">Personal details</span></div>
+        <div style="display:grid;gap:8px"><span style="height:4px;border-radius:2px;background:#E5E7EB"></span><span style="font-size:11px;color:#9CA3AF">Biometric selfie</span></div>
+        <div style="display:grid;gap:8px"><span style="height:4px;border-radius:2px;background:#E5E7EB"></span><span style="font-size:11px;color:#9CA3AF">Review</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 280px;gap:28px">
+        <div style="display:grid;gap:16px;align-content:start">
+          <span style="font-size:24px;font-weight:700;color:#0A162D;letter-spacing:-0.02em">Personal details</span>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <label style="display:grid;gap:6px;font-size:12px;color:#516880">Full name (as per CNIC)<div style="height:44px;border:1px solid rgba(10,22,45,0.15);border-radius:6px;display:flex;align-items:center;padding:0 12px;font-size:14px;color:#0A162D">Muhammad Ali Raza</div></label>
+            <label style="display:grid;gap:6px;font-size:12px;color:#516880">CNIC<div style="height:44px;border:1px solid rgba(10,22,45,0.15);border-radius:6px;display:flex;align-items:center;padding:0 12px;font-size:14px;color:#0A162D;font-family:'JetBrains Mono',monospace">42101-1234567-1</div></label>
+            <label style="display:grid;gap:6px;font-size:12px;color:#516880">Mobile (registered)<div style="height:44px;border:1px solid #0B3D2E;border-radius:6px;display:flex;align-items:center;padding:0 12px;font-size:14px;color:#0A162D;box-shadow:0 0 0 3px rgba(11,61,46,0.12)">+92 300 1234567</div></label>
+            <label style="display:grid;gap:6px;font-size:12px;color:#516880">Email<div style="height:44px;border:1px solid rgba(10,22,45,0.15);border-radius:6px;display:flex;align-items:center;padding:0 12px;font-size:14px;color:#0A162D">ali.raza@mail.com</div></label>
+            <label style="display:grid;gap:6px;font-size:12px;color:#516880;grid-column:1/-1">Source of income<div style="height:44px;border:1px solid rgba(10,22,45,0.15);border-radius:6px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;font-size:14px;color:#0A162D">Salaried <span style="color:#9CA3AF">▾</span></div></label>
+          </div>
+          <div style="display:flex;gap:10px;padding-top:6px"><span style="height:46px;padding:0 24px;border-radius:6px;background:#0B3D2E;color:#fff;display:flex;align-items:center;font-size:14px;font-weight:600">Save &amp; continue</span><span style="height:46px;padding:0 20px;border-radius:6px;border:1px solid rgba(10,22,45,0.15);display:flex;align-items:center;font-size:14px;color:#0A162D">Back</span></div>
+        </div>
+        <div style="display:grid;gap:12px;align-content:start">
+          <div style="background:#F3F7F5;border:1px solid rgba(11,61,46,0.15);border-radius:10px;padding:16px;display:grid;gap:8px"><span style="font-size:12px;font-weight:700;color:#0B3D2E">Asaan Digital Account</span><span style="font-size:12px;color:#516880;line-height:1.5">No minimum balance · Debit card · Free fund transfers</span><span style="font-size:11px;color:#0B3D2E;font-weight:600">Change type</span></div>
+          <div style="background:#fff;border:1px solid rgba(10,22,45,0.1);border-radius:10px;padding:16px;display:grid;gap:8px"><span style="font-size:12px;font-weight:700;color:#0A162D">CNIC verified</span><span style="font-size:12px;color:#28A79B;font-weight:600">✓ NADRA Verisys match</span><span style="font-size:11px;color:#516880">Front and back captured · 2 min ago</span></div>
+          <div style="font-size:11px;color:#777;line-height:1.6">Session secured · Snyk-hardened · React Query cache for step resume</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const orders = [
+      ['BUY', 'ACC-0412', 'NVDA', '184', '$182.40', 'price ok', '#28A79B'], ['BUY', 'ACC-0412', 'MSFT', '96', '$428.10', 'price ok', '#28A79B'], ['SELL', 'ACC-0413', 'TLT', '220', '$94.02', 'price ok', '#28A79B'],
+      ['SHORT', 'ACC-0415', 'XLE', '140', '$88.75', 'price ok', '#28A79B'], ['BUY', 'ACC-0416', 'LLY', '31', '$812.30', '+8.2% dev', '#DC4453'], ['COVER', 'ACC-0416', 'XLE', '60', '$88.75', 'price ok', '#28A79B'],
+      ['BUY', 'ACC-0417', 'NVDA', '402', '$182.40', 'price ok', '#28A79B'], ['SHORT', 'ACC-0417', 'XLE', '210', '$88.75', 'restricted', '#DC4453'], ['BUY', 'ACC-0419', 'MSFT', '58', '$428.10', 'price ok', '#28A79B'], ['SELL', 'ACC-0420', 'TLT', '175', '$94.02', 'price ok', '#28A79B'],
+    ].map(([type, acct, tk, qty, px, chk, cc]) => ({ type, acct, tk, qty, px, chk, cc, tc: type === 'BUY' || type === 'COVER' ? '#0F8277' : '#DC4453' }));
+    const holdings = [
+      { tk: 'NVDA', name: 'NVIDIA', qty: '184 sh', val: '$33,561', chg: '+2.4%', c: '#28A79B', bg: '#0A162D' }, { tk: 'MSFT', name: 'Microsoft', qty: '96 sh', val: '$41,097', chg: '+0.8%', c: '#28A79B', bg: '#2256B3' },
+      { tk: 'LLY', name: 'Eli Lilly', qty: '31 sh', val: '$25,181', chg: '−1.1%', c: '#DC4453', bg: '#7C3AED' }, { tk: 'BTC', name: 'Bitcoin', qty: '0.42', val: '$28,940', chg: '+3.6%', c: '#28A79B', bg: '#F97316' },
+    ];
+    return { orders, holdings };
+  }
+}
+</script>
+</body>
+</html>

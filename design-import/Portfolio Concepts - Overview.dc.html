@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#F9F9F9;color:#0A162D;font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#2256B3;text-decoration:none}a:hover{color:#0A162D;text-decoration:underline}
+</style>
+</helmet>
+<div style="max-width:1120px;margin:0 auto;padding:64px 32px 120px;display:grid;gap:64px">
+
+<header style="display:grid;gap:16px">
+  <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:rgba(10,22,45,0.6)">PORTFOLIO · THREE CONCEPTS · AHSAN IFTIKHAR</span>
+  <h1 style="margin:0;font-size:clamp(32px,4.5vw,52px);font-weight:700;letter-spacing:-0.03em;line-height:1.05">Three portfolio directions, one recommendation.</h1>
+  <p style="margin:0;font-size:17px;line-height:1.6;color:rgba(10,22,45,0.75);max-width:720px">Each is a clickable prototype with all five pages, contact, and a mobile mode (Tweaks → viewport). All three share one palette family — navy, teal, red, cyan, off-white — applied in opposite ways, so switching later costs nothing at the data layer.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:8px">
+    <a href="Concept 1 - Digital Architect.dc.html" style="display:grid;gap:8px;padding:24px;background:#0A162D;color:#fff;border-radius:4px;text-decoration:none" style-hover="text-decoration:none"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#28A79B">CONCEPT 01</span><span style="font-size:20px;font-weight:600">Digital Architect</span><span style="font-size:13px;color:rgba(255,255,255,0.65)">Dark, gridded, systems-first. Nodes &amp; case studies.</span><span style="font-size:13px;color:#28A79B;margin-top:8px">Open prototype →</span></a>
+    <a href="Concept 2 - Interactive Editorial.dc.html" style="display:grid;gap:8px;padding:24px;background:#fff;color:#0A162D;border:1px solid rgba(10,22,45,0.15);text-decoration:none" style-hover="text-decoration:none"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#DC4453">CONCEPT 02</span><span style="font-size:20px;font-weight:600">Interactive Editorial</span><span style="font-size:13px;color:rgba(10,22,45,0.65)">Light, typographic, magazine spreads. Type as the hero.</span><span style="font-size:13px;color:#DC4453;margin-top:8px">Open prototype →</span></a>
+    <a href="Concept 3 - Living Playground.dc.html" style="display:grid;gap:8px;padding:24px;background:#102345;color:#F4F5FA;border-radius:24px;text-decoration:none" style-hover="text-decoration:none"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#0CA5E9">CONCEPT 03</span><span style="font-size:20px;font-weight:600">Living Playground</span><span style="font-size:13px;color:rgba(244,245,250,0.65)">Deep navy, particle world, dock nav, project environments.</span><span style="font-size:13px;color:#0CA5E9;margin-top:8px">Open prototype →</span></a>
+  </div>
+</header>
+
+<!-- comparison -->
+<section style="display:grid;gap:20px">
+  <h2 style="margin:0;font-size:24px;font-weight:700;letter-spacing:-0.02em">How they differ</h2>
+  <div style="display:grid;border-top:1px solid #0A162D">
+    <sc-for list="{{ compare }}" as="row" hint-placeholder-count="8">
+      <div style="display:grid;grid-template-columns:{{ cmpCols }};gap:16px;padding:16px 0;border-bottom:1px solid rgba(10,22,45,0.12);font-size:14px;line-height:1.5">
+        <span style="font-weight:600;color:rgba(10,22,45,0.7)">{{ row.k }}</span>
+        <span>{{ row.a }}</span><span>{{ row.b }}</span><span>{{ row.c }}</span>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<!-- concept specs -->
+<sc-for list="{{ concepts }}" as="c" hint-placeholder-count="3">
+  <section id="{{ c.id }}" style="display:grid;gap:28px;padding-top:24px;border-top:2px solid #0A162D">
+    <div style="display:grid;grid-template-columns:{{ headCols }};gap:24px;align-items:end">
+      <div style="display:grid;gap:8px">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:{{ c.accent }}">{{ c.num }}</span>
+        <h2 style="margin:0;font-size:36px;font-weight:700;letter-spacing:-0.03em;line-height:1.05">{{ c.name }}</h2>
+        <p style="margin:0;font-size:16px;line-height:1.6;color:rgba(10,22,45,0.75)">{{ c.philosophy }}</p>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end">
+        <sc-for list="{{ c.swatches }}" as="sw" hint-placeholder-count="5"><span style="display:grid;gap:4px;justify-items:center"><span style="width:44px;height:44px;background:{{ sw.hex }};border:1px solid rgba(10,22,45,0.12)"></span><span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(10,22,45,0.6)">{{ sw.label }}</span></span></sc-for>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:rgba(10,22,45,0.12);border:1px solid rgba(10,22,45,0.12)">
+      <sc-for list="{{ c.spec }}" as="sp" hint-placeholder-count="18">
+        <div style="background:#F9F9F9;padding:18px 20px;display:grid;gap:6px;align-content:start">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:rgba(10,22,45,0.55)">{{ sp.k }}</span>
+          <span style="font-size:14px;line-height:1.55">{{ sp.v }}</span>
+        </div>
+      </sc-for>
+    </div>
+    <a href="{{ c.file }}" style="justify-self:start;font-size:14px;font-weight:600">Open the {{ c.name }} prototype →</a>
+  </section>
+</sc-for>
+
+<!-- recommendation -->
+<section style="background:#0A162D;color:#fff;padding:48px;display:grid;gap:20px">
+  <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#28A79B">RECOMMENDATION</span>
+  <h2 style="margin:0;font-size:32px;font-weight:700;letter-spacing:-0.03em;line-height:1.1">Build Concept 1 — Digital Architect — and borrow two moves from the others.</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;font-size:15px;line-height:1.6;color:rgba(255,255,255,0.8)">
+    <p style="margin:0"><strong style="color:#fff">Why it wins.</strong> Your resume's strongest claim is judgment — knowing where determinism beats a model. The Architect concept's whole visual language (grid, mono labels, case-study rows, system-architecture experience page) says that before anyone reads a word. It scores highest on developer credibility and usability, and its one WebGL scene is cheap: ~70 points and lines, cursor-reactive, pausable.</p>
+    <p style="margin:0"><strong style="color:#fff">Why not the others.</strong> Editorial is the most beautiful and the cheapest to run, but it reads "design-led" more than "engineering-led" for a backend-heavy senior role. Playground is the most memorable and best shows frontend chops, but every page carries a WebGL cost and a 3D project ring that needs real screenshots to pay off — more risk for a recruiter on a laptop.</p>
+    <p style="margin:0"><strong style="color:#fff">Steal these.</strong> From Editorial: the full-viewport project spread for the case-study detail view. From Playground: the "enter a project" page transition (Framer Motion <code style="font-family:'JetBrains Mono',monospace;font-size:13px">layoutId</code> from row → detail). Both fit inside the Architect grid without changing its identity.</p>
+  </div>
+</section>
+
+<section style="display:grid;gap:12px;font-size:14px;line-height:1.6;color:rgba(10,22,45,0.75)">
+  <h2 style="margin:0;font-size:20px;font-weight:700;letter-spacing:-0.02em;color:#0A162D">Dependencies</h2>
+  <p style="margin:0">Nothing new is required. Optional: <strong>lenis</strong> (3 KB) for smooth scroll if you want scroll-linked 3D to feel buttery — Framer Motion's <code style="font-family:'JetBrains Mono',monospace;font-size:13px">useScroll</code> works without it. Avoid GSAP/ScrollTrigger; Framer covers every animation shown here. Fonts: Inter (body, all), JetBrains Mono (labels, all), Space Grotesk (Editorial display), Plus Jakarta Sans (Playground display) — all self-hosted or Google.</p>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { width: 1200 };
+  componentDidMount() { this.onResize = () => this.setState({ width: window.innerWidth }); window.addEventListener('resize', this.onResize); this.onResize(); }
+  componentWillUnmount() { window.removeEventListener('resize', this.onResize); }
+  renderVals() {
+    const m = this.state.width < 760;
+    const compare = [
+      ['Primary feeling', 'Precision. Entering an engineering environment.', 'Expensive, art-directed, calm.', 'Alive, spatial, playful but controlled.'],
+      ['Typography', 'Inter 600 tight headings + JetBrains Mono labels; sharp, mid-scale.', 'Space Grotesk at 100–190px, uppercase, negative tracking; Inter body.', 'Plus Jakarta Sans 800, rounded and friendly; mono for status.'],
+      ['Color', 'Navy #0A162D ground, 8% white lines, teal #28A79B single accent.', 'Off-white #F9F9F9 ground, navy ink, red #DC4453 sparingly.', 'Navy → navy-deep radial, cyan #0CA5E9 primary, teal/violet secondary.'],
+      ['3D role', 'Hero only: cursor-reactive node network on an 80px grid. Structural.', 'Minimal: a dot-grid that displaces around the cursor. Texture, not subject.', 'Central: 900-particle morphing object (sphere / torus / lattice), drag to orbit; project cards glow in 3D space.'],
+      ['Navigation', 'Top bar, numbered items, teal underline grows; mobile = full-screen console list.', 'Fixed corners in difference-blend; big page ordinal bottom-left; mobile = full-screen type menu.', 'Floating bottom dock (pill), icons + active label; identical on mobile.'],
+      ['Project UX', 'Case-study rows: PROJECT 01 → expand in place to problem / solution / impact / mockup.', 'One full-viewport spread per project, prev/next like a magazine; oversized title + image.', 'Perspective ring of project objects; bring forward, then "enter" a full-screen environment.'],
+      ['Experience', 'System-architecture nodes on a connector line; inspect one to see its interface.', 'Huge company names in a list; selected name turns red and shifts, details unfold.', 'Scroll journey of stations with glow; detail panel below.'],
+      ['Animation style', 'Short, linear-ish, structural: lines grow, panels rise 18px, 300–400ms.', 'Masked line reveals, slow eases (600–900ms), slide-in spreads.', 'Springy pops, scale on hover, zoom-in environment transitions, continuous particle motion.'],
+      ['Best for', 'Senior/lead roles at fintech, infra, data-heavy products. Recruiter-safe.', 'Design-adjacent teams, agencies, product-minded startups.', 'Frontend-specialist roles, creative tech, teams that value WebGL.'],
+    ].map(([k, a, b, c]) => ({ k, a, b, c }));
+    const sp = o => Object.entries(o).map(([k, v]) => ({ k, v }));
+    const concepts = [
+      { id: 'c1', num: 'CONCEPT 01', name: 'Digital Architect', file: 'Concept 1 - Digital Architect.dc.html', accent: '#28A79B',
+        philosophy: 'The portfolio as an engineering document. Every element sits on a visible grid; labels are monospace spec text; the only color is the one that means "live".',
+        swatches: [{ hex: '#0A162D', label: 'navy' }, { hex: '#102345', label: 'surface' }, { hex: '#28A79B', label: 'teal' }, { hex: '#DC4453', label: 'problem' }, { hex: '#FFFFFF', label: 'text' }],
+        spec: sp({
+          'COLOR SYSTEM': 'bg #0A162D · surface #102345 · text #fff / 68% / 45% · accent #28A79B · borders rgba(255,255,255,.08) and .12 · hover: border → teal, text → #fff. Red #DC4453 only for the word PROBLEM.',
+          'TYPOGRAPHY': 'Inter 600 for headings: 76 / 56 / 36 / 22 / 17, tracking −0.035 to −0.02em, line-height 1.02–1.1. Body Inter 400 14–17px / 1.55. JetBrains Mono 10–12px, tracking 0.12–0.14em, uppercase for every label.',
+          'SPACING': '4px base; section padding 80/48 desktop, 48/20 mobile; 24px cell padding; 1px gap grids on a rgba(255,255,255,.08) background instead of borders.',
+          'NAVIGATION': 'Sticky 56px bar; wordmark + "/ 0N" page index; items "01 Home" with teal underline that scales from left (Framer layoutId). 1px scroll-progress line under the bar. Mobile: MENU toggles a full-screen console list with "● ACTIVE" marker and a teal Contact button pinned bottom.',
+          'HERO': 'Left-aligned, bottom-anchored copy over a full-bleed node network; gradient scrim keeps 4.5:1 contrast. Blinking status dot + mono eyebrow, 76px headline, two CTAs, mono social links, scene stats bottom-right.',
+          '3D / WEBGL': 'R3F <Points> (60–70) + <Line> segments within 150px; InstancedMesh for squares. Cursor within 220px pulls nodes and tints links teal. Static frame under prefers-reduced-motion; pause on tab hidden; dpr capped at 1.5.',
+          'HOME LAYOUT': 'Hero → 4-cell stat strip → 3 case-study rows → 4-node timeline grid → contact CTA. All bordered cells; no cards with shadows.',
+          'ABOUT': 'Spec-sheet: 220px mono label column + content. Philosophy as 4 numbered cells, capability matrix (category × tags), operating notes.',
+          'EXPERIENCE': 'Roles as service nodes on a horizontal connector; selected node has teal border and ● indicator; panel below shows RESPONSIBILITIES / INTERFACE / OUTPUT in 3 cells. Mobile: nodes stack, connector hidden.',
+          'PROJECTS': 'Numbered rows (PROJECT 0N · name · stack · + ). Click expands in place: problem/solution, role/impact/links, tags, and a 16:10 mockup slot on a blueprint grid. One open at a time.',
+          'RESUME': 'Two columns: actions + education + summary + tags on the left; a paper-white document preview on the right that lifts 4px on hover. Download is a primary teal button.',
+          'CONTACT': 'Modal (bottom sheet on mobile) with mono-labelled inputs; direct mailto fallback. Also reachable from nav, hero footer CTA and resume.',
+          'ANIMATION SYSTEM': '1) Route change: main rises 18px/400ms. 2) Hero: network reacts to cursor. 3) Reveals: whileInView rise, stagger 50ms. 4) Micro: underline scaleX, row padding-left 12px on hover, + rotates 45° on open.',
+          'MICRO-INTERACTIONS': 'Clock in PKT in nav; progress line; rows shift right on hover; tags tint teal; document preview lifts; chevron rotation.',
+          'MOBILE': 'Hero 78vh with 40px headline; stats 2-up; project rows collapse to single column; experience nodes stack; contact becomes a bottom sheet. 44px+ targets.',
+          'ACCESSIBILITY': 'All text ≥ 4.5:1 (68% white on navy = 7.9:1). Focus rings teal. Reduced motion freezes the network and disables transitions. Canvas is aria-hidden; nav uses <nav> + aria-current.',
+          'PERFORMANCE': 'One WebGL canvas, home only, unmounted on route change. No blur except the 8px nav backdrop. Lazy-load the R3F chunk; LCP is text.',
+          'COMPONENT ARCHITECTURE': 'AppShell(Nav, ProgressLine, ContactModal) · pages/Home(NetworkScene, StatStrip, CaseStudyList, TimelineGrid) · pages/Experience(ServiceNodes, RolePanel) · pages/Projects(CaseStudyRow) · pages/Resume(DocumentPreview) · data/portfolio.ts · hooks/useReducedMotion.',
+          'WHY IT STANDS OUT': 'It looks like the work: auditable, structured, deliberate. A hiring manager for fintech or infra reads it as proof of taste and restraint.',
+        }) },
+      { id: 'c2', num: 'CONCEPT 02', name: 'Interactive Editorial', file: 'Concept 2 - Interactive Editorial.dc.html', accent: '#DC4453',
+        philosophy: 'A digital magazine about one engineer. Type is the imagery; whitespace is the layout; motion is masking and sliding, never bouncing.',
+        swatches: [{ hex: '#F9F9F9', label: 'paper' }, { hex: '#0A162D', label: 'ink' }, { hex: '#DC4453', label: 'red' }, { hex: '#E5E7EB', label: 'plate' }, { hex: '#FFFFFF', label: 'doc' }],
+        spec: sp({
+          'COLOR SYSTEM': 'bg #F9F9F9 · ink #0A162D · secondary rgba(10,22,45,.65) · accent #DC4453 (one word per screen, hover color) · rules rgba(10,22,45,.12) · inverted navy band for "Currently".',
+          'TYPOGRAPHY': 'Space Grotesk 500: hero 11.5vw uppercase, tracking −0.05em, line-height 0.92; H1 56–112px; project titles 48–88px; lead 22–32px / 1.25. Inter 400 body 15–16px / 1.55. JetBrains Mono 11px for indices and dates.',
+          'SPACING': 'Generous: 112px section padding, 160px page top, 220px label column. Rules instead of boxes. Mobile 64/24.',
+          'NAVIGATION': 'Fixed corners in mix-blend-mode: difference so it survives the navy band. Items numbered 01–06 with a 1px underline that scales in. Bottom-left: 64px page ordinal that masks in on route change; right edge: vertical scroll progress. Mobile: "Menu" → full-screen navy menu with 52px masked type, active item red.',
+          'HERO': 'Four lines — Software / engineer / of systems / that hold. — staggered mask reveal 900ms, second and fourth lines indented, last word red. Below: lede, two underlined text buttons, mono socials. Dot grid behind displaces around the cursor.',
+          '3D / WEBGL': 'Intentionally minimal: R3F instanced dot grid (≈600 points) with a cursor displacement shader and slow sine wobble. Reads as paper texture that notices you. Optional: project image planes with a subtle RGB-shift on hover.',
+          'HOME LAYOUT': 'Hero → "Selected work" list (number · 52px title · kicker · metric) → inverted "Currently" band → 150px "Let\'s talk →" closer.',
+          'ABOUT': 'Editorial profile: H1 with red emphasis beside a 3:4 B/W portrait plate; lede in Space Grotesk; philosophy as rule-topped columns; skills as running text lines per category.',
+          'EXPERIENCE': 'Company names at 96px in a ruled list; selected row turns red and shifts 16px; detail unfolds with lede + 3 columns. Dates in the left mono column.',
+          'PROJECTS': 'One spread per project: text column + 4:5 navy image plate with the metric set at 56px inside it. Progress dashes top-right; prev/next with neighbour names. Slide-in 600ms. Mobile: image first, 4:3.',
+          'RESUME': '"Everything above, on two pages." Navy download button (red on hover) + file meta; summary/education/skills in ruled blocks; white paper preview with card shadow.',
+          'CONTACT': 'Right-side sheet slides in (full-screen on mobile); underline-only inputs in Space Grotesk 18px; navy Send button. mailto always visible.',
+          'ANIMATION SYSTEM': '1) Route: cross-fade 500ms + ordinal mask. 2) Hero: line masks + grid displacement. 3) Reveals: whileInView translateY 16px. 4) Micro: color to red, underline scaleX, image scale 1.01.',
+          'MICRO-INTERACTIONS': 'Red on hover is the only hover color; links grow a 1px underline; spread image lifts 1%; list rows shift; menu type masks in.',
+          'MOBILE': 'Hero 15vw type, no indents; corners shrink to 20/24; ordinal hidden; lists 2-column (index + title); spreads stack image-first; sheet goes full-width.',
+          'ACCESSIBILITY': 'Ink on paper 15:1; red only as emphasis on text ≥ 22px (4.5:1 on #F9F9F9). Difference-blend nav verified against both grounds. Masks respect reduced motion (instant).',
+          'PERFORMANCE': 'Lightest concept: one small canvas on home; everything else is text and CSS. Fonts preloaded; display font subset to Latin.',
+          'COMPONENT ARCHITECTURE': 'CornerNav, PageOrdinal, ScrollRail, MobileTypeMenu · Home(TypeHero, DotGrid, WorkList, CurrentlyBand) · Projects(Spread, SpreadNav) · Experience(NameList, RoleDetail) · ContactSheet · shared MaskedText.',
+          'WHY IT STANDS OUT': 'Confidence through restraint. It signals product taste and typographic literacy — rare in engineering portfolios — while the content stays unmistakably technical.',
+        }) },
+      { id: 'c3', num: 'CONCEPT 03', name: 'Living Playground', file: 'Concept 3 - Living Playground.dc.html', accent: '#0CA5E9',
+        philosophy: 'The portfolio is itself the product demo. A persistent spatial world — dock, glowing objects, a particle body you can orbit — with every page a different room.',
+        swatches: [{ hex: '#0A162D', label: 'navy' }, { hex: '#102345', label: 'deep' }, { hex: '#0CA5E9', label: 'cyan' }, { hex: '#28A79B', label: 'teal' }, { hex: '#7C3AED', label: 'violet' }],
+        spec: sp({
+          'COLOR SYSTEM': 'Radial navy #0A162D → #102345 ground · text #F4F5FA / 72% / 50% · primary cyan #0CA5E9 · teal #28A79B success · violet #7C3AED for AI projects · per-project accent glows at 45% alpha · borders rgba(255,255,255,.1).',
+          'TYPOGRAPHY': 'Plus Jakarta Sans 800: H1 48–84px, tracking −0.045em, line-height 0.98; H2 30–46px; card titles 22–26px. Inter 400/600 body 13–17px. JetBrains Mono 10–11px for status and indices.',
+          'SPACING': 'Soft geometry: radii 20 / 24 / 28 / 32 / pill. Section padding 72/56; 24px card padding; dock 6px inset, 44px targets.',
+          'NAVIGATION': 'Floating bottom dock: glyph + label for the active page, glyph-only otherwise on mobile; cyan dot under active; blurred navy pill with shadow. Identity pill top-left with live status; "Say hi" pill top-right. Dock never changes between desktop and mobile — thumb-reachable by design.',
+          'HERO': '"Hi, I\'m Ahsan. I make software that moves." with a cyan→teal gradient on the last word; pulsing availability dot; pill CTAs and pill socials. Particle body sits right of the copy (below on mobile), drag to orbit, shape switcher bottom-right.',
+          '3D / WEBGL': 'R3F <Points> with 900 particles (500 mobile) lerping between sphere / torus / lattice targets in a vertex shader; pointer drag rotates via OrbitControls (no zoom/pan), idle auto-rotate, cursor tilt. Color by index: cyan / teal / violet / white. Fully frozen under reduced motion.',
+          'HOME LAYOUT': 'Hero → 3 glowing project objects → horizontal experience strip (scroll-snap) → rounded CTA panel.',
+          'ABOUT': 'H1 + lede beside an interactive portrait (point-cloud that disperses on hover). Philosophy cards lift 4px. Skill constellation: hover a category pill to spotlight its skills (others fade to 25%).',
+          'EXPERIENCE': 'Journey: numbered stations on a gradient rail, staggered pop-in; active station glows and tints its card; detail panel with responsibilities / achievements / pills.',
+          'PROJECTS': 'Perspective ring (translate3d + rotateY) of 300×360 objects; click a side object to bring it forward, click the centre to enter. Environment = full-screen overlay with radial glow in the project\'s accent, 16:9 mockup, problem / solution cards, metric at 28px, prev/next. Mobile: ring becomes a vertical stack.',
+          'RESUME': 'Career map: five nodes (FAST → Medicon → Teresol → Paysys → Lumida) on a rail with year badges, current node cyan; cards for education, core skills, summary; pill tag cloud; cyan Download PDF.',
+          'CONTACT': 'Rounded modal (bottom sheet on mobile) with filled inputs and a cyan pill button; "Say hi" always visible top-right.',
+          'ANIMATION SYSTEM': '1) Route: pop (24px + scale .97) 500ms. 2) Hero: continuous particle lerp + orbit. 3) Reveals: staggered pop 80ms. 4) Micro: hover lift 6px, scale 1.02–1.04, glow shadows, environment zoom-in.',
+          'MICRO-INTERACTIONS': 'Dock labels expand on active; cards lift; shape switcher; skill spotlight; ring rotation 700ms; metric count-up inside environments.',
+          'MOBILE': 'Dock unchanged; identity pill drops status text; hero copy on top, particle body below; project ring → stack; journey rail hidden, stations stack; environment overlay scrolls natively.',
+          'ACCESSIBILITY': 'Off-white on navy 14:1; cyan only on navy (6.9:1) or as a fill with navy text. Dock buttons have titles + aria-current. Particle canvas aria-hidden and frozen under reduced motion. Overlay traps focus, Esc closes.',
+          'PERFORMANCE': 'Heaviest concept: budget one <Canvas> at a time (home hero or about portrait, never both), 900 points max, dpr ≤ 1.5, frameloop="demand" when idle. Blur limited to dock and two pills. Lazy-load three.js chunk after first paint.',
+          'COMPONENT ARCHITECTURE': 'Dock, IdentityPill, SayHiButton · Home(ParticleBody, ShapeSwitch, ObjectCard, ExperienceStrip) · Projects(ObjectRing, ProjectEnvironment) · About(PortraitCloud, SkillConstellation) · Experience(Journey, StationPanel) · Resume(CareerMap) · ContactSheet.',
+          'WHY IT STANDS OUT': 'Nobody forgets it. It proves frontend engineering live — performance, WebGL, motion — rather than listing it. Best for teams that will reward that.',
+        }) },
+    ];
+    return { compare, concepts, cmpCols: m ? '1fr' : '140px 1fr 1fr 1fr', headCols: m ? '1fr' : '1fr auto' };
+  }
+}
+</script>
+</body>
+</html>
