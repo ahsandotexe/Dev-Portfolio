@@ -1,5 +1,11 @@
 # Redesign plan: Ahsan Iftikhar portfolio (Phase 1)
 
+> **Status (2026-10-09):** the "Ledger" direction below was superseded. The owner designed
+> "Interactive Editorial" in Claude Design and chose it; the locked spec is in
+> `design-system/ahsan-portfolio/MASTER.md`, the imported prototype in `design-import/`, and the QA
+> record in `REDESIGN_QA.md`. The audit (section 1), sitemap, functionality plan and content
+> appendices remain accurate and were used for the build.
+
 Status: awaiting feedback. Where the brief and the code differ, the code is treated as the truth.
 Tokens are persisted in `design-system/ahsan-portfolio/MASTER.md`.
 

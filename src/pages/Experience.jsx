@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import Meta from '../components/Meta.jsx'
 import SectionLabel from '../components/SectionLabel.jsx'
 import { roles } from '../data/portfolio.js'
@@ -57,7 +57,7 @@ export default function Experience() {
                 </h2>
                 <AnimatePresence initial={false}>
                   {isOpen && (
-                    <motion.div
+                    <m.div
                       id={`role-${role.id}`}
                       key="detail"
                       initial={{ opacity: 0, y: 16 }}
@@ -89,7 +89,7 @@ export default function Experience() {
                           </Column>
                         </div>
                       </div>
-                    </motion.div>
+                    </m.div>
                   )}
                 </AnimatePresence>
               </li>

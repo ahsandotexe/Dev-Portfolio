@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import { person } from '../data/portfolio.js'
 import { useContact } from '../hooks/useContact.js'
@@ -63,7 +63,7 @@ export default function ContactSheet() {
   return (
     <AnimatePresence>
       {open && (
-        <motion.div
+        <m.div
           className="fixed inset-0 z-50 grid justify-items-end bg-ink/35"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -71,7 +71,7 @@ export default function ContactSheet() {
           transition={{ duration: 0.2 }}
           onClick={closeContact}
         >
-          <motion.div
+          <m.div
             ref={sheetRef}
             role="dialog"
             aria-modal="true"
@@ -192,8 +192,8 @@ export default function ContactSheet() {
             )}
 
             <p className="m-0 text-[12px] text-ink/65">{person.availability}</p>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       )}
     </AnimatePresence>
   )

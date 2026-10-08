@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { NavLink } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import { nav } from '../data/portfolio.js'
 import { useContact } from '../hooks/useContact.js'
 import { useFocusTrap } from '../hooks/useFocusTrap.js'
@@ -17,7 +17,7 @@ export default function MobileTypeMenu({ open, onClose }) {
   return (
     <AnimatePresence>
       {open && (
-        <motion.div
+        <m.div
           ref={ref}
           id="mobile-menu"
           role="dialog"
@@ -41,14 +41,14 @@ export default function MobileTypeMenu({ open, onClose }) {
                 {({ isActive }) => (
                   <>
                     <span className="font-mono text-[11px] opacity-60">{String(i + 1).padStart(2, '0')}</span>
-                    <motion.span
+                    <m.span
                       className={`inline-block font-display text-[52px] font-medium leading-[1.05] tracking-[-0.04em] ${isActive ? 'text-accent' : ''}`}
                       initial={{ y: '110%' }}
                       animate={{ y: 0 }}
                       transition={{ duration: 0.6, ease: EASE, delay: i * 0.06 }}
                     >
                       {item.label}
-                    </motion.span>
+                    </m.span>
                   </>
                 )}
               </NavLink>
@@ -74,7 +74,7 @@ export default function MobileTypeMenu({ open, onClose }) {
               </button>
             </div>
           </div>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   )

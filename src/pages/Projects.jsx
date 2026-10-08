@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import Meta from '../components/Meta.jsx'
 import { projects } from '../data/portfolio.js'
 import { EASE } from '../lib/motion.js'
@@ -78,7 +78,7 @@ export default function Projects() {
         </div>
 
         <AnimatePresence mode="wait" initial={false}>
-          <motion.article
+          <m.article
             key={project.id}
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
@@ -135,7 +135,7 @@ export default function Projects() {
               <span className="absolute bottom-5 left-5 font-display text-[56px] font-medium leading-none tracking-[-0.04em] text-[#F9F9F9]">{project.metric}</span>
               <span className="absolute bottom-6 right-5 text-[12px] text-[#F9F9F9]/85">{project.metricLabel}</span>
             </div>
-          </motion.article>
+          </m.article>
         </AnimatePresence>
 
         <nav aria-label="Previous and next project" className="flex items-center justify-between gap-4 border-t border-ink/15 pt-5">

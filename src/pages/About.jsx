@@ -27,7 +27,7 @@ export default function About() {
             </div>
           </div>
           {/* Fixed 3:4 plate below 820px; on desktop the grid row stretches it to the text column's height. */}
-          <div className="relative aspect-[3/4] bg-plate md:aspect-auto md:min-h-[560px]">
+          <div className="relative aspect-[3/4] bg-plate sm:aspect-[4/3] md:aspect-auto md:min-h-[560px]">
             <img
               src={portrait}
               alt={`${person.name}, portrait`}

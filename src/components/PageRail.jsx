@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom'
-import { AnimatePresence, motion, useScroll } from 'framer-motion'
+import { AnimatePresence, m, useScroll } from 'framer-motion'
 import { nav } from '../data/portfolio.js'
 import { EASE } from '../lib/motion.js'
 
@@ -18,7 +18,7 @@ export default function PageRail() {
     >
       <span className="inline-block overflow-hidden font-display text-[28px] font-medium leading-none tracking-[-0.04em]">
         <AnimatePresence mode="wait" initial={false}>
-          <motion.span
+          <m.span
             key={ordinal}
             className="inline-block"
             initial={{ y: '110%' }}
@@ -27,11 +27,11 @@ export default function PageRail() {
             transition={{ duration: 0.6, ease: EASE }}
           >
             {ordinal}
-          </motion.span>
+          </m.span>
         </AnimatePresence>
       </span>
       <div className="h-[140px] w-px bg-white/30">
-        <motion.div className="h-full w-full origin-top bg-white" style={{ scaleY: scrollYProgress }} />
+        <m.div className="h-full w-full origin-top bg-white" style={{ scaleY: scrollYProgress }} />
       </div>
       <span className="font-mono text-[10px] opacity-70 [writing-mode:vertical-rl]">
         {nav[index].label} / {String(nav.length).padStart(2, '0')}

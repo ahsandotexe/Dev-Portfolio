@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import DotGrid from '../components/DotGrid.jsx'
 import Meta from '../components/Meta.jsx'
 import SectionLabel from '../components/SectionLabel.jsx'
@@ -26,18 +26,18 @@ export default function Home() {
         <h1 className="relative m-0 self-end font-display text-[15vw] font-medium uppercase leading-[0.92] tracking-[-0.05em] md:text-[clamp(80px,11.5vw,190px)]">
           {hero.lines.map((line, i) => (
             <span key={line} className={`block overflow-hidden ${indent[i]}`}>
-              <motion.span
+              <m.span
                 className={`block ${i === hero.lines.length - 1 ? 'text-accent' : ''}`}
                 initial={{ y: '110%' }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.9, ease: EASE, delay: 0.2 + i * 0.11 }}
               >
                 {line}
-              </motion.span>
+              </m.span>
             </span>
           ))}
         </h1>
-        <motion.div
+        <m.div
           className="relative grid items-end gap-6 pt-10 md:grid-cols-[1fr_auto_auto]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -63,7 +63,7 @@ export default function Home() {
               Email
             </a>
           </div>
-        </motion.div>
+        </m.div>
       </section>
 
       <section aria-labelledby="work-title" className="border-t border-ink/12 px-6 py-16 md:px-10 md:py-28">
@@ -79,7 +79,7 @@ export default function Home() {
         </div>
         <ul className="m-0 grid list-none p-0">
           {featured.map((p) => (
-            <motion.li
+            <m.li
               key={p.id}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -100,7 +100,7 @@ export default function Home() {
                   {p.metric} <span className="text-ink/65">{p.metricLabel}</span>
                 </span>
               </Link>
-            </motion.li>
+            </m.li>
           ))}
         </ul>
       </section>
