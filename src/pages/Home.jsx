@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
 import { m } from 'framer-motion'
 import DotGrid from '../components/DotGrid.jsx'
+import FeaturedProject from '../components/FeaturedProject.jsx'
 import Meta from '../components/Meta.jsx'
 import SectionLabel from '../components/SectionLabel.jsx'
 import { currently, featured, hero, person } from '../data/portfolio.js'
@@ -16,7 +17,10 @@ export default function Home() {
   return (
     <>
       {pathname === '/contact' ? (
-        <Meta title="Contact" description="Write to Ahsan Iftikhar about senior and lead software engineering roles, remote on US hours." />
+        <Meta
+          title="Contact"
+          description="Write to Ahsan Iftikhar about senior and lead software engineering roles, remote on US hours."
+        />
       ) : (
         <Meta />
       )}
@@ -30,7 +34,11 @@ export default function Home() {
                 className={`block ${i === hero.lines.length - 1 ? 'text-accent' : ''}`}
                 initial={{ y: '110%' }}
                 animate={{ y: 0 }}
-                transition={{ duration: 0.9, ease: EASE, delay: 0.2 + i * 0.11 }}
+                transition={{
+                  duration: 0.9,
+                  ease: EASE,
+                  delay: 0.2 + i * 0.11,
+                }}
               >
                 {line}
               </m.span>
@@ -45,7 +53,10 @@ export default function Home() {
         >
           <p className="m-0 max-w-[380px] text-[15px] leading-[1.55] text-ink/75">{hero.lede}</p>
           <div className="flex flex-wrap gap-7 text-[13px] font-medium">
-            <Link to="/projects" className="flex items-center gap-2 border-b border-ink pb-1 transition-colors hover:border-accent hover:text-accent">
+            <Link
+              to="/projects"
+              className="flex items-center gap-2 border-b border-ink pb-1 transition-colors hover:border-accent hover:text-accent"
+            >
               Selected work <span aria-hidden="true">→</span>
             </Link>
             <Link to="/resume" className="border-b border-transparent pb-1 transition-colors hover:border-ink">
@@ -73,43 +84,46 @@ export default function Home() {
             <br />
             2022 — 2026
           </SectionLabel>
-          <h2 id="work-title" className="m-0 text-balance font-display text-[34px] font-medium leading-[1] tracking-[-0.04em] md:text-[clamp(36px,4.2vw,64px)]">
+          <h2
+            id="work-title"
+            className="m-0 text-balance font-display text-[34px] font-medium leading-[1] tracking-[-0.04em] md:text-[clamp(36px,4.2vw,64px)]"
+          >
             Three products that run money, teams, or markets.
           </h2>
         </div>
+        {/* Three compact spreads, one rule between each, so the whole case study reads here. */}
         <ul className="m-0 grid list-none p-0">
           {featured.map((p) => (
             <m.li
               key={p.id}
+              className="border-t border-ink/12 py-12 md:py-16"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '0px 0px -10% 0px' }}
               transition={{ duration: 0.4, ease: EASE }}
             >
-              <Link
-                to={`/projects/${p.id}`}
-                className="grid grid-cols-[96px_1fr] items-center gap-x-6 gap-y-2 border-t border-ink/12 py-8 transition-colors hover:text-accent focus-visible:text-accent md:grid-cols-[150px_1.6fr_1fr_220px] md:gap-6"
-              >
-                <span className="grid grid-cols-[auto_56px] items-center gap-3 md:grid-cols-[auto_72px]">
-                  <span className="font-mono text-[11px] text-ink/65">{p.num}</span>
-                  <img src={p.thumb} alt="" width="240" height="300" loading="lazy" decoding="async" className="aspect-[4/5] w-full bg-ink object-cover" />
-                </span>
-                <span className="font-display text-[28px] font-medium leading-[1] tracking-[-0.04em] md:text-[clamp(28px,3.4vw,52px)]">{p.name}</span>
-                <span className="col-start-2 text-[14px] text-ink/65 md:col-auto">{p.kicker}</span>
-                <span className="col-start-2 text-[13px] md:col-auto md:text-right">
-                  {p.metric} <span className="text-ink/65">{p.metricLabel}</span>
-                </span>
-              </Link>
+              <FeaturedProject project={p} />
             </m.li>
           ))}
         </ul>
+        <div className="grid gap-10 border-t border-ink/12 pt-8 md:grid-cols-[220px_1fr]">
+          <Link
+            to="/projects"
+            className="justify-self-start border-b border-current pb-px text-[13px] font-medium transition-colors hover:text-accent md:col-start-2"
+          >
+            All ten projects <span aria-hidden="true">→</span>
+          </Link>
+        </div>
       </section>
 
       <section aria-labelledby="currently-title" className="bg-ink px-6 py-16 text-paper md:px-10 md:py-28">
         <div className="grid gap-10 md:grid-cols-[220px_1fr]">
           <span className="font-mono text-[11px] opacity-60">Currently</span>
           <div className="grid gap-6">
-            <h2 id="currently-title" className="m-0 font-display text-[34px] font-medium leading-[1] tracking-[-0.04em] md:text-[clamp(36px,4.2vw,64px)]">
+            <h2
+              id="currently-title"
+              className="m-0 font-display text-[34px] font-medium leading-[1] tracking-[-0.04em] md:text-[clamp(36px,4.2vw,64px)]"
+            >
               {currently.headline}
             </h2>
             <div className="flex flex-wrap gap-8 text-[14px] opacity-80">
@@ -122,7 +136,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section aria-labelledby="talk-title" className="grid items-end gap-10 px-6 py-16 md:grid-cols-[220px_1fr] md:px-10 md:py-28">
+      <section
+        aria-labelledby="talk-title"
+        className="grid items-end gap-10 px-6 py-16 md:grid-cols-[220px_1fr] md:px-10 md:py-28"
+      >
         <SectionLabel>Contact</SectionLabel>
         <div className="grid gap-5">
           <h2 id="talk-title" className="m-0">
