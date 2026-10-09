@@ -22,7 +22,9 @@ export default function About() {
             </h1>
             <div className="grid max-w-[640px] gap-5 border-t border-ink/15 pt-6">
               <SectionLabel>Introduction</SectionLabel>
-              <p className="m-0 font-display text-[22px] leading-[1.25] tracking-[-0.02em] md:text-[clamp(22px,2.2vw,32px)]">{about.lead}</p>
+              <p className="m-0 font-display text-[22px] leading-[1.25] tracking-[-0.02em] md:text-[clamp(22px,2.2vw,32px)]">
+                {about.lead}
+              </p>
               <p className="m-0 text-[16px] leading-[1.6] text-ink/75">{about.body}</p>
             </div>
           </div>
@@ -55,9 +57,14 @@ export default function About() {
           <SectionLabel>Skills &amp; technologies</SectionLabel>
           <dl className="m-0 grid">
             {Object.entries(skills).map(([category, items]) => (
-              <div key={category} className="grid items-baseline gap-4 border-t border-ink/12 py-[18px] md:grid-cols-[180px_1fr]">
+              <div
+                key={category}
+                className="grid items-baseline gap-4 border-t border-ink/12 py-[18px] md:grid-cols-[180px_1fr]"
+              >
                 <dt className="text-[13px] font-medium">{category}</dt>
-                <dd className="m-0 font-display text-[18px] leading-[1.3] tracking-[-0.02em] text-ink/85 md:text-[22px]">{items.join(' · ')}</dd>
+                <dd className="m-0 font-display text-[18px] leading-[1.3] tracking-[-0.02em] text-ink/85 md:text-[22px]">
+                  {items.join(' · ')}
+                </dd>
               </div>
             ))}
           </dl>

@@ -66,7 +66,11 @@ export default function MobileTypeMenu({ open, onClose }) {
               Get in touch <span aria-hidden="true">→</span>
             </button>
             <div className="flex justify-between text-[13px] opacity-80">
-              <button type="button" onClick={toggle} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}>
+              <button
+                type="button"
+                onClick={toggle}
+                aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+              >
                 {theme === 'dark' ? 'Light theme' : 'Dark theme'}
               </button>
               <button type="button" onClick={onClose}>

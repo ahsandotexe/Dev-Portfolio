@@ -84,7 +84,11 @@ export const roles = [
       'Jasper reports (SQL / PL-SQL) for 300+ branches',
       'Mentored 2 interns to production',
     ],
-    achievements: ['3 banking products shipped from zero', 'Rebuilt reporting UI, faster loads', 'ETL pipelines for core-banking migration'],
+    achievements: [
+      '3 banking products shipped from zero',
+      'Rebuilt reporting UI, faster loads',
+      'ETL pipelines for core-banking migration',
+    ],
     tech: ['React', 'React Query', 'Node.js', 'NestJS', '.NET', 'Oracle SQL', 'JMeter'],
   },
   {
@@ -94,8 +98,13 @@ export const roles = [
     dates: 'Jan 2022 – Jun 2022',
     short: '2022',
     location: 'Karachi, Pakistan',
-    description: 'Front-end features in Vue.js for a core-banking overhaul: accounts, transactions, loans, CRM, teller and KYC.',
-    responsibilities: ['Vue.js feature development', 'JWT authentication and authorisation', 'XState middleware for complex app state'],
+    description:
+      'Front-end features in Vue.js for a core-banking overhaul: accounts, transactions, loans, CRM, teller and KYC.',
+    responsibilities: [
+      'Vue.js feature development',
+      'JWT authentication and authorisation',
+      'XState middleware for complex app state',
+    ],
     achievements: ['State machines for multi-step banking flows'],
     tech: ['Vue.js', 'XState', 'JWT', 'Quarkus'],
   },
@@ -121,7 +130,8 @@ const projectList = [
     domain: 'Fintech',
     year: '2025',
     description: 'Turns analyst portfolio allocations into executable per-account orders for Charles Schwab.',
-    problem: 'The desk spent ~2 hours per rebalance hand-building spreadsheets; stale prices and restricted tickers slipped through.',
+    problem:
+      'The desk spent ~2 hours per rebalance hand-building spreadsheets; stale prices and restricted tickers slipped through.',
     solution:
       'A Flask service converts percentage allocations into exact share quantities across four order types, validates against a live WebSocket price feed (rejecting >7% deviation) and a Firestore constraint engine. No LLM anywhere in the path.',
     tech: ['Python', 'Flask', 'Firestore', 'WebSockets', 'pandas', 'Google Sheets API'],
@@ -138,8 +148,10 @@ const projectList = [
     kicker: 'HubSpot CRM & AI automation suite',
     domain: 'AI · Revenue ops',
     year: '2025',
-    description: 'Seven sales-ops modules pairing deterministic analytics with an LLM layer for deal scoring and call coaching.',
-    problem: 'A revenue team running a ~$50M pipeline in spreadsheets with no consistent way to prioritise deals or review losses.',
+    description:
+      'Seven sales-ops modules pairing deterministic analytics with an LLM layer for deal scoring and call coaching.',
+    problem:
+      'A revenue team running a ~$50M pipeline in spreadsheets with no consistent way to prioritise deals or review losses.',
     solution:
       'Two-agent scoring: one extracts intent and blockers, a fully deterministic second agent merges signals with rule-based scores into a 5-tier stack. Hard overrides and JSON-schema validation keep high-stakes verdicts out of the model. 3 of 7 modules are LLM-free by design.',
     tech: ['Python', 'Flask', 'OpenAI', 'HubSpot API', 'Gong', 'GCP'],
@@ -156,8 +168,10 @@ const projectList = [
     kicker: 'React Native fintech app · iOS & Android',
     domain: 'Fintech · Mobile',
     year: '2025',
-    description: 'Stocks and crypto app in beta with 1,000+ active users: brokerage linking, portfolio, live prices, AI assistant.',
-    problem: 'Live price updates dropped frames on mid-tier Android; brokerage linking, deep links and notifications had no architecture.',
+    description:
+      'Stocks and crypto app in beta with 1,000+ active users: brokerage linking, portfolio, live prices, AI assistant.',
+    problem:
+      'Live price updates dropped frames on mid-tier Android; brokerage linking, deep links and notifications had no architecture.',
     solution:
       'Moved API calls, store dispatches and heavy compute off the JS thread with Worklets. Integrated SnapTrade, designed the deep-link gateway and a 6-type notification system, shipped an SSE-streamed voice assistant.',
     tech: ['React Native 0.81', 'Redux Toolkit', 'WebSockets', 'SSE', 'Firebase', 'SnapTrade'],
@@ -174,8 +188,10 @@ const projectList = [
     kicker: 'Equities research platform for the CIO team',
     domain: 'Fintech · AI',
     year: '2024 – now',
-    description: 'In-house research platform the CIO team uses to drive live US-market decisions. Eight modules, one React front end, LLMs in every one of them.',
-    problem: 'Factor analysis, news, earnings transcripts, charting and backtesting lived in separate tools, and the summaries the team needed were written by hand.',
+    description:
+      'In-house research platform the CIO team uses to drive live US-market decisions. Eight modules, one React front end, LLMs in every one of them.',
+    problem:
+      'Factor analysis, news, earnings transcripts, charting and backtesting lived in separate tools, and the summaries the team needed were written by hand.',
     solution:
       'A React front end over Flask and Firestore with OpenAI pipelines wired into every module: auto-summarised news and earnings transcripts, structured market-sentiment extraction, and ingestion of ~1,000 posts a day from ~300 curated market accounts.',
     tech: ['React', 'Flask', 'Firestore', 'GCP', 'OpenAI', 'WebSockets'],
@@ -192,8 +208,10 @@ const projectList = [
     kicker: 'Financial diagnostic & lead-gen platform',
     domain: 'Fintech',
     year: '2025',
-    description: 'Server-authoritative React 19 + Vite SPA replacing a single-file prototype, serving advisors and the public from one engine.',
-    problem: 'Scoring logic lived in a throwaway HTML file; two audiences (gated advisors, anonymous public) needed one trustworthy engine.',
+    description:
+      'Server-authoritative React 19 + Vite SPA replacing a single-file prototype, serving advisors and the public from one engine.',
+    problem:
+      'Scoring logic lived in a throwaway HTML file; two audiences (gated advisors, anonymous public) needed one trustworthy engine.',
     solution:
       'All rules stay in Flask with zero client-side duplication; a channel-aware evaluation contract serves both flows. Live findings rail with debounced, abort-superseded requests, CI/CD to GCP and a feature-flagged Stripe paywall.',
     tech: ['React 19', 'Vite', 'Flask', 'GCP', 'Stripe', 'GitHub Actions'],
@@ -230,7 +248,8 @@ const projectList = [
     year: '2023',
     description: 'Front-end lead from inception on the National Bank of Pakistan digital account-opening portal.',
     problem: 'Nationwide KYC onboarding with legacy infrastructure and strict security review.',
-    solution: 'React with MUI 5 and React Query caching, Snyk-driven security hardening, a Node.js backend, and cross-device compatibility from day one.',
+    solution:
+      'React with MUI 5 and React Query caching, Snyk-driven security hardening, a Node.js backend, and cross-device compatibility from day one.',
     tech: ['React', 'React Query', 'Material UI', 'Node.js', 'Oracle SQL', 'Snyk'],
     role: 'Project lead and front-end lead',
     impact: 'Live for national banking customers',
@@ -247,7 +266,8 @@ const projectList = [
     year: '2022 – 24',
     description:
       'Four products for Pakistan’s National Savings: a digital account-opening web app, a back-office console for processing requests, a call-centre portal for KYC lookups, and the Android app.',
-    problem: 'Opening a savings account meant a branch visit, and 300+ branches had no shared view of customer requests, KYC status or reports.',
+    problem:
+      'Opening a savings account meant a branch visit, and 300+ branches had no shared view of customer requests, KYC status or reports.',
     solution:
       'React front ends and a Node.js and Express backend for onboarding; .NET services with device-blocking controls for the back office; a React portal for call-centre agents; Jasper reports on complex SQL and PL/SQL for every branch.',
     tech: ['React', 'React Native', 'Node.js', 'Express', '.NET', 'Oracle SQL', 'Jasper Reports'],
@@ -264,7 +284,8 @@ const projectList = [
     kicker: 'Core banking overhaul · Vue.js',
     domain: 'Banking',
     year: '2022',
-    description: 'Front-end features for a core-banking overhaul covering accounts, transactions, loans, CRM, teller and cash management, and KYC.',
+    description:
+      'Front-end features for a core-banking overhaul covering accounts, transactions, loans, CRM, teller and cash management, and KYC.',
     problem: 'An ageing core-banking application with multi-step flows whose state lived in scattered component logic.',
     solution:
       'Vue.js front end with JWT authentication and authorisation, and XState state machines as middleware so every multi-step banking flow is explicit and testable, on a Quarkus and SQL backend.',
@@ -282,7 +303,8 @@ const projectList = [
     kicker: 'AI prospect research for recruiters',
     domain: 'AI · SaaS',
     year: '2024',
-    description: 'Platform that reads a hiring brief and returns a precise candidate list from large databases in minutes.',
+    description:
+      'Platform that reads a hiring brief and returns a precise candidate list from large databases in minutes.',
     problem: 'Executive and tech recruiters built prospect lists by hand from several databases.',
     solution:
       'Next.js front end with React Query and middleware; Node.js and PostgreSQL services with JWT and Elasticsearch; Socket.IO for real-time messaging; NLP that turns hiring requirements into search.',

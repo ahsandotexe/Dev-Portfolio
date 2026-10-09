@@ -71,7 +71,9 @@ export default function Resume() {
               </p>
             </Block>
             <Block title="Core skills">
-              <p className="m-0 font-display text-[18px] leading-[1.35] tracking-[-0.02em] md:text-[22px]">{coreSkillsLine}</p>
+              <p className="m-0 font-display text-[18px] leading-[1.35] tracking-[-0.02em] md:text-[22px]">
+                {coreSkillsLine}
+              </p>
             </Block>
             <Block title="Technologies">
               <p className="m-0 text-[14px] leading-[1.7] text-ink/80">{techLine}</p>

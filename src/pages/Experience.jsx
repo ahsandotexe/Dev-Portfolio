@@ -51,7 +51,9 @@ export default function Experience() {
                     className={`grid w-full items-baseline gap-2 py-7 text-left transition-[color,padding] duration-[400ms] ease-out md:grid-cols-[160px_1fr_260px] md:gap-6 ${isOpen ? 'text-accent md:pl-4' : ''}`}
                   >
                     <span className="font-mono text-[11px] text-ink/65">{role.dates}</span>
-                    <span className="font-display text-[40px] font-medium leading-[0.95] tracking-[-0.045em] md:text-[clamp(44px,6vw,96px)]">{role.company}</span>
+                    <span className="font-display text-[40px] font-medium leading-[0.95] tracking-[-0.045em] md:text-[clamp(44px,6vw,96px)]">
+                      {role.company}
+                    </span>
                     <span className="text-[14px] text-ink/70">{role.position}</span>
                   </button>
                 </h2>
@@ -68,7 +70,9 @@ export default function Experience() {
                     >
                       <span className="text-[13px] text-ink/65">{role.location}</span>
                       <div className="grid max-w-[860px] gap-8">
-                        <p className="m-0 font-display text-[22px] leading-[1.25] tracking-[-0.02em] md:text-[clamp(22px,2.2vw,32px)]">{role.description}</p>
+                        <p className="m-0 font-display text-[22px] leading-[1.25] tracking-[-0.02em] md:text-[clamp(22px,2.2vw,32px)]">
+                          {role.description}
+                        </p>
                         <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-8">
                           <Column title="Responsibilities">
                             {role.responsibilities.map((item) => (

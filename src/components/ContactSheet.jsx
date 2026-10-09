@@ -92,7 +92,10 @@ export default function ContactSheet() {
 
             {status === 'sent' ? (
               <div className="grid content-start gap-6">
-                <h2 id="contact-title" className="m-0 font-display text-[44px] font-medium leading-[0.95] tracking-[-0.05em]">
+                <h2
+                  id="contact-title"
+                  className="m-0 font-display text-[44px] font-medium leading-[0.95] tracking-[-0.05em]"
+                >
                   Sent.
                 </h2>
                 <p className="m-0 text-[15px] leading-[1.55] text-ink/75">
@@ -102,7 +105,11 @@ export default function ContactSheet() {
                   </a>
                   .
                 </p>
-                <button type="button" onClick={() => setStatus('idle')} className="justify-self-start border-b border-ink pb-1 text-[13px] font-medium hover:text-accent">
+                <button
+                  type="button"
+                  onClick={() => setStatus('idle')}
+                  className="justify-self-start border-b border-ink pb-1 text-[13px] font-medium hover:text-accent"
+                >
                   Write another
                 </button>
               </div>
@@ -122,7 +129,10 @@ export default function ContactSheet() {
                     Leave this field empty <input name="bot-field" tabIndex={-1} autoComplete="off" />
                   </label>
                 </p>
-                <h2 id="contact-title" className="m-0 font-display text-[44px] font-medium leading-[0.95] tracking-[-0.05em]">
+                <h2
+                  id="contact-title"
+                  className="m-0 font-display text-[44px] font-medium leading-[0.95] tracking-[-0.05em]"
+                >
                   Write to me.
                 </h2>
                 <Field id="contact-name" label="Name" error={errors.name?.message}>
@@ -150,7 +160,10 @@ export default function ContactSheet() {
                     aria-describedby={errors.email ? 'contact-email-error' : undefined}
                     {...register('email', {
                       required: 'Add an email address so I can reply.',
-                      pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, message: 'That email address does not look complete.' },
+                      pattern: {
+                        value: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
+                        message: 'That email address does not look complete.',
+                      },
                     })}
                   />
                 </Field>

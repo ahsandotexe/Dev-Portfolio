@@ -8,7 +8,10 @@ export default function PageRail() {
   const { pathname } = useLocation()
   const { scrollYProgress } = useScroll()
   const segment = '/' + pathname.split('/')[1]
-  const index = Math.max(0, nav.findIndex((n) => n.to === segment))
+  const index = Math.max(
+    0,
+    nav.findIndex((n) => n.to === segment),
+  )
   const ordinal = String(index + 1).padStart(2, '0')
 
   return (

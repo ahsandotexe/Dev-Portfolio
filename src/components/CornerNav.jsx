@@ -26,7 +26,10 @@ export default function CornerNav({ menuOpen, onToggleMenu }) {
   return (
     <header className="blend-difference pointer-events-none fixed inset-x-0 top-0 z-40 text-white">
       <div className="mx-auto flex max-w-frame items-start justify-between px-6 py-5 md:px-10 md:py-8">
-        <Link to="/" className="pointer-events-auto font-display text-[14px] font-medium leading-[1.3] tracking-[0.02em]">
+        <Link
+          to="/"
+          className="pointer-events-auto font-display text-[14px] font-medium leading-[1.3] tracking-[0.02em]"
+        >
           {person.name}
           <br />
           <span className="font-sans text-[11px] font-normal opacity-70">{person.shortTitle}</span>
@@ -57,7 +60,12 @@ export default function CornerNav({ menuOpen, onToggleMenu }) {
             Contact
             <span aria-hidden="true" className="h-px w-full" />
           </button>
-          <button type="button" onClick={toggle} aria-label={`Switch to ${nextTheme} theme`} className={`${itemClass} opacity-60`}>
+          <button
+            type="button"
+            onClick={toggle}
+            aria-label={`Switch to ${nextTheme} theme`}
+            className={`${itemClass} opacity-60`}
+          >
             <ThemeGlyph />
             {nextTheme === 'dark' ? 'Dark' : 'Light'}
             <span aria-hidden="true" className="h-px w-full" />
