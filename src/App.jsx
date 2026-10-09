@@ -1,41 +1,37 @@
-import { useEffect, useRef, useState } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
-import {
-  AnimatePresence,
-  LazyMotion,
-  MotionConfig,
-  domAnimation,
-  m,
-} from "framer-motion";
-import ContactSheet from "./components/ContactSheet.jsx";
-import CornerNav from "./components/CornerNav.jsx";
-import Footer from "./components/Footer.jsx";
-import MobileTypeMenu from "./components/MobileTypeMenu.jsx";
-import PageRail from "./components/PageRail.jsx";
-import SkipLink from "./components/SkipLink.jsx";
-import { ContactProvider } from "./context/ContactProvider.jsx";
-import About from "./pages/About.jsx";
-import Experience from "./pages/Experience.jsx";
-import Home from "./pages/Home.jsx";
-import NotFound from "./pages/NotFound.jsx";
-import Projects from "./pages/Projects.jsx";
-import Resume from "./pages/Resume.jsx";
+import { useEffect, useRef, useState } from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom'
+import { AnimatePresence, LazyMotion, MotionConfig, domAnimation, m } from 'framer-motion'
+import ContactSheet from './components/ContactSheet.jsx'
+import CornerNav from './components/CornerNav.jsx'
+import Footer from './components/Footer.jsx'
+import MobileTypeMenu from './components/MobileTypeMenu.jsx'
+import PageRail from './components/PageRail.jsx'
+import SkipLink from './components/SkipLink.jsx'
+import { ContactProvider } from './context/ContactProvider.jsx'
+import About from './pages/About.jsx'
+import Experience from './pages/Experience.jsx'
+import Home from './pages/Home.jsx'
+import NotFound from './pages/NotFound.jsx'
+import Projects from './pages/Projects.jsx'
+import Resume from './pages/Resume.jsx'
 
 export default function App() {
-  const location = useLocation();
-  const [menuOpen, setMenuOpen] = useState(false);
-  const firstRender = useRef(true);
+  const location = useLocation()
+  const [menuOpen, setMenuOpen] = useState(false)
+  const firstRender = useRef(true)
   // Cross-fade between pages only; /projects/:slug changes animate inside the Projects page.
-  const pageKey = "/" + location.pathname.split("/")[1];
+  const pageKey = '/' + location.pathname.split('/')[1]
 
   useEffect(() => {
     if (firstRender.current) {
-      firstRender.current = false;
-      return;
+      firstRender.current = false
+      return
     }
     // Move focus to the page on route change so screen readers announce the new content.
-    document.getElementById("main")?.focus({ preventScroll: true });
-  }, [location.pathname]);
+    // Keyed on the page, not the full path: paging inside /projects (including its autoplay)
+    // keeps focus where it is and its counter announces the change instead.
+    document.getElementById('main')?.focus({ preventScroll: true })
+  }, [pageKey])
 
   return (
     // LazyMotion + m: only the animation features actually used are bundled; strict mode throws if a full `motion` component sneaks in.
@@ -43,19 +39,12 @@ export default function App() {
       <MotionConfig reducedMotion="user">
         <ContactProvider>
           <SkipLink />
-          <CornerNav
-            menuOpen={menuOpen}
-            onToggleMenu={() => setMenuOpen((v) => !v)}
-          />
+          <CornerNav menuOpen={menuOpen} onToggleMenu={() => setMenuOpen((v) => !v)} />
           <PageRail />
           <MobileTypeMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
           <div className="relative mx-auto min-h-screen max-w-frame overflow-x-clip">
             <main id="main" tabIndex={-1} className="outline-none">
-              <AnimatePresence
-                mode="wait"
-                initial={false}
-                onExitComplete={() => window.scrollTo({ top: 0, left: 0 })}
-              >
+              <AnimatePresence mode="wait" initial={false} onExitComplete={() => window.scrollTo({ top: 0, left: 0 })}>
                 <m.div
                   key={pageKey}
                   initial={{ opacity: 0 }}
@@ -82,5 +71,5 @@ export default function App() {
         </ContactProvider>
       </MotionConfig>
     </LazyMotion>
-  );
+  )
 }

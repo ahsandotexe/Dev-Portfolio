@@ -122,3 +122,11 @@ menu and sheet trap focus and close on Escape; images carry alt text; the canvas
   the details to the bottom, and the image plate fills the row height (min 560px) instead of a fixed
   4:5. On desktop the whole illustration is shown (contain) over a blurred copy of itself, so edges are
   never cropped; phones get a 4:5 plate that fits the illustration exactly.
+- Home "Selected work" shows the three featured projects as compact spreads with every field (eyebrow,
+  title, description, Problem / Solution, Role / Impact / Stack / Domain, links, 4:5 plate with the
+  metric) via `FeaturedProject`, followed by an "All ten projects" link.
+- Projects auto-advance every 2 s (`AUTOPLAY_INTERVAL_MS`). Paused while the pointer or keyboard focus
+  is inside the spread, while the contact sheet is open, while the tab is hidden, and from the start
+  under reduced motion; a Pause / Play control sits centred in the bottom bar and the active dash fills
+  as a countdown. Automatic advances replace the history entry and never scroll; manual paging pushes
+  history, restarts the countdown and scrolls the spread back into view.

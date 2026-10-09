@@ -92,3 +92,19 @@ for small labels, measured 4.0:1 in light mode and was raised to 65% everywhere.
    proper headshot would replace `src/assets/portrait.webp`.
 6. The four illustrations for Lumida AI, National Savings, Bank Al-Habib and Qlu.ai were drawn in the
    same idiom as the prototype's six; all ten are illustrations, not screenshots.
+
+## Update, later on 2026-10-09: home spreads and the autoplay carousel
+
+- Home "Selected work" now shows all three featured projects in full (`src/components/FeaturedProject.jsx`);
+  the standalone preview is `mockups/home-selected-work.html`, published as a private artifact at
+  https://claude.ai/artifact/27ewujR17wmn82R4AMu6mi. Reviewed at 375 and 1440 in both themes.
+- Projects carousel (`src/pages/Projects.jsx`, `src/hooks/useAutoplay.js`): scripted with puppeteer-core
+  against the production build, 31 checks passed: advances every 2 s; no history growth; hover pauses and
+  leaving resumes from the held countdown; Pause holds until Play; arrow keys navigate and restart the
+  countdown; a mouse click's leftover focus does not pin it but visible keyboard focus does; reduced
+  motion starts paused with Play still working; autoplay never scrolls while manual paging scrolls the
+  spread into view; the open contact sheet and a hidden tab pause it; focus stays put on automatic
+  advances; the active dash fills while playing; the Pause / Play button is centred with no overflow at
+  1440 and 375 (neighbour names truncate).
+- Open decision: 2 s is a short reading time for a spread (the slide motion alone takes 0.8 s); 5 to 6 s is
+  the usual carousel pace. One constant to change.
