@@ -1,6 +1,11 @@
 import Meta from '../components/Meta.jsx'
 import SectionLabel from '../components/SectionLabel.jsx'
-import { certificates, coreSkillsLine, person, projects, roles, skills } from '../data/portfolio.js'
+import page1 from '../assets/resume-page-1.webp'
+import page2 from '../assets/resume-page-2.webp'
+import { certificates, coreSkillsLine, person, roles, skills } from '../data/portfolio.js'
+
+// Renders of the real PDF, regenerated whenever public/Ahsan_Iftikhar_Resume.pdf changes.
+const pages = [page1, page2]
 
 function Block({ title, children }) {
   return (
@@ -17,7 +22,7 @@ export default function Resume() {
     <>
       <Meta
         title="Resume"
-        description="Download Ahsan Iftikhar's two-page resume as a PDF, with an experience summary, education, core skills, technologies and certificates."
+        description="Open Ahsan Iftikhar's two-page resume as a PDF, with an experience summary, education, core skills, technologies and certificates."
       />
       <section className="grid gap-16 px-6 pb-16 pt-[110px] md:px-10 md:pb-24 md:pt-40">
         <div className="grid items-end gap-10 md:grid-cols-[220px_1fr]">
@@ -35,10 +40,18 @@ export default function Resume() {
             <div className="flex flex-wrap items-center gap-7">
               <a
                 href={person.resume.href}
-                download="Ahsan_Iftikhar_Resume.pdf"
+                target="_blank"
+                rel="noreferrer"
                 className="flex h-[52px] items-center gap-3 bg-ink px-6 text-[14px] font-medium text-paper transition-colors hover:bg-accent"
               >
-                Download PDF <span aria-hidden="true">↓</span>
+                Open PDF <span aria-hidden="true">↗</span>
+              </a>
+              <a
+                href={person.resume.href}
+                download="Ahsan_Iftikhar_Resume.pdf"
+                className="border-b border-ink pb-1 text-[13px] font-medium transition-colors hover:border-accent hover:text-accent"
+              >
+                Download <span aria-hidden="true">↓</span>
               </a>
               <span className="text-[13px] text-ink/65">
                 PDF · {person.resume.pages} pages · {person.resume.size}
@@ -93,42 +106,29 @@ export default function Resume() {
             </Block>
           </div>
 
-          <a
-            href={person.resume.href}
-            aria-label="Open the resume PDF"
-            className="grid aspect-[8.5/11] content-start gap-3.5 overflow-hidden border border-ink/12 bg-doc p-7 text-[10px] leading-[1.5] text-doc-ink shadow-[0_2px_20px_rgba(0,0,0,0.06)] transition-transform duration-[400ms] ease-out hover:-translate-y-1 md:p-9"
-          >
-            <span className="font-display text-[20px] font-medium tracking-[-0.03em]">{person.name}</span>
-            <span className="text-doc-ink/65">
-              {person.title} · {person.tagline}
-            </span>
-            <span className="h-px bg-doc-ink" />
-            <span>
-              <strong>Summary</strong>
-              <br />
-              {person.summary}
-            </span>
-            <span>
-              <strong>Experience</strong>
-            </span>
-            {roles.map((role) => (
-              <span key={role.id} className="flex justify-between gap-2">
-                <span>
-                  {role.position}, {role.company}
-                </span>
-                <span className="whitespace-nowrap text-doc-ink/60">{role.dates}</span>
-              </span>
+          {/* The two real pages, each a link that opens the PDF in a new tab. */}
+          <div className="grid gap-6">
+            {pages.map((src, i) => (
+              <a
+                key={src}
+                href={person.resume.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Open the resume PDF in a new tab (page ${i + 1} of ${pages.length})`}
+                className="block transition-transform duration-[400ms] ease-out hover:-translate-y-1 focus-visible:-translate-y-1"
+              >
+                <img
+                  src={src}
+                  alt={`Resume page ${i + 1} of ${pages.length}`}
+                  width="900"
+                  height="1165"
+                  loading="lazy"
+                  decoding="async"
+                  className="block w-full border border-ink/12 bg-doc shadow-[0_2px_20px_rgba(0,0,0,0.06)]"
+                />
+              </a>
             ))}
-            <span>
-              <strong>Selected projects</strong>
-            </span>
-            {projects.slice(0, 6).map((p) => (
-              <span key={p.id} className="flex justify-between gap-2">
-                <span>{p.name}</span>
-                <span className="whitespace-nowrap text-doc-ink/60">{p.kicker}</span>
-              </span>
-            ))}
-          </a>
+          </div>
         </div>
       </section>
     </>

@@ -108,3 +108,6 @@ for small labels, measured 4.0:1 in light mode and was raised to 65% everywhere.
   1440 and 375 (neighbour names truncate).
 - Open decision: 2 s is a short reading time for a spread (the slide motion alone takes 0.8 s); 5 to 6 s is
   the usual carousel pace. One constant to change.
+- Resume page: the mocked paper card (clipped to a fixed page shape) is replaced by renders of the real
+  PDF's two pages (`src/assets/resume-page-{1,2}.webp`, 900px wide, regenerated from the PDF). Each page and
+  the main button open the PDF in a new tab; a secondary link downloads it. Checked at 1440 light/dark and 375.
