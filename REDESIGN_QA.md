@@ -99,8 +99,8 @@ for small labels, measured 4.0:1 in light mode and was raised to 65% everywhere.
   the standalone preview is `mockups/home-selected-work.html`, published as a private artifact at
   https://claude.ai/artifact/27ewujR17wmn82R4AMu6mi. Reviewed at 375 and 1440 in both themes.
 - Projects carousel (`src/pages/Projects.jsx`, `src/hooks/useAutoplay.js`): scripted with puppeteer-core
-  against the production build, 31 checks passed: advances every 2 s; no history growth; hover pauses and
-  leaving resumes from the held countdown; Pause holds until Play; arrow keys navigate and restart the
+  against the production build, 31 checks passed: advances every 2 s; no history growth; hovering the spread (eyebrow,
+  text and image, not the counter row or the bottom bar) pauses and leaving resumes from the held countdown; Pause holds until Play; arrow keys navigate and restart the
   countdown; a mouse click's leftover focus does not pin it but visible keyboard focus does; reduced
   motion starts paused with Play still working; autoplay never scrolls while manual paging scrolls the
   spread into view; the open contact sheet and a hidden tab pause it; focus stays put on automatic

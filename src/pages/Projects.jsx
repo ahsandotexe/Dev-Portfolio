@@ -129,8 +129,6 @@ export default function Projects() {
         ref={sectionRef}
         aria-label="Projects"
         aria-roledescription="carousel"
-        onPointerEnter={() => setHovered(true)}
-        onPointerLeave={() => setHovered(false)}
         onFocus={(e) => {
           // Keyboard focus pauses like hover; the focus a mouse click leaves on a button (no ring) must not pin the carousel.
           if (showsFocusRing(e.target)) setFocused(true)
@@ -172,102 +170,106 @@ export default function Projects() {
           </ul>
         </div>
 
-        <AnimatePresence mode="wait" initial={false}>
-          <m.article
-            key={project.id}
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, transition: { duration: 0.2 } }}
-            transition={{ duration: 0.6, ease: EASE }}
-            className="grid gap-8 md:grid-cols-[1fr_1.1fr] md:items-stretch md:gap-16 xl:grid-cols-[1.25fr_1fr]"
-          >
-            {/* Text column shares the image's top and bottom edges: title block pinned to the top, details to the bottom. */}
-            <div className="order-2 flex flex-col gap-7 md:order-1 md:justify-between md:gap-12">
-              <div className="grid gap-7">
-                <div className="grid gap-3">
-                  <span className="font-mono text-[11px] text-accent">
-                    {project.num} — {project.kicker}
-                  </span>
-                  <h1 className="m-0 text-balance font-display text-[44px] font-medium leading-[0.92] tracking-[-0.05em] md:text-[clamp(48px,5.6vw,88px)]">
-                    {project.name}
-                  </h1>
+        {/* Hover pause zone: the spread itself (eyebrow, text and image), not the counter row above or the bar below.
+            A stable wrapper so the zone survives the article remounting on every advance. */}
+        <div className="grid" onPointerEnter={() => setHovered(true)} onPointerLeave={() => setHovered(false)}>
+          <AnimatePresence mode="wait" initial={false}>
+            <m.article
+              key={project.id}
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, transition: { duration: 0.2 } }}
+              transition={{ duration: 0.6, ease: EASE }}
+              className="grid gap-8 md:grid-cols-[1fr_1.1fr] md:items-stretch md:gap-16 xl:grid-cols-[1.25fr_1fr]"
+            >
+              {/* Text column shares the image's top and bottom edges: title block pinned to the top, details to the bottom. */}
+              <div className="order-2 flex flex-col gap-7 md:order-1 md:justify-between md:gap-12">
+                <div className="grid gap-7">
+                  <div className="grid gap-3">
+                    <span className="font-mono text-[11px] text-accent">
+                      {project.num} — {project.kicker}
+                    </span>
+                    <h1 className="m-0 text-balance font-display text-[44px] font-medium leading-[0.92] tracking-[-0.05em] md:text-[clamp(48px,5.6vw,88px)]">
+                      {project.name}
+                    </h1>
+                  </div>
+                  <p className="m-0 max-w-[480px] text-[16px] leading-[1.55] text-ink/80">{project.description}</p>
                 </div>
-                <p className="m-0 max-w-[480px] text-[16px] leading-[1.55] text-ink/80">{project.description}</p>
+                <div className="grid gap-7">
+                  <div className="grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-5 border-t border-ink/15 pt-5">
+                    <Cell label="Problem">{project.problem}</Cell>
+                    <Cell label="Solution">{project.solution}</Cell>
+                  </div>
+                  <div className="grid grid-cols-[repeat(auto-fit,minmax(140px,1fr))] gap-5">
+                    <Cell label="Role">{project.role}</Cell>
+                    <Cell label="Impact">{project.impact}</Cell>
+                    <Cell label="Stack">{project.techLine}</Cell>
+                    <Cell label="Domain">
+                      {project.domain} · {project.year}
+                    </Cell>
+                  </div>
+                  <div className="flex flex-wrap gap-6 text-[13px] font-medium">
+                    {project.live ? (
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="border-b border-current pb-px transition-colors hover:text-accent"
+                      >
+                        Live site ↗
+                      </a>
+                    ) : null}
+                    {project.repo ? (
+                      <a
+                        href={project.repo}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="border-b border-current pb-px transition-colors hover:text-accent"
+                      >
+                        GitHub ↗
+                      </a>
+                    ) : null}
+                    {!project.live && !project.repo ? (
+                      <span className="font-normal text-ink/65">Internal system, no public link</span>
+                    ) : null}
+                  </div>
+                </div>
               </div>
-              <div className="grid gap-7">
-                <div className="grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-5 border-t border-ink/15 pt-5">
-                  <Cell label="Problem">{project.problem}</Cell>
-                  <Cell label="Solution">{project.solution}</Cell>
-                </div>
-                <div className="grid grid-cols-[repeat(auto-fit,minmax(140px,1fr))] gap-5">
-                  <Cell label="Role">{project.role}</Cell>
-                  <Cell label="Impact">{project.impact}</Cell>
-                  <Cell label="Stack">{project.techLine}</Cell>
-                  <Cell label="Domain">
-                    {project.domain} · {project.year}
-                  </Cell>
-                </div>
-                <div className="flex flex-wrap gap-6 text-[13px] font-medium">
-                  {project.live ? (
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="border-b border-current pb-px transition-colors hover:text-accent"
-                    >
-                      Live site ↗
-                    </a>
-                  ) : null}
-                  {project.repo ? (
-                    <a
-                      href={project.repo}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="border-b border-current pb-px transition-colors hover:text-accent"
-                    >
-                      GitHub ↗
-                    </a>
-                  ) : null}
-                  {!project.live && !project.repo ? (
-                    <span className="font-normal text-ink/65">Internal system, no public link</span>
-                  ) : null}
-                </div>
-              </div>
-            </div>
 
-            {/* 4:5 plate on phones (the illustration fits exactly). On desktop it fills the row height so both columns share top and bottom edges; at 1440 the column is 576px wide with a 720px floor, i.e. 4:5 again. */}
-            <div className="relative order-1 aspect-[4/5] overflow-hidden bg-[#0A162D] transition-transform duration-[600ms] ease-out hover:scale-[1.01] md:order-2 md:aspect-auto md:min-h-[560px] xl:min-h-[720px]">
-              {/* Desktop: the whole illustration is shown (contain) over a blurred copy of itself, so no edge is ever cropped. */}
-              <img
-                src={project.img}
-                alt=""
-                aria-hidden="true"
-                width="1200"
-                height="1500"
-                loading="lazy"
-                decoding="async"
-                className="absolute inset-0 hidden h-full w-full scale-125 object-cover blur-3xl saturate-[1.1] md:block"
-              />
-              <img
-                src={project.img}
-                alt={`${project.name}: ${project.kicker}`}
-                width="1200"
-                height="1500"
-                loading={index === 0 ? 'eager' : 'lazy'}
-                decoding="async"
-                className="absolute inset-0 h-full w-full object-cover md:object-contain"
-              />
-              <div
-                aria-hidden="true"
-                className="absolute inset-x-0 bottom-0 h-[46%] bg-gradient-to-b from-[rgba(10,22,45,0)] to-[rgba(10,22,45,0.92)]"
-              />
-              <span className="absolute bottom-5 left-5 font-display text-[56px] font-medium leading-none tracking-[-0.04em] text-[#F9F9F9]">
-                {project.metric}
-              </span>
-              <span className="absolute bottom-6 right-5 text-[12px] text-[#F9F9F9]/85">{project.metricLabel}</span>
-            </div>
-          </m.article>
-        </AnimatePresence>
+              {/* 4:5 plate on phones (the illustration fits exactly). On desktop it fills the row height so both columns share top and bottom edges; at 1440 the column is 576px wide with a 720px floor, i.e. 4:5 again. */}
+              <div className="relative order-1 aspect-[4/5] overflow-hidden bg-[#0A162D] transition-transform duration-[600ms] ease-out hover:scale-[1.01] md:order-2 md:aspect-auto md:min-h-[560px] xl:min-h-[720px]">
+                {/* Desktop: the whole illustration is shown (contain) over a blurred copy of itself, so no edge is ever cropped. */}
+                <img
+                  src={project.img}
+                  alt=""
+                  aria-hidden="true"
+                  width="1200"
+                  height="1500"
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 hidden h-full w-full scale-125 object-cover blur-3xl saturate-[1.1] md:block"
+                />
+                <img
+                  src={project.img}
+                  alt={`${project.name}: ${project.kicker}`}
+                  width="1200"
+                  height="1500"
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                  decoding="async"
+                  className="absolute inset-0 h-full w-full object-cover md:object-contain"
+                />
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-x-0 bottom-0 h-[46%] bg-gradient-to-b from-[rgba(10,22,45,0)] to-[rgba(10,22,45,0.92)]"
+                />
+                <span className="absolute bottom-5 left-5 font-display text-[56px] font-medium leading-none tracking-[-0.04em] text-[#F9F9F9]">
+                  {project.metric}
+                </span>
+                <span className="absolute bottom-6 right-5 text-[12px] text-[#F9F9F9]/85">{project.metricLabel}</span>
+              </div>
+            </m.article>
+          </AnimatePresence>
+        </div>
 
         {/* Three columns so Pause/Play sits on the centre line whatever the neighbour names measure; long names truncate rather than wrap. */}
         <nav
