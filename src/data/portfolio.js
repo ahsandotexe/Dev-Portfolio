@@ -179,7 +179,8 @@ const projectList = [
     impact: '1,000+ active users, 60 fps on mid-tier devices',
     metric: '1,000+',
     metricLabel: 'active users',
-    live: null,
+    live: 'https://apps.apple.com/us/app/lumida-invest/id6753766251',
+    liveLabel: 'App Store',
     repo: null,
   },
   {

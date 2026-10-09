@@ -216,7 +216,7 @@ export default function Projects() {
                         rel="noreferrer"
                         className="border-b border-current pb-px transition-colors hover:text-accent"
                       >
-                        Live site ↗
+                        {project.liveLabel || 'Live site'} ↗
                       </a>
                     ) : null}
                     {project.repo ? (

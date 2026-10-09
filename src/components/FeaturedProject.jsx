@@ -57,7 +57,7 @@ export default function FeaturedProject({ project }) {
               rel="noreferrer"
               className="border-b border-current pb-px transition-colors hover:text-accent"
             >
-              Live site ↗
+              {project.liveLabel || 'Live site'} ↗
             </a>
           ) : null}
           {project.repo ? (
