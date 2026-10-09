@@ -1,6 +1,6 @@
-@import '@fontsource-variable/inter';
-@import '@fontsource-variable/space-grotesk';
-@import '@fontsource-variable/jetbrains-mono';
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/space-grotesk";
+@import "@fontsource-variable/jetbrains-mono";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -16,7 +16,7 @@
     --doc-ink: 10 22 45;
     color-scheme: light;
   }
-  [data-theme='dark'] {
+  [data-theme="dark"] {
     --paper: 10 22 45;
     --ink: 249 249 249;
     --accent: 232 96 109;

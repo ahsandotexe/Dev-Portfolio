@@ -118,3 +118,7 @@ menu and sheet trap focus and close on Escape; images carry alt text; the canvas
   Al-Habib and Qlu.ai, so every project on the current site survives (as instructed).
 - Contact sheet posts to Netlify Forms with a honeypot and explicit success/error states.
 - "Full case study" button on spreads removed: the spread is the case study.
+- Spread columns share their top and bottom edges: the text column pins the title block to the top and
+  the details to the bottom, and the image plate fills the row height (min 560px) instead of a fixed
+  4:5. On desktop the whole illustration is shown (contain) over a blurred copy of itself, so edges are
+  never cropped; phones get a 4:5 plate that fits the illustration exactly.
