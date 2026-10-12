@@ -2,6 +2,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { nav, person } from '../data/portfolio.js'
 import { useContact } from '../hooks/useContact.js'
 import { useTheme } from '../hooks/useTheme.js'
+import { useScrolled } from '../hooks/useScrolled.js'
 
 const itemClass =
   'pointer-events-auto flex flex-col items-start gap-1 text-[13px] font-medium transition-opacity duration-200 hover:opacity-100 focus-visible:opacity-100'
@@ -22,13 +23,15 @@ export default function CornerNav({ menuOpen, onToggleMenu }) {
   const { openContact } = useContact()
   const { theme, toggle } = useTheme()
   const nextTheme = theme === 'dark' ? 'light' : 'dark'
+  // The name block hides once the page scrolls so the fixed header does not sit on top of body text; it returns at the top.
+  const scrolled = useScrolled(24)
 
   return (
     <header className="blend-difference pointer-events-none fixed inset-x-0 top-0 z-40 text-white">
       <div className="mx-auto flex max-w-frame items-start justify-between px-6 py-5 md:px-10 md:py-8">
         <Link
           to="/"
-          className="pointer-events-auto font-display text-[14px] font-medium leading-[1.3] tracking-[0.02em]"
+          className={`pointer-events-auto font-display text-[14px] font-medium leading-[1.3] tracking-[0.02em] transition-[opacity,visibility] duration-200 ${scrolled ? 'invisible opacity-0' : 'visible opacity-100'}`}
         >
           {person.name}
           <br />
