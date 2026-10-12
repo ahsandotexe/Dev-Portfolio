@@ -77,21 +77,25 @@ export default function FeaturedProject({ project }) {
       </div>
 
       {/* 4:5 plate: the illustration is 1200×1500, so it fits exactly at any width. Plate first on phones. */}
-      <div className="relative order-1 aspect-[4/5] overflow-hidden bg-[#0A162D] md:order-2">
-        <img
-          src={project.img}
-          alt={`${project.name}: ${project.kicker}`}
-          width="1200"
-          height="1500"
-          loading="lazy"
-          decoding="async"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
+      <div className="relative order-1 aspect-[3/2] overflow-hidden bg-[#0A162D] md:order-2 md:aspect-[4/5]">
+        {/* Phones get the landscape render in a 3:2 plate; from 820px the portrait art fills the 4:5 plate. */}
+        <picture>
+          <source media="(min-width: 820px)" srcSet={project.img} width="1200" height="1500" />
+          <img
+            src={project.imgWide || project.img}
+            alt={`${project.name}: ${project.kicker}`}
+            width="1200"
+            height="800"
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        </picture>
         <div
           aria-hidden="true"
           className="absolute inset-x-0 bottom-0 h-[46%] bg-gradient-to-b from-[rgba(10,22,45,0)] to-[rgba(10,22,45,0.92)]"
         />
-        <span className="absolute bottom-5 left-5 font-display text-[56px] font-medium leading-none tracking-[-0.04em] text-[#F9F9F9]">
+        <span className="absolute bottom-4 left-4 font-display text-[40px] font-medium leading-none tracking-[-0.04em] text-[#F9F9F9] md:bottom-5 md:left-5 md:text-[56px]">
           {project.metric}
         </span>
         <span className="absolute bottom-6 right-5 text-[12px] text-[#F9F9F9]/85">{project.metricLabel}</span>

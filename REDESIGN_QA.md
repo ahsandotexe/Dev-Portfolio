@@ -111,3 +111,7 @@ for small labels, measured 4.0:1 in light mode and was raised to 65% everywhere.
 - Resume page: the mocked paper card (clipped to a fixed page shape) is replaced by renders of the real
   PDF's two pages (`src/assets/resume-page-{1,2}.webp`, 900px wide, regenerated from the PDF). Each page and
   the main button open the PDF in a new tab; a secondary link downloads it. Checked at 1440 light/dark and 375.
+- Phones: landscape renders for all ten illustrations in a 3:2 plate on the home spreads and the Projects
+  spread; at 375 wide the home heading plus two spreads went from 2648 to 2267 CSS px and a project
+  spread from 1573 to 1382. Header name block hides while scrolled (visibility hidden, out of the tab
+  order) and returns at the top; checked at 1440 and 375.

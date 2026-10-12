@@ -236,8 +236,8 @@ export default function Projects() {
                 </div>
               </div>
 
-              {/* 4:5 plate on phones (the illustration fits exactly). On desktop it fills the row height so both columns share top and bottom edges; at 1440 the column is 576px wide with a 720px floor, i.e. 4:5 again. */}
-              <div className="relative order-1 aspect-[4/5] overflow-hidden bg-[#0A162D] transition-transform duration-[600ms] ease-out hover:scale-[1.01] md:order-2 md:aspect-auto md:min-h-[560px] xl:min-h-[720px]">
+              {/* 3:2 plate on phones (landscape render). On desktop it fills the row height so both columns share top and bottom edges; at 1440 the column is 576px wide with a 720px floor, i.e. 4:5 again. */}
+              <div className="relative order-1 aspect-[3/2] overflow-hidden bg-[#0A162D] transition-transform duration-[600ms] ease-out hover:scale-[1.01] md:order-2 md:aspect-auto md:min-h-[560px] xl:min-h-[720px]">
                 {/* Desktop: the whole illustration is shown (contain) over a blurred copy of itself, so no edge is ever cropped. */}
                 <img
                   src={project.img}
@@ -249,20 +249,24 @@ export default function Projects() {
                   decoding="async"
                   className="absolute inset-0 hidden h-full w-full scale-125 object-cover blur-3xl saturate-[1.1] md:block"
                 />
-                <img
-                  src={project.img}
-                  alt={`${project.name}: ${project.kicker}`}
-                  width="1200"
-                  height="1500"
-                  loading={index === 0 ? 'eager' : 'lazy'}
-                  decoding="async"
-                  className="absolute inset-0 h-full w-full object-cover md:object-contain"
-                />
+                {/* Phones get the landscape render in a 3:2 plate; from 820px the portrait art is shown whole over the blurred backdrop. */}
+                <picture>
+                  <source media="(min-width: 820px)" srcSet={project.img} width="1200" height="1500" />
+                  <img
+                    src={project.imgWide || project.img}
+                    alt={`${project.name}: ${project.kicker}`}
+                    width="1200"
+                    height="800"
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                    decoding="async"
+                    className="absolute inset-0 h-full w-full object-cover md:object-contain"
+                  />
+                </picture>
                 <div
                   aria-hidden="true"
                   className="absolute inset-x-0 bottom-0 h-[46%] bg-gradient-to-b from-[rgba(10,22,45,0)] to-[rgba(10,22,45,0.92)]"
                 />
-                <span className="absolute bottom-5 left-5 font-display text-[56px] font-medium leading-none tracking-[-0.04em] text-[#F9F9F9]">
+                <span className="absolute bottom-4 left-4 font-display text-[40px] font-medium leading-none tracking-[-0.04em] text-[#F9F9F9] md:bottom-5 md:left-5 md:text-[56px]">
                   {project.metric}
                 </span>
                 <span className="absolute bottom-6 right-5 text-[12px] text-[#F9F9F9]/85">{project.metricLabel}</span>

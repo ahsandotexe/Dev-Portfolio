@@ -130,3 +130,7 @@ menu and sheet trap focus and close on Escape; images carry alt text; the canvas
   under reduced motion; a Pause / Play control sits centred in the bottom bar and the active dash fills
   as a countdown. Automatic advances replace the history entry and never scroll; manual paging pushes
   history, restarts the countdown and scrolls the spread back into view.
+- Phones (below 820px) show a landscape 3:2 render of each illustration (`<id>-wide.webp`, 1200×800) so
+  the plate is about half the height of the 4:5 art while nothing is cropped; the metric drops to 40px.
+- The header's name block hides once the page is scrolled past the header padding (24px) and returns at
+  the top, so the fixed header never sits on top of body text. The nav itself stays.

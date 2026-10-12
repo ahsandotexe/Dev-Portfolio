@@ -323,6 +323,7 @@ export const projects = projectList.map((p, i) => ({
   ...p,
   num: String(i + 1).padStart(2, '0'),
   img: image(p.id),
+  imgWide: image(`${p.id}-wide`), // 3:2 render for phones; the 4:5 art is for 820px and up
   thumb: thumb(p.id),
   techLine: p.tech.join(', '),
 }))
